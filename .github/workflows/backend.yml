@@ -1,0 +1,32 @@
+name: UAT Backend
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'backend/**'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.16.0]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish to Registry
+        run: | 
+          echo $GITHUB_SHA
+          /usr/bin/docker logout
+          /usr/bin/docker login -u="truongtiendung" -p="0936438822"
+          /usr/bin/docker build . --tag=truongtiendung/carrental-frontend:$GITHUB_SHA --file=backend/Dockerfile
+          /usr/bin/docker push truongtiendung/carrental-frontend:$GITHUB_SHA
+          gcloud auth activate-service-account \
+          --key-file=.github/serviceAccount.json
+          export GOOGLE_APPLICATION_CREDENTIALS=".github/serviceAccount.json"
+          gcloud compute ssh dungtruongtien411@uat --project turnkey-diode-250103 --zone asia-southeast1-b \
+          --command="whoami && docker system prune -a -f && docker pull truongtiendung/carrental-frontend:latest && docker run -p 9900:9900 -d truongtiendung/carrental-frontend:latest"
