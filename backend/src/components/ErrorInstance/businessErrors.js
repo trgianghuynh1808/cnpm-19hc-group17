@@ -1,4 +1,4 @@
-import { AppError } from '../AppErrors';
+import { AppError } from './appErrors';
 
 export class BusinessError extends AppError {
     constructor(message = 'There is business error happened') {

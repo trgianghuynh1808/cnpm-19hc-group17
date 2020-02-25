@@ -3,11 +3,9 @@
  * @module index
  */
 
-import { migrateDB } from './utils/migrate';
+import { migrateDB } from './db-helpers';
 import app from './app';
 import config from './config';
-import models from './models';
-import { logger } from './components/logger';
 
 /**
  * listen - Starts the server with the config given by the environment variables
@@ -22,8 +20,7 @@ function listen() {
     });
 }
 
-const pathToMigration = `${__dirname}/migrations/`;
-const db = migrateDB(models, pathToMigration)
-            .catch(err => logger.error(err.message, err));
+const db = migrateDB()
+            .catch(err => console.log('err--------------', err));
 
 db.then(() => listen());

@@ -15,7 +15,6 @@ import routes from './routes';
 
 const app = express();
 
-app.set('jwtSecrect', config.jwtSecrect);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());

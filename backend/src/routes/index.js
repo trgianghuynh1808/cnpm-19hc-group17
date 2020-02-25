@@ -1,10 +1,10 @@
 import express from 'express';
+import CarRoutes from './car.routes' 
+
 const router = express.Router();
 
-router.get(
-    '/healthz',
-    (req, res, next) => res.send({ msg: 'successssssssssss' })
-);
+router.use('/car', CarRoutes);
+
 
 
 export default router;
