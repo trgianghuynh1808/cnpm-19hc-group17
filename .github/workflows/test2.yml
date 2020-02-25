@@ -1,0 +1,23 @@
+name: UAT Test2
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'test2/**'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.16.0]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish to Registry
+        run: | 
+          echo test2222222222222
