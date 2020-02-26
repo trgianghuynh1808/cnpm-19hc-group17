@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
-import BookForm from '../../components/BookForm';
+import SearchForm from '../../components/SearchForm';
 import About from '../../components/About';
 import Partners from '../../components/Partners';
 import Services from '../../components/Services';
 import FunFact from '../../components/FunFact';
 import CarList from '../../components/CarList';
-import Pricing from '../../components/Pricing';
 import Testimonials from '../../components/Testimonials';
 import Articles from '../../components/Articles';
 import Footer from '../../components/Footer/Footer';
@@ -19,7 +18,7 @@ class HomePage extends Component {
         <Header/>
   {/*== Header Area End ==*/}
   {/*== Slider Area Start ==*/}
-        <BookForm/>
+        <SearchForm />
   {/*== Slider Area End ==*/}
   {/*== About Us Area Start ==*/}
         <About/>
@@ -36,9 +35,6 @@ class HomePage extends Component {
   {/*== Choose Car Area Start ==*/}
         <CarList/>
   {/*== Choose Car Area End ==*/}
-  {/*== Pricing Area Start ==*/}
-        <Pricing/>
-  {/*== Pricing Area End ==*/}
   {/*== Testimonials Area Start ==*/}
         <Testimonials/>
   {/*== Testimonials Area End ==*/}
