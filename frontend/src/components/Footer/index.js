@@ -1,3 +1,3 @@
-import About from './About';
+import Footer from './Footer';
 
-export default About;
+export default Footer;

@@ -8,7 +8,7 @@ import FunFact from '../../components/FunFact';
 import CarList from '../../components/CarList';
 import Testimonials from '../../components/Testimonials';
 import Articles from '../../components/Articles';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../components/Footer';
 
 class HomePage extends Component {
     render() {

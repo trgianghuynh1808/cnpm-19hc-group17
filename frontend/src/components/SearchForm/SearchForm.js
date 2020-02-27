@@ -9,11 +9,11 @@ class SearchForm extends Component {
               <div className="row">
                 <div className="col-lg-5">
                   <div className="book-a-car">
-                    <form action="/cars/car_detail">
+                    <form action="/car-list">
                       <div className="pickup-location book-item">
                         <h4>MODEL:</h4>
                         <select id="model" name="model" className="custom-select">
-                          <option selected>Select car model</option>
+                          <option value="" selected>Select car model</option>
                           <option value={1}>Sedan</option>
                           <option value={2}>SUV</option>
                           <option value={3}>Coupe</option>
@@ -23,7 +23,7 @@ class SearchForm extends Component {
                       <div className="pick-up-date book-item">
                         <h4>BRAND:</h4>
                         <select id="brand" name="brand" className="custom-select">
-                          <option selected>Select car brand</option>
+                          <option value=""  selected>Select car brand</option>
                           <option value={1}>BMW</option>
                           <option value={2}>Audi</option>
                           <option value={3}>Toyota</option>
@@ -33,7 +33,7 @@ class SearchForm extends Component {
                       <div className="choose-car-type book-item">
                         <h4>COLOR:</h4>
                         <select id="color" name="color" className="custom-select">
-                          <option selected>Select car color</option>
+                          <option value=""  selected>Select car color</option>
                           <option value={1}>Black</option>
                           <option value={2}>White</option>
                           <option value={3}>Red</option>
@@ -43,7 +43,7 @@ class SearchForm extends Component {
                       <div className="choose-car-type book-item">
                         <h4>SEAT:</h4>
                         <select id="seat" name="seat" className="custom-select">
-                          <option selected>Select car seat number</option>
+                          <option value=""  selected>Select car seat number</option>
                           <option value={1}>4</option>
                           <option value={2}>7</option>
                           <option value={3}>15</option>
