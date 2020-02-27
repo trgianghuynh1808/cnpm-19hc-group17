@@ -53,5 +53,18 @@ export default function (sequelize, DataTypes) {
             allowNull: false,
         },
     }, { freezeTableName: true });
+
+
+    Car.associate = (models) => {
+        Car.Brands = Car.belongsTo(models.Brand, {
+            foreignKey: 'brand',
+            as: 'brandInfo'
+        });
+
+        Car.Models = Car.belongsTo(models.Model, {
+            foreignKey: 'model',
+            as: 'modelInfo'
+        })
+    }
     return Car;
 }
