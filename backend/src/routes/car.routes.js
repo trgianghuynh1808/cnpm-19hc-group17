@@ -1,5 +1,5 @@
 import express from 'express';
-import CarController from '../controllers/account.controller';
+import CarController from '../controllers/car.controller';
 
 const controller = new CarController();
 
@@ -9,4 +9,5 @@ router.get(
     '/',
     controller.list
 );
+
 export default router;
