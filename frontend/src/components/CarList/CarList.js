@@ -5,10 +5,10 @@ import Car from './Car';
 
 
 const CarList = (props) => {
-  const { carList } = props;
-  const [ activeBrand, setActiveBrand ] = useState('BMW');
-
-  const activeCarList = carList.find(car=> car.id === activeBrand.toLocaleLowerCase());
+  const { brandList } = props;
+  const defaultBrand = (brandList && brandList[0]) ? brandList[0].name : 'HONDA';
+  const [ activeBrand, setActiveBrand ] = useState(defaultBrand);
+  const activeBrandList = brandList.find(car=> car.id === activeBrand.toLocaleLowerCase());
   return (
     <section id="choose-car" className="section-padding">
   <div className="container">
@@ -21,9 +21,9 @@ const CarList = (props) => {
           <div className="tab-content" id="myTabContent">
             <div className="tab-pane fade show active" id="popular_cars" role="tabpanel" aria-labelledby="home-tab">
               <div className="popular-cars-wrap">
-                  <TabFilter brand={activeBrand} setBrand={setActiveBrand} />
+                  <TabFilter brandList={brandList} activeBrand={activeBrand} setActiveBrand={setActiveBrand} />
                 <div className="row popular-car-gird">
-                  {activeCarList && activeCarList.cars.map((car) => 
+                  {activeBrandList && activeBrandList.cars.map((car) => 
                     <Car {...car}/>
                   )}
                 </div>

@@ -13,10 +13,10 @@ import Footer from '../../components/Footer';
 import getListCar from '../../services/getListCar';
 
   const HomePage = (props) => {
-    const [carList, setCarList] = useState([]);
+    const [brandList, setBrandList] = useState([]);
 
     useEffect(() => {
-      getListCar().then((res)=> setCarList(res));
+      getListCar().then((res)=> setBrandList(res));
     },[]);
     return (
       <>
@@ -26,7 +26,7 @@ import getListCar from '../../services/getListCar';
         <Partners/>
         <Services/>
         <FunFact/>
-        <CarList carList={carList} />
+        <CarList brandList={brandList} />
         <Testimonials/>
         <Articles/>
         <Footer/>
