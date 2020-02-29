@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 const Car = (props) => {
-    const { img, rent_price, model, brand }
+    const { image, rent_price, model, brand } = props;
     return <div className="col-lg-4 col-md-6 hat sedan">
     <div className="single-popular-car">
       <div className="p-car-thumbnails">
         <a className="car-hover" href="assets/img/car/car-2.jpg">
-          <img src="assets/img/car/car-2.jpg" alt="JSOFT" />
+          <img src={`assets/img/car/${image || 'car-1'}.jpg `} alt="JSOFT" />
         </a>
       </div>
       <div className="p-car-content">

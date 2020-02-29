@@ -7,7 +7,7 @@ const TabFilter = (props) => {
     <a onClick={()=> onClick('BMW')} className={brand === 'BMW' ? 'active' : ''}>BMW</a>
     <a onClick={()=> onClick('Audi')} className={brand === 'Audi' ? 'active' : ''}>Audi</a>
     <a onClick={()=> onClick('Toyota')} className={brand === 'Toyota' ? 'active' : ''}>Toyota</a>
-    <a onClick={()=> onClick('Mercedes')} className={brand === 'Mercedes' ? 'active' : ''}>Mercedes</a>
+    <a onClick={()=> onClick('Honda')} className={brand === 'Honda' ? 'active' : ''}>Honda</a>
     <a onClick={()=> onClick('Ford')} className={brand === 'Ford' ? 'active' : ''}>Ford</a>
     <a onClick={()=> onClick('Mazda')} className={brand === 'Mazda' ? 'active' : ''}>Mazda</a>
   </div>
