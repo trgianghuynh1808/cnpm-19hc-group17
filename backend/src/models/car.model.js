@@ -1,13 +1,3 @@
-import sha256 from 'sha256';
-
-/**
-* Example model - create and export the database model for the example
-* including all assosiations and classmethods assiciated with this model.
-* @memberof  module:models/Example
-* @param  {Object} sequelize description
-* @param  {Object} DataTypes description
-*/
-
 export default function (sequelize, DataTypes) {
     const Car = sequelize.define('car', {
         id: {
@@ -18,40 +8,40 @@ export default function (sequelize, DataTypes) {
         },
         brand: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         model: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         color: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         seat: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         car_price: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         rent_price: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         status: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         license_plate: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     }, { freezeTableName: true });
 
 
@@ -64,7 +54,7 @@ export default function (sequelize, DataTypes) {
         Car.Models = Car.belongsTo(models.Model, {
             foreignKey: 'model',
             as: 'modelInfo'
-        })
-    }
+        });
+    };
     return Car;
 }
