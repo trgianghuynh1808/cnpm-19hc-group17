@@ -1,1 +1,4 @@
 /node_modules
+/src/uat.env
+/src/prod.env
+/dist
