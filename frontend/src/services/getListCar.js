@@ -1,5 +1,5 @@
 const key = 'cars@carrental';
-const url = 'http://35.240.255.193:9900/brands';
+const url = `${process.env.REACT_APP_CARRENTAL_API_URL}/brands`;
 
 export default function getListCar() {
     // const localStorage = window.localStorage;
