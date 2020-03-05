@@ -11,8 +11,10 @@ export default class BrandService {
                 as: 'cars',
                 include: [{
                     model: db.Model,
-                    as: 'modelInfo'
-                }]
+                    as: 'modelInfo',
+                }],
+                limit: params.limit,
+                offset: params.offset
             }],
             where: whereCondition,
             limit: params.limit,
