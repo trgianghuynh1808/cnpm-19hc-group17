@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class PageTitle extends Component {
-  render() {
+const PageTitle = (props) => {
+    const { title } = props;
     return (
       <section id="page-title-area" className="section-padding overlay">
     <div className="container">
@@ -9,7 +9,7 @@ class PageTitle extends Component {
         {/* Page Title Start */}
         <div className="col-lg-12">
           <div className="section-title  text-center">
-            <h2>Our Cars</h2>
+            <h2>{title}</h2>
             <span className="title-line"><i className="fa fa-car" /></span>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </div>
@@ -19,7 +19,6 @@ class PageTitle extends Component {
     </div>
   </section>
     );
-  }
 }
 
 export default PageTitle;
