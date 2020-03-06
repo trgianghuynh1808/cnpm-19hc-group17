@@ -11,7 +11,7 @@ export default class BrandService {
                 as: 'cars',
                 include: [{
                     model: db.Model,
-                    as: 'modelInfo',
+                    as: 'modelInfo'
                 }],
                 limit: params.limit,
                 offset: params.offset
@@ -19,6 +19,9 @@ export default class BrandService {
             where: whereCondition,
             limit: params.limit,
             offset: params.offset
-        });
+        }).then(brands => ({
+            data: brands,
+            count: brands.length
+        }));
     }
 }

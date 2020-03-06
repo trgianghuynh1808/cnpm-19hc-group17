@@ -21,7 +21,10 @@ export default class CarService {
             where: whereCondition,
             limit: params.limit,
             offset: params.offset
-        });
+        }).then(cars => ({
+            data: cars,
+            count: cars.length
+        }));
     }
 
     static retrive(id) {
