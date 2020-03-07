@@ -8,6 +8,7 @@ const TabFilter = (props) => {
     return <div className="popucar-menu text-center">
       {brandList && brandList.map((brand) =>
       {
+        console.log(brand);
         const { name } = brand;
         const upperCaseBrand = name.toUpperCase();
         return <a onClick={()=> onClick(upperCaseBrand)} className={activeBrand === upperCaseBrand ? 'active' : ''}>{upperCaseBrand}</a>

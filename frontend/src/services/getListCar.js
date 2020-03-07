@@ -9,7 +9,7 @@ export function getCarByBrands() {
     });
 }
 
-export function getGallery  (offset, limit) {
+export function getGallery(offset, limit) {
   return fetch(`${API_URL}/cars?offset=${offset}&limit=${limit}`).then((res) => {
     return res.json();
   });

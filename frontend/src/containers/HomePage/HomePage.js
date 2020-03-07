@@ -16,7 +16,11 @@ import { getCarByBrands } from '../../services/getListCar';
     const [brandList, setBrandList] = useState([]);
 
     useEffect(() => {
-      getCarByBrands().then((res)=> setBrandList(res));
+      getCarByBrands().then((res)=>{
+        const { data = []} = res;
+        console.log(data);
+        setBrandList(data);
+      });
     },[]);
     return (
       <>

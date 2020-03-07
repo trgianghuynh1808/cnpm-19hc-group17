@@ -8,18 +8,23 @@ import { getGallery } from '../../services/getListCar';
 
   const GalleryPage = (props) => {
     const [activePage, setActivePage] = useState(0);
+    const [pageCount, setPageCount] = useState(0);
     const [carList, setCarList] = useState([]);
     useEffect(() => {
       const offset = activePage === 0 ? 0 : (activePage * 5 + activePage)  ;
       const limit = offset + 5;
       console.log(offset, limit)
-      getGallery(offset, limit).then((res)=> setCarList(res));
+      getGallery(offset, limit).then((res)=> {
+        const { data = [], count = 0 } = res;
+        setPageCount(Math.ceil(count/6));
+        setCarList(data);
+      });
     },[activePage]);
     return (
       <>
         <Header/>
         <PageTitle title="Our Gallery" />
-        <Content activePage={activePage} setActivePage={setActivePage} carList={carList}/>
+        <Content pageCount={pageCount} activePage={activePage} setActivePage={setActivePage} carList={carList}/>
         <Footer/>
     </>
     );

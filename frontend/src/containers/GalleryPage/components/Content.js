@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import Car from './Car';
 
 const Content = (props) => {
-    const { carList, activePage, setActivePage } = props;
-    console.log(carList);
+    const { carList, activePage, setActivePage, pageCount } = props;
+    const pagingList = [];
+    for(let i = 1; i <= pageCount; i++ ){
+      pagingList.push(i);
+    }
     return <section id="gallery-page-content" className="section-padding">
     <div className="container">
       <div className="row">
@@ -31,8 +34,16 @@ const Content = (props) => {
     <div className="page-pagi">
       <nav aria-label="Page navigation example">
         <ul className="pagination">
-          <li onClick={()=> setActivePage(activePage - 1)} className="page-item"><a className="page-link">Previous</a></li>
-          {[1,2,3,4].map(paging =>
+          <li onClick={() => {
+            if(activePage === 0) return;
+            setActivePage(activePage - 1);
+            }}
+            className="page-item">
+              <a className="page-link">
+                Previous
+              </a>
+          </li>
+          {pagingList.map(paging =>
           <li
             onClick={()=> setActivePage(paging - 1)}
             className={`page-item ${paging - 1 === activePage && 'active'}`}>
@@ -40,7 +51,16 @@ const Content = (props) => {
                 {paging}
               </a>
           </li>)}
-          <li onClick={()=> setActivePage(activePage + 1)} className="page-item"><a className="page-link">Next</a></li>
+          <li onClick={()=> {
+            console.log(activePage, pageCount);
+            if(activePage === pageCount - 1) return;
+            setActivePage(activePage + 1)
+            }} 
+            className="page-item">
+              <a className="page-link">
+                Next
+              </a>
+            </li>
         </ul>
       </nav>
     </div>
