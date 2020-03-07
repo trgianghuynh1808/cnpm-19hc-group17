@@ -4,6 +4,8 @@ import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import CarListPage from './CarListPage';
 import GalleryPage from './GalleryPage';
+import CarDetailPage from './CarDetailPage';
+
 class App extends Component {
     render() {
         return (
@@ -19,6 +21,9 @@ class App extends Component {
                 </Route>
                 <Route path="/gallery" exact>
                     <GalleryPage {...this.props}/>
+                </Route>
+                <Route path="/car-details/:id">
+                    <CarDetailPage {...this.props}/>
                 </Route>
             </Switch>
         );
