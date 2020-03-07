@@ -36,7 +36,7 @@ class About extends Component {
         {/* About Video Start */}
         <div className="col-lg-6">
           <div className="about-video">
-            <iframe src="https://player.vimeo.com/video/121982328?title=0&byline=0&portrait=0" />
+            <img src="assets/img/car/car-2.jpg" alt="JSOFT" />
           </div>
         </div>
         {/* About Video End */}
