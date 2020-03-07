@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-
-class HeaderBottom extends Component {
-    render() {
+import React, { Component, useState } from 'react';
+import { Link } from 'react-router-dom';
+const HeaderBottom = (props) => {
+        const [activePage, setActivePage] = useState('home');
         return (
         <div id="header-bottom">
           <div className="container">
@@ -17,12 +17,10 @@ class HeaderBottom extends Component {
               <div className="col-lg-8 d-none d-xl-block">
                 <nav className="mainmenu alignright">
                   <ul>
-                    <li className="active"><a href="#">Home</a>
-                      <ul>
-                        <li><a href="index.html">Home 1</a></li>
-                        <li><a href="index2.html">Home 2</a></li>
-                        <li><a href="index3.html">Home 3</a></li>
-                      </ul>
+                    <li onClick={()=>setActivePage('home')} className={activePage === 'home' && 'active'}>
+                      <Link to="/">
+                        Home
+                      </Link>
                     </li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">services</a></li>
@@ -34,17 +32,10 @@ class HeaderBottom extends Component {
                         <li><a href="car-details.html">Car Details</a></li>
                       </ul>
                     </li>
-                    <li><a href="index.html">Pages</a>
-                      <ul>
-                        <li><a href="package.html">Pricing</a></li>
-                        <li><a href="driver.html">Driver</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="help-desk.html">Help Desk</a></li>
-                        <li><a href="login.html">Log In</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="404.html">404</a></li>
-                      </ul>
+                    <li onClick={()=>setActivePage('gallery')} className={activePage === 'gallery' && 'active'}>
+                      <Link to="/gallery">
+                        Gallery
+                      </Link>
                     </li>
                     <li><a href="#">Blog</a>
                       <ul>
@@ -61,7 +52,6 @@ class HeaderBottom extends Component {
           </div>
         </div>
         );
-    }
-}
+};
 
 export default HeaderBottom;

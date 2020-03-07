@@ -10,13 +10,17 @@ import Testimonials from '../../components/Testimonials';
 import Articles from '../../components/Articles';
 import Footer from '../../components/Footer';
 
-import getListCar from '../../services/getListCar';
+import { getCarByBrands } from '../../services/getListCar';
 
   const HomePage = (props) => {
     const [brandList, setBrandList] = useState([]);
 
     useEffect(() => {
-      getListCar().then((res)=> setBrandList(res));
+      getCarByBrands().then((res)=>{
+        const { data = []} = res;
+        console.log(data);
+        setBrandList(data);
+      });
     },[]);
     return (
       <>
