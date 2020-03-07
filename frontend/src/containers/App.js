@@ -22,7 +22,7 @@ class App extends Component {
                 <Route path="/gallery" exact>
                     <GalleryPage {...this.props}/>
                 </Route>
-                <Route path="/car-details/:id">
+                <Route path="/car-details" exact>
                     <CarDetailPage {...this.props}/>
                 </Route>
             </Switch>

@@ -3,19 +3,31 @@ import Header from '../../components/Header';
 import PageTitle from '../../components/PageTitle';
 import Footer from '../../components/Footer';
 import Content from './components/Content';
-
-import { getGallery } from '../../services/getListCar';
+import queryString from 'query-string';
+import getCarDetails from '../../services/getCarDetails';
 
   const CarDetailPage = (props) => {
-    const { car, setCar } = useState({});
+    const [ car, setCar ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(true);
     useEffect(() => {
-      const 
-    },[activePage]);
+      const { location: { search } } = props;
+      const queryObject = queryString.parse(search);
+      const { id = 1 } = queryObject;
+      getCarDetails(id)
+      .then((data) => {
+        setCar(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setCar(null);
+        setIsLoading(false);
+      })
+    },[]);
     return (
       <>
         <Header/>
         <PageTitle title="Our Gallery" />
-        <Content tivePage={activePage} setActivePage={setActivePage} carList={carList}/>
+        {!isLoading && <Content {...car} />}
         <Footer/>
     </>
     );

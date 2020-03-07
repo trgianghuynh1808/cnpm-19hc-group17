@@ -1,23 +1,18 @@
 import React, {useState} from 'react';
-import Car from './Car';
 
 const Content = (props) => {
-  <section id="car-list-area" className="section-padding">
+  const { brand = '', model = '', color = '', seat = '', car_price = '', rent_price = '', status = '', image, license_plate = ''} = props;
+  return (
+<section id="car-list-area" className="section-padding">
   <div className="container">
     <div className="row">
       {/* Car List Content Start */}
       <div className="col-lg-8">
         <div className="car-details-content">
-          <h2>Aston Martin One-77 <span className="price">Rent: <b>$150</b></span></h2>
+  <h2>{model.toUpperCase()} <span className="price">Rent: <b>${rent_price}</b></span></h2>
           <div className="car-preview-crousel">
             <div className="single-car-preview">
-              <img src="assets/img/car/car-5.jpg" alt="JSOFT" />
-            </div>
-            <div className="single-car-preview">
-              <img src="assets/img/car/car-1.jpg" alt="JSOFT" />
-            </div>
-            <div className="single-car-preview">
-              <img src="assets/img/car/car-6.jpg" alt="JSOFT" />
+            <img src={`assets/img/car/${image || 'car-1'}.jpg `} alt="JSOFT" />
             </div>
           </div>
           <div className="car-details-info">
@@ -29,20 +24,20 @@ const Content = (props) => {
                   <div className="tech-info-table">
                     <table className="table table-bordered">
                       <tbody><tr>
-                          <th>Class</th>
-                          <td>Compact</td>
+                          <th>Brand</th>
+                          <td>{brand.toUpperCase()}</td>
                         </tr>
                         <tr>
-                          <th>Fuel</th>
-                          <td>Petrol</td>
+                          <th>Color</th>
+                          <td>{color.toUpperCase()}</td>
                         </tr>
                         <tr>
-                          <th>Doors</th>
-                          <td>5</td>
+                          <th>Seats</th>
+                          <td>{seat}</td>
                         </tr>
                         <tr>
-                          <th>GearBox</th>
-                          <td>Automatic</td>
+                          <th>License Plate</th>
+                          <td>{license_plate.toUpperCase()}</td>
                         </tr>
                       </tbody></table>
                   </div>
@@ -65,7 +60,7 @@ const Content = (props) => {
               </div>
             </div>
             <div className="review-area">
-              <h3>Be the first to review “Aston Martin One-77”</h3>
+              <h3>Be the first to review “{model.toUpperCase()}”</h3>
               <div className="review-star">
                 <p className="rating">
                   <i className="fa fa-star" />
@@ -103,8 +98,12 @@ const Content = (props) => {
         </div>
       </div>
       {/* Car List Content End */}
-    </div></div></section>
+    </div>
+    </div>
+  </section>
 
+  )
+  
 }
 
 export default Content;
