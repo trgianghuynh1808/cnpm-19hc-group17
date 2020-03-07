@@ -23,7 +23,7 @@ module.exports = {
             PG_HOST: '34.87.117.119',
             PG_PORT: 5432,
             PG_USER: 'postgres',
-            PG_PASSWORD: 'password',
+            PG_PASSWORD: 'KQ2AF5fWmTErvfmW',
             PG_DB: 'uat-carrental'
         }
     }]
