@@ -1,13 +1,3 @@
-import sha256 from 'sha256';
-
-/**
-* Example model - create and export the database model for the example
-* including all assosiations and classmethods assiciated with this model.
-* @memberof  module:models/Example
-* @param  {Object} sequelize description
-* @param  {Object} DataTypes description
-*/
-
 export default function (sequelize, DataTypes) {
     const Model = sequelize.define('model', {
         id: {
@@ -18,8 +8,15 @@ export default function (sequelize, DataTypes) {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     }, { freezeTableName: true });
+
+    Model.associate = (models) => {
+        Model.Brand = Model.belongsTo(models.Brand, {
+            foreignKey: 'brand_id',
+            as: 'brand'
+        });
+    };
     return Model;
 }
