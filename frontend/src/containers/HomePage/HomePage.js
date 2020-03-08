@@ -13,11 +13,7 @@ import Testimonials from "../../components/Testimonials";
 import Articles from "../../components/Articles";
 import Footer from "../../components/Footer";
 
-import {
-  getCarsByBrandAPI,
-  getCarsByBrand,
-  getCarsByBrandSelector
-} from "../../stores/CarsState";
+import { getCarsByBrand, getCarsByBrandSelector } from "../../stores/CarsState";
 
 const connectToRedux = connect(
   createStructuredSelector({
