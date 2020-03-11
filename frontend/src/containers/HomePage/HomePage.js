@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import Header from "../../components/Header";
 import SearchForm from "../../components/SearchForm";
 import About from "../../components/About";
 import Partners from "../../components/Partners";
@@ -7,34 +11,42 @@ import FunFact from "../../components/FunFact";
 import CarList from "../../components/CarList";
 import Testimonials from "../../components/Testimonials";
 import Articles from "../../components/Articles";
-import PageLayout from "../../layouts";
+import Footer from "../../components/Footer";
 
-import { getCarByBrands } from "../../services/getListCar";
+import { getCarsByBrand, getCarsByBrandSelector } from "../../stores/CarsState";
 
-const HomePage = props => {
-  const [brandList, setBrandList] = useState([]);
+const connectToRedux = connect(
+  createStructuredSelector({
+    carByBrandsData: getCarsByBrandSelector
+  }),
+  distpatch => ({
+    getCarsByBrand: brand => {
+      distpatch(getCarsByBrand(brand));
+    }
+  })
+);
 
+const HomePage = ({ getCarsByBrand, carByBrandsData }) => {
   useEffect(() => {
-    getCarByBrands().then(res => {
-      const { data = [] } = res;
-      console.log(data);
-      setBrandList(data);
-    });
+    getCarsByBrand();
   }, []);
+
+  if (!carByBrandsData) return <> </>;
+
   return (
     <>
-      <PageLayout>
-        <SearchForm />
-        <About />
-        <Partners />
-        <Services />
-        <FunFact />
-        <CarList brandList={brandList} />
-        <Testimonials />
-        <Articles />
-      </PageLayout>
+      <Header />
+      <SearchForm />
+      <About />
+      <Partners />
+      <Services />
+      <FunFact />
+      <CarList brandList={carByBrandsData} />
+      <Testimonials />
+      <Articles />
+      <Footer />
     </>
   );
 };
 
-export default HomePage;
+export default connectToRedux(HomePage);
