@@ -10,4 +10,9 @@ router.get(
     controller.list
 );
 
+router.get(
+    '/:id',
+    controller.retrive
+);
+
 export default router;

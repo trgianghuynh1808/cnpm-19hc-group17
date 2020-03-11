@@ -12,11 +12,16 @@ export default class BrandService {
                 include: [{
                     model: db.Model,
                     as: 'modelInfo'
-                }]
+                }],
+                limit: params.limit,
+                offset: params.offset
             }],
             where: whereCondition,
             limit: params.limit,
             offset: params.offset
-        });
+        }).then(brands => ({
+            data: brands,
+            count: brands.length
+        }));
     }
 }

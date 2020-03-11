@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import _ from 'lodash';
 import db from '../models';
+import { ResourceNotFoundError } from '../components/ErrorInstance/businessErrors';
 
 export default class CarService {
 
@@ -20,6 +21,20 @@ export default class CarService {
             where: whereCondition,
             limit: params.limit,
             offset: params.offset
+        }).then(cars => ({
+            data: cars,
+            count: cars.length
+        }));
+    }
+
+    static retrive(id) {
+        return db.Car.find({
+            where: { id }
+        }).then((car) => {
+            if (!car) {
+                throw new ResourceNotFoundError('car');
+            }
+            return car;
         });
     }
 }
