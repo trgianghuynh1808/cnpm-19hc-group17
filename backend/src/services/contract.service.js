@@ -7,6 +7,13 @@ export default class ContractService {
         return db.Contract.create({ id: new Date().getTime(), ...data });
     }
 
+    static update(data) {
+        return db.Contract.update(
+            { status: data.status },
+            { where: { id: data.id } }
+        );
+    }
+
     static list(params) {
         const obj = _.omit(params, ['limit', 'offset']);
         const filterCondition = Object.keys(obj).map(key => ({ [key]: obj[key] }));

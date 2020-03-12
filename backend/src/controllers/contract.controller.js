@@ -10,4 +10,13 @@ export default class ContractController {
         const contracts = await ContractService.list(req.query);
         res.json(contracts);
     }
+
+    async update(req, res) {
+        const data = {
+            id: req.params.id,
+            ...req.body
+        };
+        const contracts = await ContractService.update(data);
+        res.json(contracts);
+    }
 }

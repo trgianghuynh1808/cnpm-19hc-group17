@@ -14,6 +14,7 @@ router.use('/brands', BrandRoutes);
 router.use('/contracts', ContractRoutes);
 
 router.use((err, req, res, next) => {
+    console.log('------------------------------')
     if (err instanceof BusinessError) {
         res.status(err.status).send({
             name: err.name,
@@ -28,6 +29,9 @@ router.use((err, req, res, next) => {
         });
         return;
     }
+    res.status(err.status).send({
+        ...err
+    });
 });
 
 export default router;

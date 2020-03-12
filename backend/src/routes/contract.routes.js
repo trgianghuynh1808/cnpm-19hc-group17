@@ -15,4 +15,9 @@ router.get(
     controller.list
 );
 
+router.put(
+    '/:id',
+    controller.update
+);
+
 export default router;
