@@ -21,9 +21,9 @@ export default class CarService {
             where: whereCondition,
             limit: params.limit,
             offset: params.offset
-        }).then(cars => ({
+        }).then(async (cars) => ({
             data: cars,
-            count: cars.length
+            count: await db.Car.count()
         }));
     }
 
