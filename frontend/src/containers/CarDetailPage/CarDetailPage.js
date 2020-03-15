@@ -20,9 +20,7 @@ const connectToRedux = connect(
   })
 );
 
-  const CarDetailPage = (store) => {
-    console.log(store)
-    const {getCarDetails, carDetailsData } = store;
+  const CarDetailPage = ({getCarDetails, carDetailsData}) => {
     useEffect(() => {
       const { location: { search } } = window;
       const queryObject = queryString.parse(search);
