@@ -60,7 +60,7 @@ export const getFilterGallerySelector = flow(
   get("data")
 );
 
-const getCarDetailsAPI = makeFetchAction(GET_CAR_DETAILS_API, ({ carID }) =>
+export const getCarDetailsAPI = makeFetchAction(GET_CAR_DETAILS_API, ({ carID }) =>
   nfetch({
     endpoint: `/cars/${carID}`,
     method: "GET"
@@ -77,5 +77,3 @@ export const getCarDetails = carID => {
     return;
   });
 };
-
-export const getCarDetailsSelector = getCarDetailsAPI.dataSelector

@@ -6,12 +6,12 @@ import PageTitle from '../../components/PageTitle';
 import Footer from '../../components/Footer';
 import Content from './components/Content';
 import queryString from 'query-string';
-import { getCarDetails, getCarDetailsSelector } from "../../stores/CarsState";
+import { getCarDetails, getCarDetailsAPI } from "../../stores/CarsState";
 
 
 const connectToRedux = connect(
   createStructuredSelector({
-    carDetailsData: getCarDetailsSelector
+    carDetailsData: getCarDetailsAPI.dataSelector
   }),
   distpatch => ({
     getCarDetails: carID => {
