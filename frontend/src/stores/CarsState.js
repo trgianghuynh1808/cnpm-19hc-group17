@@ -6,7 +6,6 @@ import nfetch from "../libs/nfetch";
 
 const GET_CARS_BY_BRAND_API = "GET_CARS_BY_BRAND_API";
 const GET_FILTER_GALLERY_API = "GET_FILTER_GALLERY_API";
-
 const GET_CAR_DETAILS_API = "GET_CAR_DETAILS_API";
 
 
@@ -79,6 +78,4 @@ export const getCarDetails = carID => {
   });
 };
 
-export const getCarDetailsSelector = flow(
-  getCarDetailsAPI.dataSelector,
-);
+export const getCarDetailsSelector = getCarDetailsAPI.dataSelector

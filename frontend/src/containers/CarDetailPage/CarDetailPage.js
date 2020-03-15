@@ -20,21 +20,20 @@ const connectToRedux = connect(
   })
 );
 
-  const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
-    const [ isLoading, setIsLoading ] = useState(true);
+  const CarDetailPage = (store) => {
+    console.log(store)
+    const {getCarDetails, carDetailsData } = store;
     useEffect(() => {
       const { location: { search } } = window;
       const queryObject = queryString.parse(search);
       const { id = 1 } = queryObject;
       getCarDetails(id);
-      setIsLoading(false);
     },[]);
-    console.log(carDetailsData);
     return (
       <>
         <Header/>
         <PageTitle title="Our Gallery" />
-        {!isLoading && <Content {...carDetailsData} />}
+        {carDetailsData && <Content {...carDetailsData} />}
         <Footer/>
     </>
     );
