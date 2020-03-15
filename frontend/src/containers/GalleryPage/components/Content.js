@@ -13,7 +13,7 @@ const Content = (props) => {
         <div className="col-lg-12">
             <div class="row popular-car-gird">
                 {carList && carList.map((car) => {
-                  const { brand, model, color, seat, car_price, rent_price, image, status } = car;
+                  const {id, brand, model, color, seat, car_price, rent_price, image, status } = car;
                   return <Car 
                   brand={brand}
                   model={model}
@@ -23,6 +23,7 @@ const Content = (props) => {
                   rentPrice={rent_price}
                   image={image}
                   status={status}
+                  id={id}
                   />
                 })
                 }

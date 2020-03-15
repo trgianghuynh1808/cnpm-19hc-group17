@@ -6,6 +6,8 @@ import nfetch from "../libs/nfetch";
 
 const GET_CARS_BY_BRAND_API = "GET_CARS_BY_BRAND_API";
 const GET_FILTER_GALLERY_API = "GET_FILTER_GALLERY_API";
+const GET_CAR_DETAILS_API = "GET_CAR_DETAILS_API";
+
 
 const getCarsByBrandAPI = makeFetchAction(GET_CARS_BY_BRAND_API, ({ brand }) =>
   nfetch({
@@ -57,3 +59,21 @@ export const getFilterGallerySelector = flow(
   getFilterGalleryAPI.dataSelector,
   get("data")
 );
+
+export const getCarDetailsAPI = makeFetchAction(GET_CAR_DETAILS_API, ({ carID }) =>
+  nfetch({
+    endpoint: `/cars/${carID}`,
+    method: "GET"
+  })()
+);
+
+export const getCarDetails = carID => {
+  return respondToSuccess(getCarDetailsAPI.actionCreator({ carID }), resp => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
+    }
+
+    return;
+  });
+};

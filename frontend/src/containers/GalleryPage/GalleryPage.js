@@ -30,7 +30,6 @@ const GalleryPage = ({ carListData, getFilterGallery }) => {
   useEffect(() => {
     const offset = activePage === 0 ? 0 : activePage * 5 + activePage;
     const limit = offset + 5;
-    console.log(offset, limit);
     getFilterGallery(offset, limit);
 
     if (carListData) setPageCount(Math.ceil(carListData.count / 6));
