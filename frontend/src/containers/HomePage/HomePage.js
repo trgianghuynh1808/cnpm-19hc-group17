@@ -31,8 +31,6 @@ const HomePage = ({ getCarsByBrand, carByBrandsData }) => {
     getCarsByBrand();
   }, []);
 
-  if (!carByBrandsData) return <> </>;
-
   return (
     <>
       <Header />

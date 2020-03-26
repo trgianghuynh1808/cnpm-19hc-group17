@@ -9,12 +9,14 @@ import Content from "./components/Content";
 
 import {
   getFilterGallery,
-  getFilterGallerySelector
+  getFilterGallerySelector,
+  getFilterGalleryCountSelector
 } from "../../stores/CarsState";
 
 const connectToRedux = connect(
   createStructuredSelector({
-    carListData: getFilterGallerySelector
+    carListData: getFilterGallerySelector,
+    carListCount: getFilterGalleryCountSelector,
   }),
   distpatch => ({
     getFilterGallery: (offset, limit) => {
@@ -23,18 +25,14 @@ const connectToRedux = connect(
   })
 );
 
-const GalleryPage = ({ carListData, getFilterGallery }) => {
+const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-
   useEffect(() => {
     const offset = activePage === 0 ? 0 : activePage * 5 + activePage;
     const limit = offset + 5;
     getFilterGallery(offset, limit);
-
-    if (carListData) setPageCount(Math.ceil(carListData.count / 6));
   }, [activePage]);
-
   if (!carListData) return <> </>;
 
   return (
@@ -42,7 +40,7 @@ const GalleryPage = ({ carListData, getFilterGallery }) => {
       <Header />
       <PageTitle title="Our Gallery" />
       <Content
-        pageCount={pageCount}
+        pageCount={Math.ceil(carListCount / 6)}
         activePage={activePage}
         setActivePage={setActivePage}
         carList={carListData}

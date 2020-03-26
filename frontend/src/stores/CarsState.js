@@ -7,6 +7,7 @@ import nfetch from "../libs/nfetch";
 const GET_CARS_BY_BRAND_API = "GET_CARS_BY_BRAND_API";
 const GET_FILTER_GALLERY_API = "GET_FILTER_GALLERY_API";
 const GET_CAR_DETAILS_API = "GET_CAR_DETAILS_API";
+const SEARCH_CARS_API = "SEARCH_CARS_API";
 
 
 const getCarsByBrandAPI = makeFetchAction(GET_CARS_BY_BRAND_API, ({ brand }) =>
@@ -60,6 +61,12 @@ export const getFilterGallerySelector = flow(
   get("data")
 );
 
+export const getFilterGalleryCountSelector = flow(
+  getFilterGalleryAPI.dataSelector,
+  get("count")
+);
+
+
 export const getCarDetailsAPI = makeFetchAction(GET_CAR_DETAILS_API, ({ carID }) =>
   nfetch({
     endpoint: `/cars/${carID}`,
@@ -77,3 +84,31 @@ export const getCarDetails = carID => {
     return;
   });
 };
+
+export const searchCarAPI = makeFetchAction(SEARCH_CARS_API, (queryObj) =>
+  nfetch({
+    endpoint: `/cars`,
+    method: "GET"
+  })(queryObj)
+);
+
+export const searchCar = queryObj => {
+  return respondToSuccess(searchCarAPI.actionCreator({ ...queryObj }), resp => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
+    }
+
+    return;
+  });
+};
+
+export const searchCarDataSelector = flow(
+  searchCarAPI.dataSelector,
+  get("data")
+);
+
+export const searchCarCountSelector = flow(
+  searchCarAPI.dataSelector,
+  get("count")
+);

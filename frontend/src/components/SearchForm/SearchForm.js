@@ -1,7 +1,29 @@
-import React, { Component } from 'react';
+import React, { useReducer } from 'react';
+import { Link } from 'react-router-dom';
 
-class SearchForm extends Component {
-    render() {
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'model':
+      return { ...state, model: action.payload };
+    case 'brand':
+      return { ...state, brand: action.payload };
+    case 'color':
+      return { ...state, color: action.payload };
+    case 'seat':
+      return {...state, seat: action.payload };
+    default:
+      throw new Error();
+  }
+}
+const SearchForm = (props) => {
+    const [ queryObj, dispatch ] = useReducer(reducer, {});
+    const selectOnChange = (id) => {
+      const element = document.getElementById(id);
+      if(element.value) {
+        dispatch({ type: id, payload: element.value});
+      }
+    }
         return (
           <section id="slider-area">
           <div className="single-slide-item overlay">
@@ -9,50 +31,53 @@ class SearchForm extends Component {
               <div className="row">
                 <div className="col-lg-5">
                   <div className="book-a-car">
-                    <form action="/car-list">
                       <div className="pickup-location book-item">
                         <h4>MODEL:</h4>
-                        <select id="model" name="model" className="custom-select">
+                        <select onChange={() => selectOnChange('model')} id="model" name="model" className="custom-select">
                           <option value="" selected>Select car model</option>
-                          <option value={1}>Sedan</option>
-                          <option value={2}>SUV</option>
-                          <option value={3}>Coupe</option>
-                          <option value={3}>MPV</option>
+                          <option value="sedan">Sedan</option>
+                          <option value="suv">SUV</option>
+                          <option value="coupe">Coupe</option>
+                          <option value="mpv">MPV</option>
                         </select>
                       </div>
                       <div className="pick-up-date book-item">
                         <h4>BRAND:</h4>
-                        <select id="brand" name="brand" className="custom-select">
+                        <select onChange={() => selectOnChange('brand')} id="brand" name="brand" className="custom-select">
                           <option value=""  selected>Select car brand</option>
-                          <option value={1}>BMW</option>
-                          <option value={2}>Audi</option>
-                          <option value={3}>Toyota</option>
-                          <option value={4}>Ferrari</option>
+                          <option value="bmw">BMW</option>
+                          <option value="audi">Audi</option>
+                          <option value="toyota">Toyota</option>
+                          <option value="ferrari">Ferrari</option>
                         </select>
                       </div>
                       <div className="choose-car-type book-item">
                         <h4>COLOR:</h4>
-                        <select id="color" name="color" className="custom-select">
+                        <select onChange={() => selectOnChange('color')} id="color" name="color" className="custom-select">
                           <option value=""  selected>Select car color</option>
-                          <option value={1}>Black</option>
-                          <option value={2}>White</option>
-                          <option value={3}>Red</option>
+                          <option value="black">Black</option>
+                          <option value="white">White</option>
+                          <option value="red">Red</option>
                         </select>
                       </div>
 
                       <div className="choose-car-type book-item">
                         <h4>SEAT:</h4>
-                        <select id="seat" name="seat" className="custom-select">
+                        <select onChange={() => selectOnChange('seat')} id="seat" name="seat" className="custom-select">
                           <option value=""  selected>Select car seat number</option>
-                          <option value={1}>4</option>
-                          <option value={2}>7</option>
-                          <option value={3}>15</option>
+                          <option value={5}>5</option>
+                          <option value={7}>7</option>
+                          <option value={15}>15</option>
                         </select>
                       </div>
                       <div className="book-button text-center">
-                        <button className="book-now-btn">Book Now</button>
+                        <Link
+                          to={{pathname:'/car-list', state: queryObj}}
+                          className="book-now-btn"
+                        >
+                          Book Now
+                        </Link>
                       </div>
-                    </form>
                   </div>
                 </div>
                 <div className="col-lg-7 text-right">
@@ -70,7 +95,6 @@ class SearchForm extends Component {
           </div>
         </section>
         );
-    }
 }
 
 export default SearchForm;
