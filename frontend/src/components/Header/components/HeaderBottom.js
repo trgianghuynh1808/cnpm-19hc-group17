@@ -1,8 +1,10 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 const HeaderBottom = props => {
-  const { location: { pathname } } = window;
-  const activePage = pathname.split('/')[1] || 'home';
+  const {
+    location: { pathname }
+  } = window;
+  const activePage = pathname.split("/")[1] || "home";
   return (
     <div id="header-bottom">
       <div className="container">
@@ -18,9 +20,7 @@ const HeaderBottom = props => {
           <div className="col-lg-8 d-none d-xl-block">
             <nav className="mainmenu alignright">
               <ul>
-                <li
-                  className={activePage === "home" && "active"}
-                >
+                <li className={activePage === "home" && "active"}>
                   <Link to="/">Home</Link>
                 </li>
                 <li>
@@ -30,7 +30,7 @@ const HeaderBottom = props => {
                   <a href="services.html">services</a>
                 </li>
                 <li>
-                  <a href="#">Cars</a>
+                  <a href="/#">Cars</a>
                   <ul>
                     <li>
                       <a href="car-left-sidebar.html">Car Left Sidebar</a>
@@ -46,13 +46,11 @@ const HeaderBottom = props => {
                     </li>
                   </ul>
                 </li>
-                <li
-                  className={activePage === "gallery" && "active"}
-                >
+                <li className={activePage === "gallery" && "active"}>
                   <Link to="/gallery">Gallery</Link>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <a href="/#">Blog</a>
                   <ul>
                     <li>
                       <a href="article.html">Blog Page</a>
