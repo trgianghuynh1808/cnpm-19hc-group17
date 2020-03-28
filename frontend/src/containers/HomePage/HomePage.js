@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -29,7 +29,7 @@ const connectToRedux = connect(
 const HomePage = ({ getCarsByBrand, carByBrandsData }) => {
   useEffect(() => {
     getCarsByBrand();
-  }, []);
+  }, [getCarsByBrand]);
 
   if (!carByBrandsData) return <> </>;
 
