@@ -1,35 +1,36 @@
 export default function (sequelize, DataTypes) {
-    const Account = sequelize.define('account', {
+    const User = sequelize.define('user', {
         id: {
             type: DataTypes.INTEGER,
             unique: true,
             autoIncrement: true,
             primaryKey: true
         },
-        username: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        password: {
+        dob: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        role: {
+        address: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_id: {
-            type: DataTypes.INTEGER,
+        phone_number: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        gender: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, { freezeTableName: true, timestamps: false });
 
-    Account.associate = (models) => {
-        Account.User = Account.belongsTo(models.User, {
-            foreignKey: 'user_id',
-            as: 'user'
-        });
-    };
-
-    return Account;
+    return User;
 }
