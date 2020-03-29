@@ -17,7 +17,8 @@ export default class AccountService {
         if (!account) throw new AuthenticationError('Username or Password is invalid');
         return generate({
             username: account.username,
-            email: account.user.email
+            email: account.user.email,
+            accountId: account.id
         });
     }
 

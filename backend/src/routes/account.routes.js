@@ -12,7 +12,8 @@ router.post(
 );
 
 router.get(
-    'getCurrentUser',
+    '/getCurrentUser',
+    verifyJWT,
     controller.action('getCurrentUser')
 );
 
