@@ -17,5 +17,9 @@ router.get(
     controller.action('getCurrentUser')
 );
 
-
+router.get(
+    '/getProfileUser',
+    verifyJWT,
+    controller.action('getProfileUser')
+);
 export default router;
