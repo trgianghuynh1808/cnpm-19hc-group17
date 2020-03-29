@@ -9,4 +9,9 @@ export default class AccountController extends BaseController {
         };
         return AccountService.login(loginInfo);
     }
+
+    getCurrentUser() {
+        return AccountService.getCurrentUser();
+    }
+
 }

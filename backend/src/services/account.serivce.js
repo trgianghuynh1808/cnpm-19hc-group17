@@ -1,5 +1,8 @@
 import db from '../models';
-import { AuthenticationError } from '../components/ErrorInstance/businessErrors';
+import {
+    AuthenticationError,
+    ResourceNotFoundError
+} from '../components/ErrorInstance/businessErrors';
 import { generate } from '../utils/token';
 
 export default class AccountService {
@@ -16,5 +19,20 @@ export default class AccountService {
             username: account.username,
             email: account.user.email
         });
+    }
+
+    static async getCurrentUser(accountId) {
+        const account = await db.Account.find({
+            include: [{
+                model: db.User,
+                as: 'user'
+            }],
+            where: { id: accountId }
+        });
+        if (!account) throw new ResourceNotFoundError('Account');
+        return {
+            email: account.user.email,
+            username: account.username
+        };
     }
 }
