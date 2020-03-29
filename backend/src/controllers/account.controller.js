@@ -14,4 +14,8 @@ export default class AccountController extends BaseController {
         return AccountService.getCurrentUser();
     }
 
+    getProfileUser(req, res) {
+        const { accountId } = res.locals.user;
+        return AccountService.getProfileUser(accountId);
+    }
 }

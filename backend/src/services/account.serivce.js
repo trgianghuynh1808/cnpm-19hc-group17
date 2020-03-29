@@ -35,4 +35,17 @@ export default class AccountService {
             username: account.username
         };
     }
+
+    static async getProfileUser(accountId) {
+        const account = await db.Account.find({
+            include: [{
+                model: db.User,
+                as: 'user'
+            }],
+            where: { id: accountId }
+        });
+        if (!account) throw new ResourceNotFoundError('Account');
+        return account;
+    }
+
 }
