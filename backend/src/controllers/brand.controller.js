@@ -1,8 +1,8 @@
 import BrandService from '../services/brand.service';
+import BaseController from './base.controller';
 
-export default class BrandControlller {
-    async list(req, res) {
-        const cars = await BrandService.list(req.query);
-        res.json(cars);
+export default class BrandControlller extends BaseController {
+    list(req) {
+        return BrandService.list(req.query);
     }
 }

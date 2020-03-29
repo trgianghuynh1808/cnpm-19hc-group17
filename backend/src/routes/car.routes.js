@@ -7,7 +7,12 @@ const router = express.Router();
 
 router.get(
     '/',
-    controller.list
+    controller.action('list')
+);
+
+router.get(
+    '/:id',
+    controller.action('retrive')
 );
 
 export default router;

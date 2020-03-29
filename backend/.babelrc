@@ -1,8 +1,23 @@
 {
-  "presets": [ "es2015", "stage-0" ],
+  "presets": [
+    "es2015",
+    "stage-0"
+  ],
   "plugins": [
-    ["transform-runtime", {
-      "regenerator": true
-    }]
+    [
+      "transform-runtime",
+      {
+        "regenerator": true
+      },
+    ],
+    [
+      "babel-plugin-transform-builtin-extend",
+      {
+        "globals": [
+          "Error",
+          "Array"
+        ]
+      }
+    ]
   ]
 }

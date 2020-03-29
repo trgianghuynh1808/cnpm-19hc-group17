@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import routes from './routes';
-import { errorMiddleware } from './components/errors';
 
 const app = express();
 
@@ -27,6 +26,5 @@ if (app.get('env') === 'development') {
 
 
 app.use('/', routes);
-app.use(errorMiddleware);
 
 export default app;

@@ -1,8 +1,12 @@
 import CarService from '../services/car.service';
+import BaseController from './base.controller';
 
-export default class CarController {
-    async list(req, res) {
-        const cars = await CarService.list(req.query);
-        res.json(cars);
+export default class CarController extends BaseController {
+    list(req) {
+        return CarService.list(req.query);
+    }
+
+    retrive(req) {
+        return CarService.retrive(req.params.id);
     }
 }

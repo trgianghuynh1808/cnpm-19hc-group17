@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get(
     '/',
-    controller.list
+    controller.action('list')
 );
 
 export default router;
