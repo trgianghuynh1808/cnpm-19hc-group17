@@ -10,4 +10,9 @@ router.post(
     controller.action('login')
 );
 
+router.get(
+    'getCurrentUser',
+    controller.action('getCurrentUser')
+);
+
 export default router;
