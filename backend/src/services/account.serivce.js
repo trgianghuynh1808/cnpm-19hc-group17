@@ -46,7 +46,9 @@ export default class AccountService {
             where: { id: accountId }
         });
         if (!account) throw new ResourceNotFoundError('Account');
-        return account;
+        const accountData = account.toJSON();
+        delete accountData.password;
+        return accountData;
     }
 
 }
