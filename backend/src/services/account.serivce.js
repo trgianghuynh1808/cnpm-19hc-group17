@@ -17,7 +17,8 @@ export default class AccountService {
         if (!account) throw new AuthenticationError('Username or Password is invalid');
         return generate({
             username: account.username,
-            email: account.user.email
+            email: account.user.email,
+            accountId: account.id
         });
     }
 
@@ -35,4 +36,19 @@ export default class AccountService {
             username: account.username
         };
     }
+
+    static async getProfileUser(accountId) {
+        const account = await db.Account.find({
+            include: [{
+                model: db.User,
+                as: 'user'
+            }],
+            where: { id: accountId }
+        });
+        if (!account) throw new ResourceNotFoundError('Account');
+        const accountData = account.toJSON();
+        delete accountData.password;
+        return accountData;
+    }
+
 }
