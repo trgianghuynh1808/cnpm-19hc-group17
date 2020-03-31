@@ -14,7 +14,7 @@ export default ({ endpoint, method = "POST" }) => (
   variables = {},
   opts = {}
 ) => {
-  let curEndpoint = process.env.REACT_APP_CARRENTAL_API_URL + endpoint;
+  let curEndpoint = 'http://localhost:9900' + endpoint;
 
   if (method === "GET") {
     const query = objectToQuery(variables);

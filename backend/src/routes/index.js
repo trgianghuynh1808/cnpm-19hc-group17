@@ -5,6 +5,7 @@ import BrandRoutes from './brand.routes';
 import AccountRoutes from './account.routes';
 import { BusinessError, AuthenticationError } from '../components/ErrorInstance/businessErrors';
 import ContractRoutes from './contract.routes';
+import { verifyJWT } from '../components/auth';
 
 const router = express.Router();
 
