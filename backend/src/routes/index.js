@@ -5,6 +5,7 @@ import BrandRoutes from './brand.routes';
 import AccountRoutes from './account.routes';
 import { BusinessError, AuthenticationError } from '../components/ErrorInstance/businessErrors';
 import ContractRoutes from './contract.routes';
+import { verifyJWT } from '../components/auth';
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.use('/brands', BrandRoutes);
 router.use('/contracts', ContractRoutes);
 
 router.use((err, req, res, next) => {
-    console.log('------------------------------')
+    console.log('err-------------', err);
     if (err instanceof BusinessError) {
         res.status(err.status).send({
             name: err.name,

@@ -33,7 +33,7 @@ const GalleryPage = ({ carListData, getFilterGallery }) => {
     getFilterGallery(offset, limit);
 
     if (carListData) setPageCount(Math.ceil(carListData.count / 6));
-  }, [activePage]);
+  }, [activePage, carListData, getFilterGallery]);
 
   if (!carListData) return <> </>;
 
