@@ -30,7 +30,7 @@ const ModalComponent = ({
         onAfterOpen={doAfterOpenModal}
         onRequestClose={closeModal}
         style={Object.assign({}, defaultStyle, styleModal)}
-        contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         {children}
       </Modal>

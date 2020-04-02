@@ -1,17 +1,29 @@
 import React, { useState } from "react";
-import ModalComponent from "../../../components/commons/ModalComponent";
+import { Field, reduxForm } from "redux-form";
 
-const Content = props => {
-  const {
-    brand = "",
-    model = "",
-    color = "",
-    seat = "",
-    rent_price = "",
-    image,
-    license_plate = ""
-  } = props;
+import ModalComponent from "../../../components/commons/ModalComponent";
+import FormFields from "../../../components/commons/ReduxFormFields";
+
+const { InputRenderFieldComponent } = FormFields;
+
+const Content = ({
+  brand = "",
+  model = "",
+  color = "",
+  seat = "",
+  rent_price = "",
+  image,
+  license_plate = "",
+  handleSubmit,
+  pristine,
+  submitting,
+  reset
+}) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+
+  const submitBookingHandle = values => {
+    console.log("test submit", values);
+  };
 
   return (
     <section id="car-list-area" className="section-padding">
@@ -87,7 +99,7 @@ const Content = props => {
                     </div>
                   </div>
                 </div>
-                <div className="input-submit align-middle">
+                <div className="input-submit">
                   <button
                     type="button"
                     onClick={() => {
@@ -101,7 +113,61 @@ const Content = props => {
                   modalIsOpen={isOpenBookingModal}
                   setIsOpen={setIsOpenBookingModal}
                 >
-                  <h1>Test cai nhe</h1>
+                  <form onSubmit={handleSubmit(submitBookingHandle)}>
+                    <div className="form-group">
+                      <label>Full Name: </label>
+                      <Field
+                        name="fullname"
+                        component={InputRenderFieldComponent}
+                        placeholder="Enter full name"
+                        type="text"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Phone Number:</label>
+                      <Field
+                        name="phoneNumber"
+                        component={InputRenderFieldComponent}
+                        placeholder="Enter phone number"
+                        type="text"
+                        required
+                        pattern={`([0-9]{9,})`}
+                      />
+                      <small className="form-text text-muted">
+                        Phone number must has least 9 numbers
+                      </small>
+                    </div>
+                    <div className="form-group">
+                      <label>Email address</label>
+                      <Field
+                        name="email"
+                        type="email"
+                        component={InputRenderFieldComponent}
+                        placeholder="Enter email"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Identity Card:</label>
+                      <Field
+                        name="indentityCard"
+                        component={InputRenderFieldComponent}
+                        placeholder="Enter identity card:"
+                        type="text"
+                        required
+                        pattern={`([0-9])`}
+                      />
+                    </div>
+                    <div className="input-submit">
+                      <button type="submit" disabled={pristine || submitting}>
+                        Submit
+                      </button>
+                      <button disabled={pristine || submitting} onClick={reset}>
+                        Clear
+                      </button>
+                    </div>
+                  </form>
                 </ModalComponent>
 
                 <div className="review-area">
@@ -155,4 +221,6 @@ const Content = props => {
   );
 };
 
-export default Content;
+export default reduxForm({
+  form: "booking-form"
+})(Content);
