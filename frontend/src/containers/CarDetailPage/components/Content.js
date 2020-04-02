@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ModalComponent from "../../../components/commons/ModalComponent";
 
 const Content = props => {
   const {
@@ -10,6 +11,8 @@ const Content = props => {
     image,
     license_plate = ""
   } = props;
+  const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+
   return (
     <section id="car-list-area" className="section-padding">
       <div className="container">
@@ -84,6 +87,23 @@ const Content = props => {
                     </div>
                   </div>
                 </div>
+                <div className="input-submit align-middle">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpenBookingModal(true);
+                    }}
+                  >
+                    Booking Now
+                  </button>
+                </div>
+                <ModalComponent
+                  modalIsOpen={isOpenBookingModal}
+                  setIsOpen={setIsOpenBookingModal}
+                >
+                  <h1>Test cai nhe</h1>
+                </ModalComponent>
+
                 <div className="review-area">
                   <h3>Be the first to review “{model.toUpperCase()}”</h3>
                   <div className="review-star">
