@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TabFilter = (props) => {
-    const { brandList, activeBrand, setActiveBrand } = props;
+const TabFilter = props => {
+  const { brandList, activeBrand, setActiveBrand } = props;
 
-    const onClick = (brand) => setActiveBrand(brand);
+  const onClick = brand => setActiveBrand(brand);
 
     return <div className="popucar-menu text-center">
       {brandList && brandList.map((brand, index) =>

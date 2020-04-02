@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Car = (props) => {
   const {id, color, seat, status, image, rentPrice, model, brand } = props;
@@ -22,8 +22,7 @@ const Car = (props) => {
         <a href="">{status}</a>
       </div>
     </div>
-  </div>
-</div>
-}
+  );
+};
 
 export default Car;

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import Car from './Car';
+import React from "react";
+import Car from "./Car";
 
 const Content = (props) => {
     const { carList, activePage, setActivePage, pageCount } = props;
@@ -29,8 +29,48 @@ const Content = (props) => {
                 })
                 }
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="page-pagi">
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li
+                    onClick={() => {
+                      if (activePage === 0) return;
+                      setActivePage(activePage - 1);
+                    }}
+                    className="page-item"
+                  >
+                    <a className="page-link">Previous</a>
+                  </li>
+                  {pagingList.map(paging => (
+                    <li
+                      onClick={() => setActivePage(paging - 1)}
+                      className={`page-item ${paging - 1 === activePage &&
+                        "active"}`}
+                    >
+                      <a className="page-link">{paging}</a>
+                    </li>
+                  ))}
+                  <li
+                    onClick={() => {
+                      console.log(activePage, pageCount);
+                      if (activePage === pageCount - 1) return;
+                      setActivePage(activePage + 1);
+                    }}
+                    className="page-item"
+                  >
+                    <a className="page-link">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
+<<<<<<< HEAD
       <div className="row">
   <div className="col-lg-12">
     <div className="page-pagi">
@@ -73,5 +113,10 @@ const Content = (props) => {
   </section>
   
 }
+=======
+    </section>
+  );
+};
+>>>>>>> 32b13a9cde5f97253678708babdab82ffbd4a52f
 
 export default Content;

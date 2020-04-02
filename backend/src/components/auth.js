@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { AuthenticationError, AuthorizationError } from './ErrorInstance/businessErrors';
+import config from '../config';
 
 export function permitRole(...allowed) {
     return (req, res, next) => {
@@ -14,27 +15,21 @@ export function permitRole(...allowed) {
     };
 }
 
-export function verifyJWT(jwtSecrect) {
-    return (req, res, next) => {
-        if (res.locals.user) {
-            return next();
+export function verifyJWT(req, res, next) {
+    if (res.locals.user) {
+        return next();
+    }
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    jwt.verify(token, config.jwtSecrect, (err, decoded) => {
+        if (err) {
+            throw new AuthenticationError(err);
         }
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
-        jwt.verify(token, jwtSecrect, (err, decoded) => {
-            if (err) {
-                throw new AuthenticationError(err);
-            }
-            const userData = {
-                account: decoded.account,
-                staff: decoded.staff ? decoded.staff : null
-            };
-            if (!userData || !userData.account.id) {
-                throw new AuthorizationError('Invalid Data for authorization');
-            }
-            res.locals.user = userData; //eslint-disable-line
-            next();
-        });
-    };
+        if (!decoded) {
+            throw new AuthorizationError('Invalid Data for authorization');
+        }
+            res.locals.user = decoded; //eslint-disable-line
+        next();
+    });
 }
 
 export function permitAction(...allowed) {

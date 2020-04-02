@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 const HeaderBottom = props => {
-  const { location: { pathname } } = window;
-  const activePage = pathname.split('/')[1] || 'home';
+  const {
+    location: { pathname }
+  } = window;
+  const activePage = pathname.split("/")[1] || "home";
   return (
     <div id="header-bottom">
       <div className="container">
@@ -30,7 +32,7 @@ const HeaderBottom = props => {
                   <a href="services.html">services</a>
                 </li>
                 <li>
-                  <a href="#">Cars</a>
+                  <a href="/#">Cars</a>
                   <ul>
                     <li>
                       <a href="car-left-sidebar.html">Car Left Sidebar</a>
@@ -52,7 +54,7 @@ const HeaderBottom = props => {
                   <Link to="/gallery">Gallery</Link>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <a href="/#">Blog</a>
                   <ul>
                     <li>
                       <a href="article.html">Blog Page</a>
