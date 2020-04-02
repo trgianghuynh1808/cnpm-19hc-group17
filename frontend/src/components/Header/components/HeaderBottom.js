@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 const HeaderBottom = props => {
   const { location: { pathname } } = window;
@@ -19,7 +19,7 @@ const HeaderBottom = props => {
             <nav className="mainmenu alignright">
               <ul>
                 <li
-                  className={activePage === "home" && "active"}
+                  className={activePage === 'home' ? 'active' : ''}
                 >
                   <Link to="/">Home</Link>
                 </li>
@@ -47,7 +47,7 @@ const HeaderBottom = props => {
                   </ul>
                 </li>
                 <li
-                  className={activePage === "gallery" && "active"}
+                  className={activePage === 'gallery' ? 'active' : ''}
                 >
                   <Link to="/gallery">Gallery</Link>
                 </li>

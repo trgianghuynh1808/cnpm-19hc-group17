@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 const Content = (props) => {
   const { brand = '', model = '', color = '', seat = '', car_price = '', rent_price = '', status = '', image, license_plate = ''} = props;

@@ -11,10 +11,11 @@ const Content = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
-            <div class="row popular-car-gird">
-                {carList && carList.map((car) => {
+            <div className="row popular-car-gird">
+                {carList && carList.map((car, index) => {
                   const {id, brand, model, color, seat, car_price, rent_price, image, status } = car;
                   return <Car 
+                  key={index}
                   brand={brand}
                   model={model}
                   seat={seat}
@@ -44,8 +45,9 @@ const Content = (props) => {
                 Previous
               </a>
           </li>
-          {pagingList.map(paging =>
+          {pagingList.map((paging, index) =>
           <li
+            key={index}
             onClick={()=> setActivePage(paging - 1)}
             className={`page-item ${paging - 1 === activePage && 'active'}`}>
               <a className="page-link">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Pagination = (props) => {
     const { pageCount = 0, activePage, setActivePage } = props;

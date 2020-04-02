@@ -34,7 +34,7 @@ const SearchForm = (props) => {
                       <div className="pickup-location book-item">
                         <h4>MODEL:</h4>
                         <select onChange={() => selectOnChange('model')} id="model" name="model" className="custom-select">
-                          <option value="" selected>Select car model</option>
+                          <option value="">Select car model</option>
                           <option value="sedan">Sedan</option>
                           <option value="suv">SUV</option>
                           <option value="coupe">Coupe</option>
@@ -44,7 +44,7 @@ const SearchForm = (props) => {
                       <div className="pick-up-date book-item">
                         <h4>BRAND:</h4>
                         <select onChange={() => selectOnChange('brand')} id="brand" name="brand" className="custom-select">
-                          <option value=""  selected>Select car brand</option>
+                          <option value="" >Select car brand</option>
                           <option value="bmw">BMW</option>
                           <option value="audi">Audi</option>
                           <option value="toyota">Toyota</option>
@@ -54,7 +54,7 @@ const SearchForm = (props) => {
                       <div className="choose-car-type book-item">
                         <h4>COLOR:</h4>
                         <select onChange={() => selectOnChange('color')} id="color" name="color" className="custom-select">
-                          <option value=""  selected>Select car color</option>
+                          <option value="">Select car color</option>
                           <option value="black">Black</option>
                           <option value="white">White</option>
                           <option value="red">Red</option>
@@ -64,7 +64,7 @@ const SearchForm = (props) => {
                       <div className="choose-car-type book-item">
                         <h4>SEAT:</h4>
                         <select onChange={() => selectOnChange('seat')} id="seat" name="seat" className="custom-select">
-                          <option value=""  selected>Select car seat number</option>
+                          <option value="" >Select car seat number</option>
                           <option value={5}>5</option>
                           <option value={7}>7</option>
                           <option value={15}>15</option>

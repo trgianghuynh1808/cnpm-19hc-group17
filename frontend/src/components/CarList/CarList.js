@@ -23,8 +23,8 @@ const CarList = (props) => {
               <div className="popular-cars-wrap">
                   <TabFilter brandList={brandList} activeBrand={activeBrand} setActiveBrand={setActiveBrand} />
                 <div className="row popular-car-gird">
-                  {activeBrandList && activeBrandList.cars.map((car) => 
-                    <Car {...car}/>
+                  {activeBrandList && activeBrandList.cars.map((car, index) => 
+                    <Car key={index} {...car}/>
                   )}
                 </div>
               </div>
