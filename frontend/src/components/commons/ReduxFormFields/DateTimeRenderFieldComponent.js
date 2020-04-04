@@ -3,11 +3,7 @@ import Datetime from "react-datetime";
 
 import { DATE_FORMAT } from "../../../utils/enums";
 
-const DateTimeRenderFieldComponent = ({
-  input,
-  meta: { touched, error },
-  ...other
-}) => {
+const DateTimeRenderFieldComponent = ({ input, ...other }) => {
   return (
     <Datetime
       {...input}

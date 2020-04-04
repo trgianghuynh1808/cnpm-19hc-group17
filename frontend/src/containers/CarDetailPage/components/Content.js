@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
-import Datetime from "react-datetime";
 import moment from "moment";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
-import { DATE_FORMAT } from "../../../utils/enums";
+import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
 
 const { InputRenderFieldComponent, DateTimeRenderFieldComponent } = FormFields;
 
@@ -122,7 +121,13 @@ const Content = ({
                 >
                   <form onSubmit={handleSubmit(submitBookingHandle)}>
                     <div className="container">
-                      <h4 className="text-center">Booking Info</h4>
+                      <div className="row justify-content-between p-2">
+                        <h4 style={{ color: "#fabf21" }}>Booking Info</h4>
+                        <h5>
+                          Deposit fee: $
+                          {(rent_price * PECENT_DEPOSIT_FEE) / 100}
+                        </h5>
+                      </div>
                       <div className="row pt-3">
                         <div className="col-lg-6">
                           <div className="form-group">
@@ -216,6 +221,17 @@ const Content = ({
                               }}
                             />
                           </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          By clicking submit you are agreeing to{" "}
+                          <span
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                          >
+                            The content of contract.
+                          </span>
                         </div>
                       </div>
                       <div className="row justify-content-center">
