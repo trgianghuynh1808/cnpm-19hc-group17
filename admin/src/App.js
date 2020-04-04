@@ -1,12 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import WrapperCompnent from './components';
+import React, { Component } from 'react';
+import { Router } from 'react-router-dom';
+import App from './containers/App';
+import { createBrowserHistory } from 'history';
 
-function App() {
-  return (
-    <WrapperCompnent/>
-  );
+const history = createBrowserHistory();
+export default class extends Component {
+  render() {
+    return (
+    <Router history={history}>
+      <App/>
+    </Router>
+    );
+  }
 }
-
-export default App;

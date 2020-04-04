@@ -15,7 +15,7 @@ export default (props) => {
           <div className="app-main__outer">
             <div className="app-main__inner">
               <Title/>
-              <Table/>
+              {children}
             </div>
           </div>
         </div>
