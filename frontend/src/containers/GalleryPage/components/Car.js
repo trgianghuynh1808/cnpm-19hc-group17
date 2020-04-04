@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 const Car = (props) => {
   const {id, color, seat, status, image, rentPrice, model, brand } = props;
-  return <div className="col-lg-4 col-md-6 hat sedan">
+  return (
+  <div className="col-lg-4 col-md-6 hat sedan">
   <div className="single-popular-car">
     <div className="p-car-thumbnails">
       <Link to={`/car-details?id=${id}`} className="car-hover">
@@ -21,6 +22,8 @@ const Car = (props) => {
         <a href="">{seat} seat</a>
         <a href="">{status}</a>
       </div>
+    </div>
+    </div>
     </div>
   );
 };

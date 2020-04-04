@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { carPerHoriPage } from '../../utils/enum';
 
 import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
@@ -29,8 +30,9 @@ const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   useEffect(() => {
-    const offset = activePage === 0 ? 0 : activePage * 5 + activePage;
-    const limit = offset + 5;
+    const carPerPage = carPerHoriPage - 1 ;
+    const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
+    const limit = offset + carPerPage;
     getFilterGallery(offset, limit);
   }, [activePage]);
   if (!carListData) return <> </>;
@@ -40,7 +42,7 @@ const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
       <Header />
       <PageTitle title="Our Gallery" />
       <Content
-        pageCount={Math.ceil(carListCount / 6)}
+        pageCount={Math.ceil(carListCount / carPerHoriPage)}
         activePage={activePage}
         setActivePage={setActivePage}
         carList={carListData}

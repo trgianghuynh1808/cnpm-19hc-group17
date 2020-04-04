@@ -3,12 +3,12 @@ import TabFilter from './TabFilter';
 import Title from './Title';
 import Car from './Car';
 
-
 const CarList = (props) => {
   const { brandList = [] } = props;
   const defaultBrand = (brandList && brandList[0]) ? brandList[0].name : 'HONDA';
   const [ activeBrand, setActiveBrand ] = useState(defaultBrand);
   const activeBrandList = brandList.find(car=> car.id === activeBrand.toLocaleLowerCase());
+  if(!brandList[0]) return <> Loading!!!!!</>;
   return (
     <section id="choose-car" className="section-padding">
   <div className="container">
