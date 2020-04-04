@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
+import Datetime from "react-datetime";
+import moment from "moment";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
+import { DATE_FORMAT } from "../../../utils/enums";
 
-const { InputRenderFieldComponent } = FormFields;
+const { InputRenderFieldComponent, DateTimeRenderFieldComponent } = FormFields;
 
 const Content = ({
   brand = "",
@@ -17,12 +20,16 @@ const Content = ({
   handleSubmit,
   pristine,
   submitting,
-  reset
+  reset,
 }) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  const submitBookingHandle = values => {
-    console.log("test submit", values);
+  const submitBookingHandle = (values) => {
+    if (values.startDate && values.endDate) {
+      console.log("test submit", values);
+    }
   };
 
   return (
@@ -114,58 +121,119 @@ const Content = ({
                   setIsOpen={setIsOpenBookingModal}
                 >
                   <form onSubmit={handleSubmit(submitBookingHandle)}>
-                    <div className="form-group">
-                      <label>Full Name: </label>
-                      <Field
-                        name="fullname"
-                        component={InputRenderFieldComponent}
-                        placeholder="Enter full name"
-                        type="text"
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Phone Number:</label>
-                      <Field
-                        name="phoneNumber"
-                        component={InputRenderFieldComponent}
-                        placeholder="Enter phone number"
-                        type="text"
-                        required
-                        pattern={`([0-9]{9,})`}
-                      />
-                      <small className="form-text text-muted">
-                        Phone number must has least 9 numbers
-                      </small>
-                    </div>
-                    <div className="form-group">
-                      <label>Email address</label>
-                      <Field
-                        name="email"
-                        type="email"
-                        component={InputRenderFieldComponent}
-                        placeholder="Enter email"
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Identity Card:</label>
-                      <Field
-                        name="indentityCard"
-                        component={InputRenderFieldComponent}
-                        placeholder="Enter identity card:"
-                        type="text"
-                        required
-                        pattern={`([0-9])`}
-                      />
-                    </div>
-                    <div className="input-submit">
-                      <button type="submit" disabled={pristine || submitting}>
-                        Submit
-                      </button>
-                      <button disabled={pristine || submitting} onClick={reset}>
-                        Clear
-                      </button>
+                    <div className="container">
+                      <h4 className="text-center">Booking Info</h4>
+                      <div className="row pt-3">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Full Name: </label>
+                            <Field
+                              name="fullname"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter full name"
+                              type="text"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Identity Card:</label>
+                            <Field
+                              name="indentityCard"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter identity card:"
+                              type="text"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Email address</label>
+                            <Field
+                              name="email"
+                              type="email"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter email"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Phone Number:</label>
+                            <Field
+                              name="phoneNumber"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter phone number"
+                              type="text"
+                              required
+                              pattern={`([0-9]{9,})`}
+                            />
+                            <small className="form-text text-muted">
+                              Phone number must has least 9 numbers
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Start Date</label>
+                            <Field
+                              name="startDate"
+                              component={DateTimeRenderFieldComponent}
+                              isValidDate={(currentDate) => {
+                                const nowTime = moment();
+                                return moment(currentDate).isAfter(nowTime);
+                              }}
+                              onChange={(selectedDate) => {
+                                const dateFormatted = selectedDate.format(
+                                  DATE_FORMAT
+                                );
+                                setStartDate(dateFormatted);
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>End Date</label>
+                            <Field
+                              name="endDate"
+                              component={DateTimeRenderFieldComponent}
+                              isValidDate={(currentDate) => {
+                                return moment(currentDate).isAfter(startDate);
+                              }}
+                              onChange={(selectedDate) => {
+                                const dateFormatted = selectedDate.format(
+                                  DATE_FORMAT
+                                );
+                                setEndDate(dateFormatted);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row justify-content-center">
+                        <div className="input-submit">
+                          <button
+                            type="submit"
+                            disabled={pristine || submitting}
+                          >
+                            Submit
+                          </button>
+                          <button
+                            disabled={pristine || submitting}
+                            onClick={reset}
+                          >
+                            Clear
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </ModalComponent>
@@ -222,5 +290,5 @@ const Content = ({
 };
 
 export default reduxForm({
-  form: "booking-form"
+  form: "booking-form",
 })(Content);
