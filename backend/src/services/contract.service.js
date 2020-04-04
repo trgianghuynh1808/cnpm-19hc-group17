@@ -1,10 +1,21 @@
 import _ from 'lodash';
 import db from '../models';
+import { ResourceNotFoundError } from '../components/ErrorInstance/businessErrors';
 
 export default class ContractService {
 
-    static create(data) {
-        return db.Contract.create({ id: new Date().getTime(), ...data });
+    static async create(data) {
+        const { car_id } = data;
+        const car = await db.Car.findOne({ id: car_id });
+        if (!car) throw ResourceNotFoundError('car');
+        const { rent_price } = car;
+        const deposit = (rent_price * 30) / 100;
+        return db.Contract.create({
+            ...data,
+            id: new Date().getTime(),
+            deposit,
+            status: 'reviewing'
+        });
     }
 
     static update(data) {
