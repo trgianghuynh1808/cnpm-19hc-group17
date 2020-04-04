@@ -7,7 +7,7 @@ const history = createBrowserHistory();
 export default class extends Component {
   render() {
     return (
-      <Router history={history}>
+    <Router history={history}>
       <App/>
     </Router>
     );

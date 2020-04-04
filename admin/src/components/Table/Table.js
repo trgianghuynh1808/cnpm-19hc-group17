@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => {
-
+    console.log(props);
     return (
       <div className="main-card mb-3 card">
         <div className="card-header">Active Users
