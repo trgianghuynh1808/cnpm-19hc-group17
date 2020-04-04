@@ -7,7 +7,6 @@ import PageLayout from "../../layouts";
 
 class CarListPage extends Component {
   render() {
-    console.log(queryString.parse(this.props.location.search));
     return (
       <div>
         <PageLayout>
