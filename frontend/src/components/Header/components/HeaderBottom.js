@@ -54,18 +54,10 @@ const HeaderBottom = props => {
                   <Link to="/gallery">Gallery</Link>
                 </li>
                 <li>
-                  <a href="/#">Blog</a>
-                  <ul>
-                    <li>
-                      <a href="article.html">Blog Page</a>
-                    </li>
-                    <li>
-                      <a href="article-details.html">Blog Details</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
                   <a href="contact.html">Contact</a>
+                </li>
+                <li className={activePage === 'login' ? 'active' : ''}>
+                  <Link to="/login">Login</Link>
                 </li>
               </ul>
             </nav>
