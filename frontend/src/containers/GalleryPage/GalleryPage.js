@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { CAR_PER_HORI_PAGE } from '../../utils/enum';
+import { CAR_PER_HORI_PAGE } from "../../utils/enums";
 
 import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
@@ -11,7 +11,7 @@ import Content from "./components/Content";
 import {
   getFilterGallery,
   getFilterGallerySelector,
-  getFilterGalleryCountSelector
+  getFilterGalleryCountSelector,
 } from "../../stores/CarsState";
 
 const connectToRedux = connect(
@@ -19,21 +19,21 @@ const connectToRedux = connect(
     carListData: getFilterGallerySelector,
     carListCount: getFilterGalleryCountSelector,
   }),
-  distpatch => ({
+  (distpatch) => ({
     getFilterGallery: (offset, limit) => {
       distpatch(getFilterGallery({ offset, limit }));
-    }
+    },
   })
 );
 
 const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
   useEffect(() => {
-    const carPerPage = CAR_PER_HORI_PAGE - 1 ;
+    const carPerPage = CAR_PER_HORI_PAGE - 1;
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
     getFilterGallery(offset, limit);
-  }, [activePage,getFilterGallery]);
+  }, [activePage, getFilterGallery]);
   if (!carListData) return <> </>;
 
   return (
