@@ -6,7 +6,6 @@ import PageTitle from "../../components/PageTitle";
 import SideBar from "./components/SideBar";
 import Car from "./components/Car";
 import Pagination from "./components/Pagination";
-import queryString from "query-string";
 import PageLayout from "../../layouts";
 import {
   searchCar,
@@ -36,7 +35,7 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
     searchCar({...queryState,offset: offset, limit: limit});
-    }, [activePage]);
+    }, [activePage, searchCar, queryState]);
 
     return (
       <div>

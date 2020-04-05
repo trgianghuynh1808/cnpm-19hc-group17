@@ -28,13 +28,12 @@ const connectToRedux = connect(
 
 const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
   useEffect(() => {
     const carPerPage = CAR_PER_HORI_PAGE - 1 ;
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
     getFilterGallery(offset, limit);
-  }, [activePage]);
+  }, [activePage,getFilterGallery]);
   if (!carListData) return <> </>;
 
   return (

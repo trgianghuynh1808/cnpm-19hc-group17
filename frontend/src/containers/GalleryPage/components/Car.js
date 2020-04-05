@@ -13,14 +13,14 @@ const Car = (props) => {
     </div>
     <div className="p-car-content">
       <h3>
-          <a href="">{model}</a>
+          <a href="# ">{model}</a>
           <span className="price"><i className="fa fa-tag" /> ${rentPrice}/day</span>
       </h3>
       <h5>{brand}</h5>
       <div className="p-car-feature">
-        <a href="">{color}</a>
-        <a href="">{seat} seat</a>
-        <a href="">{status}</a>
+        <a href="# ">{color}</a>
+        <a href="# ">{seat} seat</a>
+        <a href="# ">{status}</a>
       </div>
     </div>
     </div>

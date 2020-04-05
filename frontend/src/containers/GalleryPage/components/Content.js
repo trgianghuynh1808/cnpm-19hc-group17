@@ -7,6 +7,7 @@ const Content = (props) => {
     for(let i = 1; i <= pageCount; i++ ){
       pagingList.push(i);
     }
+    const href = `#${activePage + 1}`
     return (
     <section id="gallery-page-content" className="section-padding">
     <div className="container">
@@ -44,15 +45,16 @@ const Content = (props) => {
                     }}
                     className="page-item"
                   >
-                    <a className="page-link">Previous</a>
+                    <a href={href} className="page-link">Previous</a>
                   </li>
                   {pagingList.map(paging => (
                     <li
+                      key={paging}
                       onClick={() => setActivePage(paging - 1)}
                       className={`page-item ${paging - 1 === activePage &&
                         "active"}`}
                     >
-                      <a className="page-link">{paging}</a>
+                      <a href={href} className="page-link">{paging}</a>
                     </li>
                   ))}
                   <li
@@ -63,7 +65,7 @@ const Content = (props) => {
                     }}
                     className="page-item"
                   >
-                    <a className="page-link">Next</a>
+                    <a href={href} className="page-link">Next</a>
                   </li>
                 </ul>
               </nav>

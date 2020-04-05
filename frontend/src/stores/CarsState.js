@@ -114,15 +114,15 @@ export const searchCarCountSelector = flow(
   get("count")
 );
 
-const getBrandsAPI = makeFetchAction(GET_BRANDS_API, ({ brand }) =>
+const getBrandsAPI = makeFetchAction(GET_BRANDS_API, () =>
   nfetch({
     endpoint: `/brands`,
     method: "GET"
-  })({ brand })
+  })()
 );
 
-export const getBrands = brand => {
-  return respondToSuccess(getBrandsAPI.actionCreator({ brand }), resp => {
+export const getBrands = () => {
+  return respondToSuccess(getBrandsAPI.actionCreator(), resp => {
     if (resp.errors) {
       console.error("Err: ", resp.errors);
       return;
