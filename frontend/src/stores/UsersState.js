@@ -11,7 +11,6 @@ const LOGIN_API = "LOGIN_API";
 const loginAPI = makeFetchAction(LOGIN_API, ({ username, password }) =>{
   return nfetch({
     endpoint: `/accounts/login`,
-    method: "POST"
   })({ username, password  })
 }
 
