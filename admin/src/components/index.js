@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header';
 import SideBar from './SideBar';
 import Footer from './Footer';
-import Table from './Table';
 import Title from './Title';
 
 export default (props) => {

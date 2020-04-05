@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => {
-
+    const href="#header";
     return (
       <div className="app-header header-shadow">
         <div className="app-header__logo">
@@ -44,19 +44,19 @@ export default (props) => {
             </div>
             <ul className="header-menu nav">
               <li className="nav-item">
-                <a href="" className="nav-link">
+                <a href={href} className="nav-link">
                   <i className="nav-link-icon fa fa-database"> </i>
                   Statistics
                 </a>
               </li>
               <li className="btn-group nav-item">
-                <a href="" className="nav-link">
+                <a href={href} className="nav-link">
                   <i className="nav-link-icon fa fa-edit" />
                   Projects
                 </a>
               </li>
               <li className="dropdown nav-item">
-                <a href="" className="nav-link">
+                <a href={href} className="nav-link">
                   <i className="nav-link-icon fa fa-cog" />
                   Settings
                 </a>
@@ -68,8 +68,8 @@ export default (props) => {
                 <div className="widget-content-wrapper">
                   <div className="widget-content-left">
                     <div className="btn-group">
-                      <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
-                        <img width={42} className="rounded-circle" src="assets/images/avatars/1.jpg" alt="" />
+                      <a href={href} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
+                        <img width={42} className="rounded-circle" src="assets/images/avatars/1.jpg" alt={href} />
                         <i className="fa fa-angle-down ml-2 opacity-8" />
                       </a>
                       <div tabIndex={-1} role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">

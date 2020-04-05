@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => {
-
+    const href="#sidebar"
     return (
       <div className="app-sidebar sidebar-shadow">
       <div className="app-header__logo">
@@ -38,63 +38,63 @@ export default (props) => {
           <ul className="vertical-nav-menu">
             <li className="app-sidebar__heading">Dashboards</li>
             <li>
-              <a href="index.html" className="mm-active">
+              <a href={href} className="mm-active">
                 <i className="metismenu-icon pe-7s-rocket" />
                 Dashboard Example 1
               </a>
             </li>
             <li className="app-sidebar__heading">UI Components</li>
             <li>
-              <a href="#">
+              <a href={href}>
                 <i className="metismenu-icon pe-7s-diamond" />
                 Elements
                 <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
               </a>
               <ul>
                 <li>
-                  <a href="elements-buttons-standard.html">
+                  <a href={href}>
                     <i className="metismenu-icon" />
                     Buttons
                   </a>
                 </li>
                 <li>
-                  <a href="elements-dropdowns.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Dropdowns
                   </a>
                 </li>
                 <li>
-                  <a href="elements-icons.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Icons
                   </a>
                 </li>
                 <li>
-                  <a href="elements-badges-labels.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Badges
                   </a>
                 </li>
                 <li>
-                  <a href="elements-cards.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Cards
                   </a>
                 </li>
                 <li>
-                  <a href="elements-list-group.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>List Groups
                   </a>
                 </li>
                 <li>
-                  <a href="elements-navigation.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Navigation Menus
                   </a>
                 </li>
                 <li>
-                  <a href="elements-utilities.html">
+                  <a href={href}>
                     <i className="metismenu-icon">
                     </i>Utilities
                   </a>
