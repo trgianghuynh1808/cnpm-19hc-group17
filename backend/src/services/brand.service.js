@@ -3,7 +3,11 @@ import db from '../models';
 
 export default class BrandService {
 
-    static list(params) {
+    static async list(params) {
+        return db.Brand.findAll();
+    }
+
+    static carsGroupByBrands(params) {
         const whereCondition = params.brand ? { id: { $in: [params.brand] } } : undefined;
         return db.Brand.findAll({
             include: [{
