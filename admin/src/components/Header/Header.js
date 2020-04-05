@@ -44,19 +44,19 @@ export default (props) => {
             </div>
             <ul className="header-menu nav">
               <li className="nav-item">
-                <a href="javascript:void(0);" className="nav-link">
+                <a href="" className="nav-link">
                   <i className="nav-link-icon fa fa-database"> </i>
                   Statistics
                 </a>
               </li>
               <li className="btn-group nav-item">
-                <a href="javascript:void(0);" className="nav-link">
+                <a href="" className="nav-link">
                   <i className="nav-link-icon fa fa-edit" />
                   Projects
                 </a>
               </li>
               <li className="dropdown nav-item">
-                <a href="javascript:void(0);" className="nav-link">
+                <a href="" className="nav-link">
                   <i className="nav-link-icon fa fa-cog" />
                   Settings
                 </a>

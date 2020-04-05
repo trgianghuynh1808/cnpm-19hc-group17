@@ -29,7 +29,7 @@ export default (props) => {
               <div tabIndex={-1} role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
                 <ul className="nav flex-column">
                   <li className="nav-item">
-                    <a href="javascript:void(0);" className="nav-link">
+                    <a href="" className="nav-link">
                       <i className="nav-link-icon lnr-inbox" />
                       <span>
                         Inbox
@@ -38,7 +38,7 @@ export default (props) => {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="javascript:void(0);" className="nav-link">
+                    <a href="" className="nav-link">
                       <i className="nav-link-icon lnr-book" />
                       <span>
                         Book
@@ -47,7 +47,7 @@ export default (props) => {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="javascript:void(0);" className="nav-link">
+                    <a href="" className="nav-link">
                       <i className="nav-link-icon lnr-picture" />
                       <span>
                         Picture
@@ -55,7 +55,7 @@ export default (props) => {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a disabled href="javascript:void(0);" className="nav-link disabled">
+                    <a disabled href="" className="nav-link disabled">
                       <i className="nav-link-icon lnr-file-empty" />
                       <span>
                         File Disabled
