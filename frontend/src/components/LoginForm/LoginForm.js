@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class FunFact extends Component {
-  render() {
+const LoginForm = (props) => {
+  const { onChange, onSubmit } = props;
     return (
       <section id="lgoin-page-wrap" className="section-padding">
       <div className="container">
@@ -10,23 +10,24 @@ class FunFact extends Component {
             <div className="login-page-content">
               <div className="login-form">
                 <h3>Welcome Back!</h3>
-                <form action="index.html">
+                <form id="LOGIN_FORM">
+                <div className="form-group">
+                <label>Username</label>
                   <div className="username">
-                    <input type="text" placeholder="Email or Username" />
+                    <input id="username" onChange={()=> onChange('username')} required type="text" />
                   </div>
+                </div>
+                <div className="form-group">
+                <label>Password</label>
                   <div className="password">
-                    <input type="password" placeholder="Password" />
+                    <input id="password" onChange={()=> onChange('password')} required type="password" />
+                </div>
                   </div>
-                  <div className="log-btn">
-                    <button type="submit"><i className="fa fa-sign-in" /> Log In</button>
+                  <div onClick={onSubmit} className="log-btn">
+                    <button><i className="fa fa-sign-in" /> Log In</button>
                   </div>
                 </form>
-              </div>
-              <div className="login-other">
-                <span className="or">or</span>
-                <a href="#" className="login-with-btn facebook"><i className="fa fa-facebook" /> Login With Facebook</a>
-                <a href="#" className="login-with-btn google"><i className="fa fa-google" /> Login With Google</a>
-              </div>
+              </div>  
               <div className="create-ac">
                 <p>Don't have an account? <a href="register.html">Sign Up</a></p>
               </div>
@@ -41,7 +42,6 @@ class FunFact extends Component {
       </div>
     </section>    
     );
-  }
-}
+};
 
-export default FunFact;
+export default LoginForm;
