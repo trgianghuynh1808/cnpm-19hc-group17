@@ -1,12 +1,32 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import moment from "moment";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
 import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
+import { createContractUser } from "../../../stores/UserState";
 
-const { InputRenderFieldComponent, DateTimeRenderFieldComponent } = FormFields;
+const {
+  InputRenderFieldComponent,
+  DateTimeRenderFieldComponent,
+  TextAreaRenderFieldComponent,
+} = FormFields;
+
+const connectToRedux = connect(null, (distpatch) => ({
+  createContractUser: (objBody, callback) => {
+    distpatch(createContractUser(objBody, callback));
+  },
+}));
+
+const enhance = compose(
+  reduxForm({
+    form: "booking-form",
+  }),
+  connectToRedux
+);
 
 const Content = ({
   brand = "",
@@ -20,14 +40,31 @@ const Content = ({
   pristine,
   submitting,
   reset,
+  id,
+  createContractUser,
 }) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
 
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
-      console.log("test submit", values);
+      const { indentityCard, fullname, phoneNumber, email } = values;
+
+      const objBody = {
+        car_id: id,
+        start_rent_date: values.startDate.format(DATE_FORMAT),
+        end_rent_date: values.endDate.format(DATE_FORMAT),
+        identity_id: indentityCard,
+        name: fullname,
+        phone_number: phoneNumber,
+        email,
+        note: values.note || "",
+      };
+
+      createContractUser(objBody, () => {
+        reset();
+        setIsOpenBookingModal(false);
+      });
     }
   };
 
@@ -213,12 +250,19 @@ const Content = ({
                               isValidDate={(currentDate) => {
                                 return moment(currentDate).isAfter(startDate);
                               }}
-                              onChange={(selectedDate) => {
-                                const dateFormatted = selectedDate.format(
-                                  DATE_FORMAT
-                                );
-                                setEndDate(dateFormatted);
-                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Note</label>
+                            <Field
+                              name="note"
+                              component={TextAreaRenderFieldComponent}
+                              placeholder="Enter note"
+                              rows="3"
                             />
                           </div>
                         </div>
@@ -305,6 +349,4 @@ const Content = ({
   );
 };
 
-export default reduxForm({
-  form: "booking-form",
-})(Content);
+export default enhance(Content);
