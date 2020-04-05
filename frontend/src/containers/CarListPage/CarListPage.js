@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { CAR_PER_VERTI_PAGE } from '../../utils/enum';
+import { CAR_PER_VERTI_PAGE } from "../../utils/enums";
 import PageTitle from "../../components/PageTitle";
 import SideBar from "./components/SideBar";
 import Car from "./components/Car";
@@ -10,70 +10,87 @@ import PageLayout from "../../layouts";
 import {
   searchCar,
   searchCarDataSelector,
-  searchCarCountSelector
+  searchCarCountSelector,
 } from "../../stores/CarsState";
 
 const connectToRedux = connect(
   createStructuredSelector({
     carListData: searchCarDataSelector,
-    carListCount: searchCarCountSelector
+    carListCount: searchCarCountSelector,
   }),
-  distpatch => ({
+  (distpatch) => ({
     searchCar: (queryObj) => {
       distpatch(searchCar({ ...queryObj }));
-    }
+    },
   })
 );
 
 const CarListPage = ({ carListCount, carListData, searchCar }) => {
-    const { history = {} } = window;
-    const { state = {} } = history;
-    const { state: queryState = {} } = state;
-    const [activePage, setActivePage] = useState(0);
-    useEffect(() => {
-    const carPerPage = CAR_PER_VERTI_PAGE - 1 ;
+  const { history = {} } = window;
+  const { state = {} } = history;
+  const { state: queryState = {} } = state;
+  const [activePage, setActivePage] = useState(0);
+  useEffect(() => {
+    const carPerPage = CAR_PER_VERTI_PAGE - 1;
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
-    searchCar({...queryState,offset: offset, limit: limit});
-    }, [activePage, searchCar, queryState]);
+    searchCar({ ...queryState, offset: offset, limit: limit });
+  }, [activePage, searchCar, queryState]);
 
-    return (
-      <div>
-        <PageLayout>
-          <PageTitle />          
-          <section id="car-list-area" className="section-padding">
-            <div className="container">
-              <div className="row">
-                <SideBar />
-                <div className="col-lg-8">
-                  <div className="car-list-content m-t-50">
-                    {carListData && carListData.map((car) => {
-                      const {id, brand, model, color, seat, car_price, rent_price, image, status } = car;
-                      return <Car
-                      brand={brand}
-                      model={model}
-                      seat={seat}
-                      carPrice={car_price}
-                      color={color} 
-                      rentPrice={rent_price}
-                      image={image}
-                      status={status}
-                      id={id}
-                      />
-                    }
-                    )}
-                  </div>
-                  <Pagination activePage={activePage} setActivePage={setActivePage} pageCount={Math.ceil(carListCount / CAR_PER_VERTI_PAGE)} />
+  return (
+    <div>
+      <PageLayout>
+        <PageTitle />
+        <section id="car-list-area" className="section-padding">
+          <div className="container">
+            <div className="row">
+              <SideBar />
+              <div className="col-lg-8">
+                <div className="car-list-content m-t-50">
+                  {carListData &&
+                    carListData.map((car) => {
+                      const {
+                        id,
+                        brand,
+                        model,
+                        color,
+                        seat,
+                        car_price,
+                        rent_price,
+                        image,
+                        status,
+                      } = car;
+                      return (
+                        <Car
+                          brand={brand}
+                          model={model}
+                          seat={seat}
+                          carPrice={car_price}
+                          color={color}
+                          rentPrice={rent_price}
+                          image={image}
+                          status={status}
+                          id={id}
+                        />
+                      );
+                    })}
                 </div>
-=              </div>
+                <Pagination
+                  activePage={activePage}
+                  setActivePage={setActivePage}
+                  pageCount={Math.ceil(carListCount / CAR_PER_VERTI_PAGE)}
+                />
+              </div>
+              ={" "}
             </div>
-          </section>
-          <div className="scroll-top">
-            <img src="assets/img/scroll-top.png" alt="JSOFT" />
           </div>
-        </PageLayout>
-      </div>
-    );
-}
+        </section>
+        <div className="scroll-top">
+          <img src="assets/img/scroll-top.png" alt="JSOFT" />
+        </div>
+      </PageLayout>
+    </div>
+  );
+};
 
 export default connectToRedux(CarListPage);
