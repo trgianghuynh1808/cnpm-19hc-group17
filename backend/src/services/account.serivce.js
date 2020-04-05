@@ -15,11 +15,13 @@ export default class AccountService {
             where: { username, password }
         });
         if (!account) throw new AuthenticationError('Username or Password is invalid');
-        return generate({
-            username: account.username,
-            email: account.user.email,
-            accountId: account.id
-        });
+        return {
+            token: generate({
+                username: account.username,
+                email: account.user.email,
+                accountId: account.id
+            })
+        };
     }
 
     static async getCurrentUser(accountId) {
