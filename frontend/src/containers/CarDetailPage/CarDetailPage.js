@@ -8,21 +8,23 @@ import Content from "./components/Content";
 import queryString from "query-string";
 import { getCarDetails, getCarDetailsAPI } from "../../stores/CarsState";
 
+import AuthenHOC from "../../components/HOC/AuthenHOC";
+
 const connectToRedux = connect(
   createStructuredSelector({
-    carDetailsData: getCarDetailsAPI.dataSelector
+    carDetailsData: getCarDetailsAPI.dataSelector,
   }),
-  distpatch => ({
-    getCarDetails: carID => {
+  (distpatch) => ({
+    getCarDetails: (carID) => {
       distpatch(getCarDetails(carID));
-    }
+    },
   })
 );
 
 const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
   useEffect(() => {
     const {
-      location: { search }
+      location: { search },
     } = window;
     const queryObject = queryString.parse(search);
     const { id = 1 } = queryObject;
@@ -38,4 +40,6 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
     </>
   );
 };
-export default connectToRedux(CarDetailPage);
+
+export default AuthenHOC(CarDetailPage);
+// export default connectToRedux(CarDetailPage);
