@@ -20,7 +20,8 @@ export default class AccountService {
                 username: account.username,
                 email: account.user.email,
                 accountId: account.id
-            })
+            }),
+            message: 'Welcome'
         };
     }
 
