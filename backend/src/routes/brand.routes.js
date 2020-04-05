@@ -6,6 +6,11 @@ const controller = new BrandController();
 const router = express.Router();
 
 router.get(
+    '/carsGroupByBrands',
+    controller.action('carsGroupByBrands')
+);
+
+router.get(
     '/',
     controller.action('list')
 );
