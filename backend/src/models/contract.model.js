@@ -19,7 +19,7 @@ export default function (sequelize, DataTypes) {
         note: {
             type: DataTypes.STRING
         },
-        national_id: {
+        identity_id: {
             type: DataTypes.STRING
         },
         name: {
