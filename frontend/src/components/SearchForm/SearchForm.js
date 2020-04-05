@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
-
+import { SEARCH_VALUE } from '../../utils/enum';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -17,6 +17,7 @@ function reducer(state, action) {
   }
 }
 const SearchForm = (props) => {
+    const { brands } = props;
     const [ queryObj, dispatch ] = useReducer(reducer, {});
     const selectOnChange = (id) => {
       const element = document.getElementById(id);
@@ -24,6 +25,11 @@ const SearchForm = (props) => {
         dispatch({ type: id, payload: element.value});
       }
     }
+    let brandList = [];
+    if(brands) {
+      brandList = brands.map((v) => v.id);
+    }
+    const searchValue = Object.entries({brand: brandList, ...SEARCH_VALUE});
         return (
           <section id="slider-area">
           <div className="single-slide-item overlay">
@@ -31,45 +37,23 @@ const SearchForm = (props) => {
               <div className="row">
                 <div className="col-lg-5">
                   <div className="book-a-car">
-                      <div className="pickup-location book-item">
-                        <h4>MODEL:</h4>
-                        <select onChange={() => selectOnChange('model')} id="model" name="model" className="custom-select">
-                          <option value="">Select car model</option>
-                          <option value="sedan">Sedan</option>
-                          <option value="suv">SUV</option>
-                          <option value="coupe">Coupe</option>
-                          <option value="mpv">MPV</option>
-                        </select>
-                      </div>
-                      <div className="pick-up-date book-item">
-                        <h4>BRAND:</h4>
-                        <select onChange={() => selectOnChange('brand')} id="brand" name="brand" className="custom-select">
-                          <option value="" >Select car brand</option>
-                          <option value="bmw">BMW</option>
-                          <option value="audi">Audi</option>
-                          <option value="toyota">Toyota</option>
-                          <option value="ferrari">Ferrari</option>
-                        </select>
-                      </div>
-                      <div className="choose-car-type book-item">
-                        <h4>COLOR:</h4>
-                        <select onChange={() => selectOnChange('color')} id="color" name="color" className="custom-select">
-                          <option value="">Select car color</option>
-                          <option value="black">Black</option>
-                          <option value="white">White</option>
-                          <option value="red">Red</option>
-                        </select>
-                      </div>
-
-                      <div className="choose-car-type book-item">
-                        <h4>SEAT:</h4>
-                        <select onChange={() => selectOnChange('seat')} id="seat" name="seat" className="custom-select">
-                          <option value="" >Select car seat number</option>
-                          <option value={5}>5</option>
-                          <option value={7}>7</option>
-                          <option value={15}>15</option>
-                        </select>
-                      </div>
+                      {searchValue.map((v) => {
+                        const [ field, values ] = v;
+                        const upperCaseField = field.toUpperCase();
+                        return (
+                          <div key={field} className="choose-car-type book-item">
+                            <h4>{upperCaseField}:</h4>
+                            <select onChange={() => selectOnChange(field)} id={field} name={field} className="custom-select">
+                              <option value="">SELECT CAR {upperCaseField}</option>
+                              {values.map((value)=>
+                              <option key={value} value={typeof value === 'number' ? value : value.toLowerCase()}>
+                                {typeof value === 'number' ? value : value.toUpperCase()}
+                              </option>
+                              )}
+                            </select>
+                          </div>
+                        )
+                      })}
                       <div className="book-button text-center">
                         <Link
                           to={{pathname:'/car-list', state: queryObj}}
