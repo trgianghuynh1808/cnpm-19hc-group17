@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { CAR_PER_VERTI_PAGE } from '../../utils/enum';
 import PageTitle from "../../components/PageTitle";
 import SideBar from "./components/SideBar";
 import Car from "./components/Car";
 import Pagination from "./components/Pagination";
-import queryString from "query-string";
 import PageLayout from "../../layouts";
 import {
   searchCar,
@@ -31,10 +31,11 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
     const { state: queryState = {} } = state;
     const [activePage, setActivePage] = useState(0);
     useEffect(() => {
-    const offset = activePage === 0 ? 0 : activePage * 5 + activePage;
-    const limit = offset + 5;
+    const carPerPage = CAR_PER_VERTI_PAGE - 1 ;
+    const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
+    const limit = offset + carPerPage;
     searchCar({...queryState,offset: offset, limit: limit});
-    }, [activePage]);
+    }, [activePage, searchCar, queryState]);
 
     return (
       <div>
@@ -62,7 +63,7 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
                     }
                     )}
                   </div>
-                  <Pagination activePage={activePage} setActivePage={setActivePage} pageCount={Math.ceil(carListCount / 6)} />
+                  <Pagination activePage={activePage} setActivePage={setActivePage} pageCount={Math.ceil(carListCount / CAR_PER_VERTI_PAGE)} />
                 </div>
 =              </div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Car = (props) => {
-  const {id, color, seat, status, image, rentPrice, model, brand } = props;
+  const {id, color, seat, status, image, model, brand } = props;
       return (
             <div className="single-car-wrap">
               <div className="row">
@@ -37,7 +37,7 @@ const Car = (props) => {
                           <i className="fa fa-star" />
                           <i className="fa fa-star unmark" />
                         </p>
-                        <a href="#" className="rent-btn">Book It</a>
+                        <a href="#book" className="rent-btn">Book It</a>
                       </div>
                     </div>
                   </div>
