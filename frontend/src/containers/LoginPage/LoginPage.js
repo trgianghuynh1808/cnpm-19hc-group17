@@ -1,4 +1,4 @@
-import React, { Component, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Wrapper from '../../layouts';
 import PageTitle from '../../components/PageTitle';
 import Login from '../../components/LoginForm';

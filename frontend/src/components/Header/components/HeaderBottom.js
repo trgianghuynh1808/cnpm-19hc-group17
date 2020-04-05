@@ -56,7 +56,7 @@ const HeaderBottom = props => {
                 <li>
                   <a href="contact.html">Contact</a>
                 </li>
-                <li className={activePage === "login" && "active"}>
+                <li className={activePage === 'login' ? 'active' : ''}>
                   <Link to="/login">Login</Link>
                 </li>
               </ul>

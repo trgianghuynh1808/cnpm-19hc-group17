@@ -1,5 +1,4 @@
 import { makeFetchAction } from "redux-api-call";
-import { flow, get } from "lodash/fp";
 import { saveToken } from '../libs/token-libs';
 import { navigateWithClear } from '../utils/route';
 
