@@ -1,45 +1,35 @@
 import React from "react";
 import Car from "./Car";
 
-const Content = props => {
-  const { carList, activePage, setActivePage, pageCount } = props;
-  const pagingList = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pagingList.push(i);
-  }
-  return (
+const Content = (props) => {
+    const { carList, activePage, setActivePage, pageCount } = props;
+    const pagingList = [];
+    for(let i = 1; i <= pageCount; i++ ){
+      pagingList.push(i);
+    }
+    const href = `#${activePage + 1}`
+    return (
     <section id="gallery-page-content" className="section-padding">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div class="row popular-car-gird">
-              {carList &&
-                carList.map(car => {
-                  const {
-                    id,
-                    brand,
-                    model,
-                    color,
-                    seat,
-                    car_price,
-                    rent_price,
-                    image,
-                    status
-                  } = car;
-                  return (
-                    <Car
-                      brand={brand}
-                      model={model}
-                      seat={seat}
-                      carPrice={car_price}
-                      color={color}
-                      rentPrice={rent_price}
-                      image={image}
-                      status={status}
-                      id={id}
-                    />
-                  );
-                })}
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+            <div className="row popular-car-gird">
+                {carList && carList.map((car, index) => {
+                  const {id, brand, model, color, seat, car_price, rent_price, image, status } = car;
+                  return <Car 
+                  key={index}
+                  brand={brand}
+                  model={model}
+                  seat={seat}
+                  carPrice={car_price}
+                  color={color} 
+                  rentPrice={rent_price}
+                  image={image}
+                  status={status}
+                  id={id}
+                  />
+                })
+                }
             </div>
           </div>
         </div>
@@ -55,15 +45,16 @@ const Content = props => {
                     }}
                     className="page-item"
                   >
-                    <a className="page-link">Previous</a>
+                    <a href={href} className="page-link">Previous</a>
                   </li>
                   {pagingList.map(paging => (
                     <li
+                      key={paging}
                       onClick={() => setActivePage(paging - 1)}
                       className={`page-item ${paging - 1 === activePage &&
                         "active"}`}
                     >
-                      <a className="page-link">{paging}</a>
+                      <a href={href} className="page-link">{paging}</a>
                     </li>
                   ))}
                   <li
@@ -74,7 +65,7 @@ const Content = props => {
                     }}
                     className="page-item"
                   >
-                    <a className="page-link">Next</a>
+                    <a href={href} className="page-link">Next</a>
                   </li>
                 </ul>
               </nav>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { CAR_PER_HORI_PAGE } from '../../utils/enum';
 
 import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
@@ -9,12 +10,14 @@ import Content from "./components/Content";
 
 import {
   getFilterGallery,
-  getFilterGallerySelector
+  getFilterGallerySelector,
+  getFilterGalleryCountSelector
 } from "../../stores/CarsState";
 
 const connectToRedux = connect(
   createStructuredSelector({
-    carListData: getFilterGallerySelector
+    carListData: getFilterGallerySelector,
+    carListCount: getFilterGalleryCountSelector,
   }),
   distpatch => ({
     getFilterGallery: (offset, limit) => {
@@ -23,18 +26,14 @@ const connectToRedux = connect(
   })
 );
 
-const GalleryPage = ({ carListData, getFilterGallery }) => {
+const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
-
   useEffect(() => {
-    const offset = activePage === 0 ? 0 : activePage * 5 + activePage;
-    const limit = offset + 5;
+    const carPerPage = CAR_PER_HORI_PAGE - 1 ;
+    const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
+    const limit = offset + carPerPage;
     getFilterGallery(offset, limit);
-
-    if (carListData) setPageCount(Math.ceil(carListData.count / 6));
-  }, [activePage, carListData, getFilterGallery]);
-
+  }, [activePage,getFilterGallery]);
   if (!carListData) return <> </>;
 
   return (
@@ -42,7 +41,7 @@ const GalleryPage = ({ carListData, getFilterGallery }) => {
       <Header />
       <PageTitle title="Our Gallery" />
       <Content
-        pageCount={pageCount}
+        pageCount={Math.ceil(carListCount / CAR_PER_HORI_PAGE)}
         activePage={activePage}
         setActivePage={setActivePage}
         carList={carListData}

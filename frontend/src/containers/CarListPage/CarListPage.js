@@ -1,90 +1,79 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { CAR_PER_VERTI_PAGE } from '../../utils/enum';
 import PageTitle from "../../components/PageTitle";
 import SideBar from "./components/SideBar";
 import Car from "./components/Car";
-import queryString from "query-string";
+import Pagination from "./components/Pagination";
 import PageLayout from "../../layouts";
+import {
+  searchCar,
+  searchCarDataSelector,
+  searchCarCountSelector
+} from "../../stores/CarsState";
 
-class CarListPage extends Component {
-  render() {
-    console.log(queryString.parse(this.props.location.search));
+const connectToRedux = connect(
+  createStructuredSelector({
+    carListData: searchCarDataSelector,
+    carListCount: searchCarCountSelector
+  }),
+  distpatch => ({
+    searchCar: (queryObj) => {
+      distpatch(searchCar({ ...queryObj }));
+    }
+  })
+);
+
+const CarListPage = ({ carListCount, carListData, searchCar }) => {
+    const { history = {} } = window;
+    const { state = {} } = history;
+    const { state: queryState = {} } = state;
+    const [activePage, setActivePage] = useState(0);
+    useEffect(() => {
+    const carPerPage = CAR_PER_VERTI_PAGE - 1 ;
+    const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
+    const limit = offset + carPerPage;
+    searchCar({...queryState,offset: offset, limit: limit});
+    }, [activePage, searchCar, queryState]);
+
     return (
       <div>
         <PageLayout>
-          {/*== Header Area End ==*/}
-          {/*== Page Title Area Start ==*/}
-          <PageTitle />
-          {/*== Page Title Area End ==*/}
-          {/*== Car List Area Start ==*/}
+          <PageTitle />          
           <section id="car-list-area" className="section-padding">
             <div className="container">
               <div className="row">
-                {/* Sidebar Area Start */}
                 <SideBar />
-                {/* Sidebar Area End */}
-                {/* Car List Content Start */}
                 <div className="col-lg-8">
                   <div className="car-list-content m-t-50">
-                    <Car />
-                    <Car />
+                    {carListData && carListData.map((car) => {
+                      const {id, brand, model, color, seat, car_price, rent_price, image, status } = car;
+                      return <Car
+                      brand={brand}
+                      model={model}
+                      seat={seat}
+                      carPrice={car_price}
+                      color={color} 
+                      rentPrice={rent_price}
+                      image={image}
+                      status={status}
+                      id={id}
+                      />
+                    }
+                    )}
                   </div>
-                  {/* Page Pagination Start */}
-                  <div className="page-pagi">
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination">
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            Previous
-                          </a>
-                        </li>
-                        <li className="page-item active">
-                          <a className="page-link" href="/#">
-                            1
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            2
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            3
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            4
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            5
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="/#">
-                            Next
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
-                  {/* Page Pagination End */}
+                  <Pagination activePage={activePage} setActivePage={setActivePage} pageCount={Math.ceil(carListCount / CAR_PER_VERTI_PAGE)} />
                 </div>
-                {/* Car List Content End */}
-              </div>
+=              </div>
             </div>
           </section>
-          {/*== Car List Area End ==*/}
-          {/*== Footer Area Start ==*/}
           <div className="scroll-top">
             <img src="assets/img/scroll-top.png" alt="JSOFT" />
           </div>
         </PageLayout>
       </div>
     );
-  }
 }
 
-export default CarListPage;
+export default connectToRedux(CarListPage);
