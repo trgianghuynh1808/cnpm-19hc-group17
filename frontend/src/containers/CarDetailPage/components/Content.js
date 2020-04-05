@@ -7,7 +7,7 @@ import { compose } from "redux";
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
 import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
-import { createContractUser } from "../../../stores/UserState";
+import { createContractUser } from "../../../stores/UsersState";
 
 const {
   InputRenderFieldComponent,
