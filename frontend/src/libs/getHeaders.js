@@ -7,8 +7,8 @@ export default (options = {}) =>
   Object.assign(
     {},
     {
-      Authorization: getToken(),
-      "Content-Type": "application/json"
+      "x-access-token": getToken(),
+      "Content-Type": "application/json",
     },
     formatObj(options)
   );

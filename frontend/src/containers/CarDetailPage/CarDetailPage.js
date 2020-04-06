@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import queryString from "query-string";
+import { compose } from "redux";
+
 import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
 import Footer from "../../components/Footer";
 import Content from "./components/Content";
-import queryString from "query-string";
 import { getCarDetails, getCarDetailsAPI } from "../../stores/CarsState";
-
-import AuthenHOC from "../../components/HOC/AuthenHOC";
 
 const connectToRedux = connect(
   createStructuredSelector({
@@ -20,6 +20,8 @@ const connectToRedux = connect(
     },
   })
 );
+
+const enhance = compose(connectToRedux);
 
 const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
   useEffect(() => {
@@ -41,5 +43,4 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
   );
 };
 
-export default AuthenHOC(CarDetailPage);
-// export default connectToRedux(CarDetailPage);
+export default enhance(CarDetailPage);
