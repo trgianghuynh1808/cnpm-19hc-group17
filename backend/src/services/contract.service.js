@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import _ from 'lodash';
 import sequelize from 'sequelize';
+import md5 from 'md5';
 import uuid from 'uuid/v4';
 import jwt from 'jsonwebtoken';
 import db from '../models';
@@ -13,13 +14,13 @@ import { sendMailUtil } from '../utils/mail';
 
 export default class ContractService {
     static async getContractUser(data, token, transaction) {
-        const { email, phone_number, identity_id, name } = data;
+        const { email, phone_number, identity_id, name, address } = data;
         let contractUser = { email, phone_number, identity_id, name };
         if (token) {
             let userInfo;
             try {
                 userInfo = await jwt.verify(token, config.jwtSecrect);
-            } catch(err) {
+            } catch (err) {
                 throw new AuthenticationError(err);
             }
             if (userInfo) {
@@ -36,18 +37,19 @@ export default class ContractService {
         }
         try {
             const password = 'abc';
-            const userId = new Date().getTime();
+            const userId = uuid();
             await db.User.create({
                 id: userId,
                 email,
                 phone_number,
                 identity_id,
+                address,
                 name
             }, { transaction });
             await db.Account.create({
-                id: new Date().getTime(),
+                id: uuid(),
                 username: email,
-                password,
+                password: md5(password),
                 role: 'guest',
                 user_id: userId
             }, { transaction });
@@ -65,7 +67,7 @@ export default class ContractService {
     static async create(data, token) {
         const { car_id } = data;
         let contractUser;
-        let transaction = await db.sequelize.transaction();
+        const transaction = await db.sequelize.transaction();
         try {
             contractUser = await ContractService.getContractUser(data, token, transaction);
         } catch (err) {
