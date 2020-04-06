@@ -5,7 +5,7 @@ import db from '../src/models';
 
 export function loadFixtures(fixtures) {
     const fixturePaths = fixtures
-      .map(file => `${path.resolve(__dirname, '../')}/seeds/${file}.json`);
+        .map(file => `${path.resolve(__dirname, '../')}/seeds/${file}.json`);
     return db
         .sequelize
         .sync({ force: true })

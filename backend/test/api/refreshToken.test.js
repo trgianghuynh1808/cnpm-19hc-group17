@@ -19,12 +19,12 @@ const invalidRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblR5cG
 const URI = '/accounts/refreshToken';
 
 const verifyToken = (token) =>
-jwt.verify(token, config.jwtSecrect, (err, decoded) => {
-    if (err) {
-        return;
-    }
-    return decoded;
-});
+    jwt.verify(token, config.jwtSecrect, (err, decoded) => {
+        if (err) {
+            return;
+        }
+        return decoded;
+    });
 
 describe.serial('refreshToken API', it => {
     it.beforeEach(() => loadFixtures(fixtures));

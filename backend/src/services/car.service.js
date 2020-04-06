@@ -4,7 +4,6 @@ import db from '../models';
 import { ResourceNotFoundError } from '../components/ErrorInstance/businessErrors';
 
 export default class CarService {
-
     static list(params) {
         const obj = _.omit(params, ['limit', 'offset']);
         const filterCondition = Object.keys(obj).map(key => ({ [key]: obj[key] }));

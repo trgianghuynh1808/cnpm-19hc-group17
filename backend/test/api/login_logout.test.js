@@ -19,12 +19,12 @@ const URI = '/accounts/login';
 const URI_LOGOUT = '/accounts/logout';
 
 const verifyToken = (token) =>
-jwt.verify(token, config.jwtSecrect, (err, decoded) => {
-    if (err) {
-        return;
-    }
-    return decoded;
-});
+    jwt.verify(token, config.jwtSecrect, (err, decoded) => {
+        if (err) {
+            return;
+        }
+        return decoded;
+    });
 
 
 describe.serial('Login API', it => {

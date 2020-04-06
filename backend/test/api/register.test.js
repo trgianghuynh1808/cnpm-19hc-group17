@@ -48,7 +48,7 @@ describe.serial('Register API', it => {
             .expect(200)
             .then(res => res.body);
         const accountRoles = Array.isArray(response.roles)
-        ? response.roles.map(item => item.role) : [];
+            ? response.roles.map(item => item.role) : [];
         t.is(accountRoles.indexOf('company_admin'), accountData.roles.indexOf('company_admin'));
     });
     it('can register an uw_admin account', async t => {

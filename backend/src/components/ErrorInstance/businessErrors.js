@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import { AppError } from './appErrors';
 
 export class BusinessError extends AppError {
@@ -17,7 +18,7 @@ export class APINotFoundError extends BusinessError {
 }
 
 export class DataValidationError extends BusinessError {
-    constructor(err, sequelize) {
+    constructor(err) {
         super(err.message);
         this.name = 'DataValidationError';
         this.status = 400;

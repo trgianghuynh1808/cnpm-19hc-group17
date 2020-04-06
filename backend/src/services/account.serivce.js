@@ -53,5 +53,4 @@ export default class AccountService {
         delete accountData.password;
         return accountData;
     }
-
 }
