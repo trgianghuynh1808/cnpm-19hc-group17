@@ -38,6 +38,7 @@ export default class ContractService {
         try {
             const password = 'abc';
             const userId = uuid();
+            const username = email.substring(0, email.indexOf('@'));
             await db.User.create({
                 id: userId,
                 email,
@@ -48,14 +49,14 @@ export default class ContractService {
             }, { transaction });
             await db.Account.create({
                 id: uuid(),
-                username: email,
+                username,
                 password: md5(password),
                 role: 'guest',
                 user_id: userId
             }, { transaction });
             await sendMailUtil({
                 to: email,
-                username: email,
+                username,
                 password
             });
             return contractUser;
