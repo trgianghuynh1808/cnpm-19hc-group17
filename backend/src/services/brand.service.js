@@ -2,8 +2,7 @@
 import db from '../models';
 
 export default class BrandService {
-
-    static async list(params) {
+    static async list() {
         return db.Brand.findAll();
     }
 

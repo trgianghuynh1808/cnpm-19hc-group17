@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
     '/',
-    controller.create
+    controller.action('create')
 );
 
 router.get(
