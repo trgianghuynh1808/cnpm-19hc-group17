@@ -11,24 +11,25 @@ export default function (sequelize, DataTypes) {
             allowNull: false
         },
         dob: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
         },
         address: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
         },
         phone_number: {
             type: DataTypes.STRING,
             allowNull: false
         },
         gender: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
+        },
+        identity_id: {
+            type: DataTypes.STRING
         }
     }, { freezeTableName: true, timestamps: false });
 

@@ -6,7 +6,7 @@ export default class BrandControlller extends BaseController {
         return BrandService.carsGroupByBrands(req.query);
     }
 
-    list(req){
+    list(req) {
         return BrandService.list(req.query);
     }
 }

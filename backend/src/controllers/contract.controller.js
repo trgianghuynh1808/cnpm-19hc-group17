@@ -1,8 +1,10 @@
 import ContractService from '../services/contract.service';
+import BaseController from './base.controller';
 
-export default class ContractController {
+export default class ContractController extends BaseController {
     async create(req, res) {
-        const contract = await ContractService.create(req.body);
+        const token = req.headers['x-access-token'];
+        const contract = await ContractService.create(req.body, token);
         res.json(contract);
     }
 
