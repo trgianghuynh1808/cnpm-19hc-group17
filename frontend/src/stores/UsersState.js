@@ -5,8 +5,8 @@ import { navigateWithClear } from "../utils/route";
 import { respondToSuccess, respondToFailure } from "./middlewares/api-reaction";
 import nfetch from "../libs/nfetch";
 
-const LOGIN_API = "LOGIN_API";
-const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
+export const LOGIN_API = "LOGIN_API";
+export const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
 
 const loginAPI = makeFetchAction(LOGIN_API, ({ username, password }) => {
