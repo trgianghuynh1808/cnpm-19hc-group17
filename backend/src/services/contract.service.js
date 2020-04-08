@@ -1,17 +1,17 @@
 /* eslint-disable camelcase */
 import _ from 'lodash';
+import uuid from 'uuid/v4';
 import jwt from 'jsonwebtoken';
 import db from '../models';
 import config from '../config';
 import {
-    ResourceNotFoundError,
-    DataValidationError
+    ResourceNotFoundError, DataValidationError
 } from '../components/ErrorInstance/businessErrors';
 import AccountService from './account.serivce';
 import { sendMailUtil } from '../utils/mail';
 
 export default class ContractService {
-    static async getContractUser(data, token) {
+    static async getContractUser(data, token, transaction) {
         const { email, phone_number, identity_id, name } = data;
         let contractUser = { email, phone_number, identity_id, name };
         if (token) {
@@ -28,56 +28,55 @@ export default class ContractService {
                 return contractUser;
             }
         }
-        const transaction = await db.sequelize.transaction();
+        const password = 'abc';
+        const userId = uuid();
+        await db.User.create({
+            id: userId,
+            email,
+            phone_number,
+            identity_id,
+            name
+        }, { transaction });
         try {
-            const password = 'abc';
-            const userId = new Date().getTime();
-            await db.User.create({
-                id: userId,
-                email,
-                phone_number,
-                identity_id,
-                name
-            }, { transaction });
             await db.Account.create({
-                id: new Date().getTime(),
                 username: email,
                 password,
                 role: 'guest',
                 user_id: userId
             }, { transaction });
-            await sendMailUtil({
-                to: email,
-                username: email,
-                password
-            });
-            await transaction.commit();
-            return contractUser;
         } catch (err) {
-            await transaction.rollback();
-            throw new Error(err);
+            throw new DataValidationError(err);
         }
+        await sendMailUtil({
+            to: email,
+            username: email,
+            password
+        });
+        return contractUser;
     }
 
     static async create(data, token) {
         const { car_id } = data;
         let contractUser;
+        const transaction = await db.sequelize.transaction();
         try {
-            contractUser = await ContractService.getContractUser(data, token);
+            contractUser = await ContractService.getContractUser(data, token, transaction);
+            const car = await db.Car.findOne({ where: { id: car_id } });
+            if (!car) throw new ResourceNotFoundError('car');
+            const { rent_price } = car;
+            const deposit = (rent_price * 30) / 100;
+            const contract = await db.Contract.create({
+                ...data,
+                ...contractUser,
+                deposit,
+                status: 'reviewing'
+            });
+            await transaction.commit();
+            return contract;
         } catch (err) {
-            throw new DataValidationError(err);
+            await transaction.rollback();
+            throw new Error(err);
         }
-        const car = await db.Car.findOne({ where: { id: car_id } });
-        if (!car) throw ResourceNotFoundError('car');
-        const { rent_price } = car;
-        const deposit = (rent_price * 30) / 100;
-        return db.Contract.create({
-            ...data,
-            ...contractUser,
-            id: new Date().getTime(),
-            deposit,
-            status: 'reviewing'
-        });
     }
 
     static update(data) {
