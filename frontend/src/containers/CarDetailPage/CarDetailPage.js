@@ -28,6 +28,7 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
     const {
       location: { search },
     } = window;
+    document.title = 'Chi tiết sản phẩm';
     const queryObject = queryString.parse(search);
     const { id = 1 } = queryObject;
     getCarDetails(id);

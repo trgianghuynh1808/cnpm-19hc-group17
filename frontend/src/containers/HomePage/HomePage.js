@@ -32,6 +32,7 @@ const connectToRedux = connect(
 
 const HomePage = ({ getBrands,brandsData , getCarsByBrand, carByBrandsData }) => {
   useEffect(() => {
+    document.title = 'Cardoor';
     getCarsByBrand();
     getBrands();
   }, [getCarsByBrand, getBrands]);

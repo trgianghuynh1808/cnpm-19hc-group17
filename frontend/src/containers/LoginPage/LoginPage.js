@@ -36,6 +36,7 @@ const LoginPage =  ({ login }) => {
   };
 
   useEffect(() => {
+    document.title = 'Đăng nhập';
     document.getElementById("LOGIN_FORM").onsubmit = function() {
       return false;
   };
