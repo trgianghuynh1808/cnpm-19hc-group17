@@ -8,7 +8,7 @@ const Car = (props) => {
               <div className="row">
                 {/* Single Car Thumbnail */}
                 <div className="col-lg-5">
-                <Link to={`/car-details?id=${id}`} className="car-hover">
+                <Link to={`/car-details/${id}`} className="car-hover">
                   <img src={`assets/img/car/${image || 'car-1'}.jpg `} alt="JSOFT" />
                 </Link>
                 </div>
@@ -19,7 +19,7 @@ const Car = (props) => {
                     <div className="display-table-cell">
                       <div className="car-list-info">
                         <h2>
-                          <Link to={`/car-details?id=${id}`} className="car-hover">
+                          <Link to={`/car-details/${id}`} className="car-hover">
                           {model.toUpperCase()}
                           </Link>
                         </h2>

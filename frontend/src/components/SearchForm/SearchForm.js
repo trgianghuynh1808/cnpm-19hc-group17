@@ -73,7 +73,7 @@ const SearchForm = (props) => {
                     to={{ pathname: "/car-list", state: queryObj }}
                     className="book-now-btn"
                   >
-                    Book Now
+                    Search
                   </Link>
                 </div>
               </div>
