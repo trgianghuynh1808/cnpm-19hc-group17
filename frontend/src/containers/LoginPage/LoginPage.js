@@ -44,6 +44,7 @@ const LoginPage =  ({ login }) => {
 
   const onSubmit = () => {
     const { username, password } = info;
+    if(!username || !password) return;
     login({ username, password: md5(password)});
   };
 
