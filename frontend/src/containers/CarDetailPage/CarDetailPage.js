@@ -28,7 +28,7 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
     const {
       location: { search },
     } = window;
-    document.title = 'Chi tiết sản phẩm';
+    document.title = 'Car Details';
     const queryObject = queryString.parse(search);
     const { id = 1 } = queryObject;
     getCarDetails(id);
@@ -37,7 +37,7 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
   return (
     <>
       <Header />
-      <PageTitle title="Our Gallery" />
+      <PageTitle title="Our Car" />
       {carDetailsData && <Content {...carDetailsData} />}
       <Footer />
     </>
