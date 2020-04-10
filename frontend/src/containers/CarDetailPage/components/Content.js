@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import moment from "moment";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
 import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
-import { createContractUser } from "../../../stores/UsersState";
+import {
+  createContractUser,
+  getProfileUser,
+  GetProfileUserAPI,
+} from "../../../stores/UsersState";
 
 const {
   InputRenderFieldComponent,
@@ -15,11 +20,19 @@ const {
   TextAreaRenderFieldComponent,
 } = FormFields;
 
-const connectToRedux = connect(null, (distpatch) => ({
-  createContractUser: (objBody, callback) => {
-    distpatch(createContractUser(objBody, callback));
-  },
-}));
+const connectToRedux = connect(
+  createStructuredSelector({
+    profileUserData: GetProfileUserAPI.dataSelector,
+  }),
+  (distpatch) => ({
+    createContractUser: (objBody, callback) => {
+      distpatch(createContractUser(objBody, callback));
+    },
+    getProfileUser: () => {
+      distpatch(getProfileUser());
+    },
+  })
+);
 
 const enhance = compose(
   reduxForm({
@@ -39,12 +52,19 @@ const Content = ({
   handleSubmit,
   pristine,
   submitting,
+  initialize,
   reset,
   id,
   createContractUser,
+  getProfileUser,
+  profileUserData,
 }) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [startDate, setStartDate] = useState("");
+
+  useEffect(() => {
+    getProfileUser();
+  }, []);
 
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
@@ -147,6 +167,21 @@ const Content = ({
                     type="button"
                     onClick={() => {
                       setIsOpenBookingModal(true);
+                      if (profileUserData) {
+                        const {
+                          name,
+                          identity_id,
+                          phone_number,
+                          email,
+                        } = profileUserData.user;
+
+                        initialize({
+                          fullname: name,
+                          indentityCard: identity_id,
+                          phoneNumber: phone_number,
+                          email,
+                        });
+                      }
                     }}
                   >
                     Booking Now
@@ -175,6 +210,7 @@ const Content = ({
                               placeholder="Enter full name"
                               type="text"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -187,6 +223,7 @@ const Content = ({
                               placeholder="Enter identity card:"
                               type="text"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -201,6 +238,7 @@ const Content = ({
                               component={InputRenderFieldComponent}
                               placeholder="Enter email"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -214,6 +252,7 @@ const Content = ({
                               type="text"
                               required
                               pattern={`([0-9]{9,})`}
+                              readOnly={profileUserData ? true : false}
                             />
                             <small className="form-text text-muted">
                               Phone number must has least 9 numbers
