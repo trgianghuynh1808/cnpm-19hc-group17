@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { removeToken } from "../../../libs/token-libs";
+
 const HeaderBottom = props => {
+  const { currentUser } = props;
   const {
     location: { pathname }
   } = window;
@@ -56,9 +59,33 @@ const HeaderBottom = props => {
                 <li>
                   <a href="contact.html">Contact</a>
                 </li>
-                <li className={activePage === 'login' ? 'active' : ''}>
-                  <Link to="/login">Login</Link>
-                </li>
+                {
+                  currentUser ? 
+                    (
+                      <li>
+                        <Link>{currentUser.username}</Link>
+                        <ul>
+                          <li>
+                            <Link to="/profile">Profile</Link>
+                          </li>
+                          <li>
+                            <Link onClick={()=> {
+                              removeToken();
+                              window.location.reload();
+                            }}>
+                              Logout
+                            </Link>
+                          </li> 
+                        </ul>
+                      </li>                        
+                    )
+                  :
+                    (
+                      <li className={activePage === 'login' ? 'active' : ''}>
+                      <Link to="/login">Login</Link>
+                      </li>
+                    )
+                }
               </ul>
             </nav>
           </div>

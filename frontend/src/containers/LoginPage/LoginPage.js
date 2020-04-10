@@ -1,10 +1,10 @@
-import React, { useReducer, useEffect } from 'react';
-import Wrapper from '../../layouts';
-import PageTitle from '../../components/PageTitle';
-import Login from '../../components/LoginForm';
+import React, { useReducer, useEffect } from "react";
+import PageLayout from "../../layouts";
+import PageTitle from "../../components/PageTitle";
+import Login from "../../components/LoginForm";
 import { login } from "../../stores/UsersState";
 import { connect } from "react-redux";
-import md5 from 'md5';
+import md5 from "md5";
 
 const connectToRedux = connect(
   null,
@@ -36,8 +36,11 @@ const LoginPage =  ({ login }) => {
   };
 
   useEffect(() => {
-    document.getElementById("LOGIN_FORM").onsubmit = function() {
-      return false;
+    const loginForm = document.getElementById("LOGIN_FORM");
+    if(loginForm) {
+      loginForm.onsubmit = function() {
+        return false;
+    }
   };
   }, [])
 
@@ -47,10 +50,10 @@ const LoginPage =  ({ login }) => {
   };
 
   return (
-    <Wrapper>
+    <PageLayout>
       <PageTitle title="Login Page"/>
         <Login onSubmit={onSubmit} onChange={onChange} />
-    </Wrapper>
+    </PageLayout>
   );
 }
 

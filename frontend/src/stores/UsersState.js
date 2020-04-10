@@ -65,8 +65,19 @@ export const GetCurrentUserAPI = makeFetchAction(
   })
 );
 
-export const getCurrentUser = () => {
+export const getCurrentUserWithFailure = () => {
   return respondToFailure(GetCurrentUserAPI.actionCreator(), (resp) => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
+    }
+
+    return;
+  });
+};
+
+export const getCurrentUserWithSucces = () => {
+  return respondToSuccess(GetCurrentUserAPI.actionCreator(), (resp) => {
     if (resp.errors) {
       console.error("Err: ", resp.errors);
       return;

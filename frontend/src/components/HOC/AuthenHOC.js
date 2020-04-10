@@ -6,7 +6,7 @@ import { isServer } from "../../utils";
 
 import {
   GetCurrentUserAPI,
-  getCurrentUser,
+  getCurrentUserWithFailure,
   verifyLogin,
 } from "../../stores/UsersState";
 
@@ -26,7 +26,7 @@ export default function withAuth(AuthComponent) {
 
     componentDidMount() {
       if (!isServer) {
-        this.props.dispatch(getCurrentUser());
+        this.props.dispatch(getCurrentUserWithFailure());
       }
     }
 
