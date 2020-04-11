@@ -75,7 +75,7 @@ const HeaderBottom = props => {
                           </li>
                           <li>
                             <a href="#logout " onClick={logOut}>
-                              Log Out
+                              Logout
                             </a>
                           </li> 
                         </ul>
