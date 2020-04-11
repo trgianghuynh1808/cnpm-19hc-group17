@@ -23,9 +23,7 @@ class App extends Component {
                 <Route path="/gallery" exact>
                     <GalleryPage {...this.props}/>
                 </Route>
-                <Route path="/car-details" exact>
-                    <CarDetailPage {...this.props}/>
-                </Route>
+                <Route path="/car-details/:id" component={CarDetailPage} />
                 <Route path="/profile" exact>
                     <ProfilePage {...this.props}/>
                 </Route>
