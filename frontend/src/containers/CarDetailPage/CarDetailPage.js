@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import queryString from "query-string";
 import { compose } from "redux";
+import PageLayout from "../../layouts";
 
-import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
-import Footer from "../../components/Footer";
 import Content from "./components/Content";
 import { getCarDetails, getCarDetailsAPI } from "../../stores/CarsState";
 
@@ -34,12 +33,10 @@ const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
   }, [getCarDetails]);
 
   return (
-    <>
-      <Header />
+    <PageLayout>
       <PageTitle title="Our Gallery" />
       {carDetailsData && <Content {...carDetailsData} />}
-      <Footer />
-    </>
+    </PageLayout>
   );
 };
 

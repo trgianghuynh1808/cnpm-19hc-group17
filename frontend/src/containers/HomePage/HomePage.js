@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import Header from "../../components/Header";
+import PageLayout from "../../layouts";
 import SearchForm from "../../components/SearchForm";
 import About from "../../components/About";
 import Partners from "../../components/Partners";
@@ -11,7 +11,6 @@ import FunFact from "../../components/FunFact";
 import CarList from "../../components/CarList";
 import Testimonials from "../../components/Testimonials";
 import Articles from "../../components/Articles";
-import Footer from "../../components/Footer";
 
 import { getBrands, getBrandsDataSelector, getCarsByBrand, getCarsByBrandSelector } from "../../stores/CarsState";
 
@@ -36,8 +35,7 @@ const HomePage = ({ getBrands,brandsData , getCarsByBrand, carByBrandsData }) =>
     getBrands();
   }, [getCarsByBrand, getBrands]);
   return (
-    <>
-      <Header />
+    <PageLayout>
       <SearchForm brands={brandsData}/>
       <About />
       <Partners />
@@ -46,8 +44,7 @@ const HomePage = ({ getBrands,brandsData , getCarsByBrand, carByBrandsData }) =>
       <CarList carListGroupByBrand={carByBrandsData} />
       <Testimonials />
       <Articles />
-      <Footer />
-    </>
+    </PageLayout>
   );
 };
 

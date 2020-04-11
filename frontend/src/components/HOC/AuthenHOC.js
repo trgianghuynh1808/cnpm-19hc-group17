@@ -6,7 +6,7 @@ import { isServer } from "../../utils";
 
 import {
   GetCurrentUserAPI,
-  getCurrentUser,
+  getCurrentUserWithFailure,
   verifyLogin,
 } from "../../stores/UsersState";
 
@@ -26,19 +26,18 @@ export default function withAuth(AuthComponent) {
 
     componentDidMount() {
       if (!isServer) {
-        this.props.dispatch(getCurrentUser());
+        this.props.dispatch(getCurrentUserWithFailure());
       }
     }
 
     render() {
       const { currentUser } = this.props;
-
       return (
         <div>
           {!verifyLogin(currentUser) ? (
             <></>
           ) : (
-            <AuthComponent {...this.props} isLoggedIn={true} />
+            <AuthComponent {...this.props} isHOC={true} isLoggedIn={true} />
           )}
         </div>
       );
