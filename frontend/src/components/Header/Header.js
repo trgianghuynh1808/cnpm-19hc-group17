@@ -7,7 +7,6 @@ import { createStructuredSelector } from "reselect";
 import {
     GetCurrentUserAPI,
     getCurrentUserWithSucces,
-    verifyLogin,
 } from "../../stores/UsersState"
 
 const connectToRedux = connect(
@@ -23,15 +22,15 @@ const connectToRedux = connect(
 
 const enhance = compose(connectToRedux);
 
-const Header = ({getCurrentUserWithSucces, currentUser}) => {
-
+const Header = (props) => {
+  const {getCurrentUserWithSucces, currentUser} = props;
   useEffect(() => {
     getCurrentUserWithSucces();
   }, [getCurrentUserWithSucces]);
   return (
     <header id="header-area" className="fixed-top">
         <HeaderTop />
-        <HeaderBottom currentUser={currentUser}/>
+        <HeaderBottom {...props} currentUser={currentUser}/>
     </header>
 
   );

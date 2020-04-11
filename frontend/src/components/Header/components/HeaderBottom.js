@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import { removeToken } from "../../../libs/token-libs";
 
 const HeaderBottom = props => {
-  const { currentUser } = props;
+  const { currentUser, isHOC } = props;
+  const logOut = () => {
+    removeToken();
+    if(isHOC) return window.location.replace('/');
+    return window.location.reload();
+  }
   const {
     location: { pathname }
   } = window;
@@ -63,18 +68,15 @@ const HeaderBottom = props => {
                   currentUser ? 
                     (
                       <li>
-                        <Link>{currentUser.username}</Link>
+                        <a href="#username ">{currentUser.username}</a>
                         <ul>
                           <li>
                             <Link to="/profile">Profile</Link>
                           </li>
                           <li>
-                            <Link onClick={()=> {
-                              removeToken();
-                              window.location.reload();
-                            }}>
-                              Logout
-                            </Link>
+                            <a href="#logout " onClick={logOut}>
+                              Log Out
+                            </a>
                           </li> 
                         </ul>
                       </li>                        

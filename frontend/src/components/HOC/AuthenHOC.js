@@ -32,13 +32,13 @@ export default function withAuth(AuthComponent) {
 
     render() {
       const { currentUser } = this.props;
-
+      console.log(currentUser);
       return (
         <div>
           {!verifyLogin(currentUser) ? (
             <></>
           ) : (
-            <AuthComponent {...this.props} isLoggedIn={true} />
+            <AuthComponent {...this.props} isHOC={true} isLoggedIn={true} />
           )}
         </div>
       );

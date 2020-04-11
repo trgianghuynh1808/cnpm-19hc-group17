@@ -72,6 +72,10 @@ export const getCurrentUserWithFailure = () => {
       return;
     }
 
+    if (!verifyLogin(resp.email)) {
+      return navigateWithClear("/login");
+    }
+
     return;
   });
 };
@@ -81,10 +85,6 @@ export const getCurrentUserWithSucces = () => {
     if (resp.errors) {
       console.error("Err: ", resp.errors);
       return;
-    }
-
-    if (!verifyLogin(resp.email)) {
-      return navigateWithClear("/login");
     }
 
     return;
