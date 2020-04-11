@@ -32,7 +32,6 @@ export default function withAuth(AuthComponent) {
 
     render() {
       const { currentUser } = this.props;
-      console.log(currentUser);
       return (
         <div>
           {!verifyLogin(currentUser) ? (
