@@ -9,15 +9,15 @@ export const LOGIN_API = "LOGIN_API";
 export const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
 
-const loginAPI = makeFetchAction(LOGIN_API, ({ username, password }) => {
+const loginAPI = makeFetchAction(LOGIN_API, ({ username, password, role }) => {
   return nfetch({
     endpoint: `/accounts/login`,
-  })({ username, password });
+  })({ username, password, role });
 });
 
-export const login = ({ username, password }) => {
+export const login = ({ username, password, role }) => {
   return respondToSuccess(
-    loginAPI.actionCreator({ username, password }),
+    loginAPI.actionCreator({ username, password, role }),
     (resp) => {
       if (resp.errors) {
         console.error("Err: ", resp.errors);
