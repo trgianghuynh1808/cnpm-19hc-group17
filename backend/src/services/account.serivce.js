@@ -6,13 +6,13 @@ import {
 import { generate } from '../utils/token';
 
 export default class AccountService {
-    static async login({ username, password }) {
+    static async login({ username, password, role = 'guest' }) {
         const account = await db.Account.find({
             include: [{
                 model: db.User,
                 as: 'user'
             }],
-            where: { username, password }
+            where: { username, password, role }
         });
         if (!account) throw new AuthenticationError('Username or Password is invalid');
         return {

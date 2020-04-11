@@ -5,6 +5,7 @@ import LoginPage from './LoginPage';
 import CarListPage from './CarListPage';
 import GalleryPage from './GalleryPage';
 import CarDetailPage from './CarDetailPage';
+import ProfilePage from './ProfilePage';
 
 class App extends Component {
     render() {
@@ -23,6 +24,9 @@ class App extends Component {
                     <GalleryPage {...this.props}/>
                 </Route>
                 <Route path="/car-details/:id" component={CarDetailPage} />
+                <Route path="/profile" exact>
+                    <ProfilePage {...this.props}/>
+                </Route>
             </Switch>
         );
     }
