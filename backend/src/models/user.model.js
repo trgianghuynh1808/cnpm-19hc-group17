@@ -1,9 +1,12 @@
+import uuid from 'uuid/v4';
+
 export default function (sequelize, DataTypes) {
     const User = sequelize.define('user', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             unique: true,
             autoIncrement: true,
+            defaultValue: uuid(),
             primaryKey: true
         },
         name: {

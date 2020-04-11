@@ -3238,3 +3238,7 @@ body,
 	opacity: 1;
 	visibility: visible;
 }
+
+.dropdown-menu:hover {
+	color: white;
+}
