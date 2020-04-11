@@ -5,7 +5,8 @@ export default class AccountController extends BaseController {
     login(req) {
         const loginInfo = {
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            role: req.body.role
         };
         return AccountService.login(loginInfo);
     }

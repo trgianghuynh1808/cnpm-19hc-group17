@@ -23,17 +23,23 @@ export class DataValidationError extends BusinessError {
         this.name = 'DataValidationError';
         this.status = 400;
         if (err instanceof sequelize.ValidationError) {
-            this.payload = err.errors.reduce((finalErrors, itemError) => ({
-                ...finalErrors,
-                [itemError.path]: {
-                    message: itemError.message,
-                    type: itemError.validatorKey,
-                    context: {
-                        value: itemError.value,
-                        agrs: itemError.validatorArgs
-                    }
+            this.payload = err.errors.reduce((finalErrors, itemError) => {
+                let message = '';
+                if (itemError.validatorKey === 'not_unique') {
+                    message = `${itemError.path} has been exist`;
                 }
-            }), {});
+                return ({
+                    ...finalErrors,
+                    [itemError.path]: {
+                        message: message || itemError.message,
+                        type: itemError.validatorKey,
+                        context: {
+                            value: itemError.value,
+                            agrs: itemError.validatorArgs
+                        }
+                    }
+                });
+            }, {});
         }
     }
 }

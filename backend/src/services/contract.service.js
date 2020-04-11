@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import _ from 'lodash';
+import sequelize from 'sequelize';
 import uuid from 'uuid/v4';
 import jwt from 'jsonwebtoken';
 import db from '../models';
@@ -75,6 +76,9 @@ export default class ContractService {
             return contract;
         } catch (err) {
             await transaction.rollback();
+            if (err instanceof sequelize.ValidationError) {
+                throw new DataValidationError(err);
+            }
             throw new Error(err);
         }
     }

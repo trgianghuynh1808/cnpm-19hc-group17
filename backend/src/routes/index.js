@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
 import express from 'express';
+import sequelize from 'sequelize';
 import CarRoutes from './car.routes';
 import BrandRoutes from './brand.routes';
 import AccountRoutes from './account.routes';
-import { BusinessError, AuthenticationError } from '../components/ErrorInstance/businessErrors';
+import { BusinessError,
+    AuthenticationError,
+    DataValidationError
+} from '../components/ErrorInstance/businessErrors';
 import ContractRoutes from './contract.routes';
-import { verifyJWT } from '../components/auth';
 
 const router = express.Router();
 
@@ -15,14 +18,22 @@ router.use('/brands', BrandRoutes);
 router.use('/contracts', ContractRoutes);
 
 router.use((err, req, res, next) => {
-    if (err instanceof BusinessError) {
+    if (err instanceof DataValidationError) {
+        res.status(err.status).send({
+            name: err.name,
+            message: err.message,
+            payload: err.payload
+        });
+        return;
+    }
+    if (err instanceof AuthenticationError) {
         res.status(err.status).send({
             name: err.name,
             message: err.message
         });
         return;
     }
-    if (err instanceof AuthenticationError) {
+    if (err instanceof BusinessError) {
         res.status(err.status).send({
             name: err.name,
             message: err.message
