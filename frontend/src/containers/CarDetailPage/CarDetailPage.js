@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import queryString from "query-string";
 import { compose } from "redux";
 import PageLayout from "../../layouts";
 
@@ -22,16 +21,12 @@ const connectToRedux = connect(
 
 const enhance = compose(connectToRedux);
 
-const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
+const CarDetailPage = (props) => {
+  const { getCarDetails, carDetailsData, match: { params } } = props;
+  const { id } = params;
   useEffect(() => {
-    const {
-      location: { search },
-    } = window;
-    document.title = 'Car Details';
-    const queryObject = queryString.parse(search);
-    const { id = 1 } = queryObject;
     getCarDetails(id);
-  }, [getCarDetails]);
+  }, [getCarDetails, id]);
 
   return (
     <PageLayout>
