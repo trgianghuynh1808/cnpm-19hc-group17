@@ -23,14 +23,11 @@ const connectToRedux = connect(
 const enhance = compose(connectToRedux);
 
 const CarDetailPage = (props) => {
-  const { getCarDetails, carDetailsData } = props;
+  const { getCarDetails, carDetailsData, match: { params } } = props;
+  const { id } = params;
   useEffect(() => {
-    const {
-      match: { params },
-    } = props;
-    const { id } = params;
     getCarDetails(id);
-  }, [getCarDetails]);
+  }, [getCarDetails, id]);
 
   return (
     <>
