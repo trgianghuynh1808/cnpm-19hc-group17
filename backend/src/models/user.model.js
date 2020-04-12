@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 
 export default function (sequelize, DataTypes) {
     const User = sequelize.define('user', {
@@ -5,7 +6,7 @@ export default function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             unique: true,
             autoIncrement: true,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: uuid(),
             primaryKey: true
         },
         name: {
