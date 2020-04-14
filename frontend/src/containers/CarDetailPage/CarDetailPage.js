@@ -30,7 +30,7 @@ const CarDetailPage = (props) => {
 
   return (
     <PageLayout>
-      <PageTitle title="Our Gallery" />
+      <PageTitle title="Our Car" />
       {carDetailsData && <Content {...carDetailsData} />}
     </PageLayout>
   );

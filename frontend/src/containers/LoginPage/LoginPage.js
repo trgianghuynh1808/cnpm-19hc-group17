@@ -37,11 +37,9 @@ const LoginPage =  ({ login }) => {
   };
 
   useEffect(() => {
-    const loginForm = document.getElementById("LOGIN_FORM");
-    if(loginForm) {
-      loginForm.onsubmit = function() {
-        return false;
-    }
+    document.title = 'Login Page';
+    document.getElementById("LOGIN_FORM").onsubmit = function() {
+      return false;
   };
   }, [])
 

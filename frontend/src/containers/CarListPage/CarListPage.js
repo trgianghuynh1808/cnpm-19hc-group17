@@ -31,6 +31,7 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
   const { state: queryState = {} } = state;
   const [activePage, setActivePage] = useState(0);
   useEffect(() => {
+    document.title= 'Car List';
     const carPerPage = CAR_PER_VERTI_PAGE - 1;
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
@@ -62,6 +63,7 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
                       } = car;
                       return (
                         <Car
+                          key={id}
                           brand={brand}
                           model={model}
                           seat={seat}
