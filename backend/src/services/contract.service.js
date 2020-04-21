@@ -87,7 +87,7 @@ export default class ContractService {
         const contract = await db.Contract.create({
             ...data,
             ...contractUser,
-            id: new Date().getTime(),
+            id: uuid(),
             deposit,
             status: 'reviewing'
         });
