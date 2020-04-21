@@ -25,7 +25,7 @@ export const login = ({ username, password, role }) => {
       }
       if (resp.token) {
         saveToken(resp.token);
-        navigateWithClear("/");
+        window.location.replace('/');
       }
       return;
     }

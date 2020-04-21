@@ -1,5 +1,4 @@
-import React, { useEffect, useReducer } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import Wrapper from '../components';
 import Table from '../components/Table';
 

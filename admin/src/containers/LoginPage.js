@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer } from "react";
 import { connect } from "react-redux";
-import Wrapper from '../components';
 import LoginForm from '../components/LoginForm';
 import { LOGIN_ROLE } from "../utils/enums";
 import { login } from "../stores/UsersState";
@@ -35,7 +34,6 @@ const LoginPage = ({ login }) => {
       dispatch({ type: id, payload: element.value});
     }
   };
-  console.log(info);
   useEffect(() => {
     document.title = 'Đăng nhập';
     document.getElementById("LOGIN_FORM").onsubmit = function() {
@@ -50,9 +48,7 @@ const LoginPage = ({ login }) => {
   };
 
     return (
-      <Wrapper>
         <LoginForm onSubmit={onSubmit} onChange={onChange} />
-      </Wrapper>
     );
 }
 
