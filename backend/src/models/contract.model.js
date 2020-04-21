@@ -1,11 +1,9 @@
-import uuid from 'uuid/v4';
-
 
 export default function (sequelize, DataTypes) {
     const Contract = sequelize.define('contract', {
         id: {
             type: DataTypes.STRING,
-            defaultValue: uuid(),
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         car_id: {
@@ -33,6 +31,9 @@ export default function (sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         email: {
+            type: DataTypes.STRING
+        },
+        address: {
             type: DataTypes.STRING
         },
         status: {

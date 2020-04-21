@@ -1,12 +1,10 @@
-import uuid from 'uuid/v4';
-
 
 export default function (sequelize, DataTypes) {
     const Brand = sequelize.define('brand', {
         id: {
             type: DataTypes.STRING,
             unique: true,
-            defaultValue: uuid(),
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         name: {

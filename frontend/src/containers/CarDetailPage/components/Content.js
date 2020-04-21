@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import moment from "moment";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
-import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
-import { createContractUser } from "../../../stores/UsersState";
+import { DATE_FORMAT, PERCENT_DEPOSIT_FEE } from "../../../utils/enums";
+import {
+  createContractUser,
+  getProfileUser,
+  GetProfileUserAPI,
+} from "../../../stores/UsersState";
 
 const {
   InputRenderFieldComponent,
@@ -15,11 +20,19 @@ const {
   TextAreaRenderFieldComponent,
 } = FormFields;
 
-const connectToRedux = connect(null, (distpatch) => ({
-  createContractUser: (objBody, callback) => {
-    distpatch(createContractUser(objBody, callback));
-  },
-}));
+const connectToRedux = connect(
+  createStructuredSelector({
+    profileUserData: GetProfileUserAPI.dataSelector,
+  }),
+  (dispatch) => ({
+    createContractUser: (objBody, callback) => {
+      dispatch(createContractUser(objBody, callback));
+    },
+    getProfileUser: () => {
+      dispatch(getProfileUser());
+    },
+  })
+);
 
 const enhance = compose(
   reduxForm({
@@ -39,26 +52,34 @@ const Content = ({
   handleSubmit,
   pristine,
   submitting,
+  initialize,
   reset,
   id,
   createContractUser,
+  getProfileUser,
+  profileUserData,
 }) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [startDate, setStartDate] = useState("");
 
+  useEffect(() => {
+    getProfileUser();
+  }, [getProfileUser]);
+
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
-      const { indentityCard, fullname, phoneNumber, email } = values;
+      const { identityCard, fullname, phoneNumber, email, address } = values;
 
       const objBody = {
         car_id: id,
         start_rent_date: values.startDate.format(DATE_FORMAT),
         end_rent_date: values.endDate.format(DATE_FORMAT),
-        identity_id: indentityCard,
+        identity_id: identityCard,
         name: fullname,
         phone_number: phoneNumber,
         email,
         note: values.note || "",
+        address,
       };
 
       createContractUser(objBody, () => {
@@ -147,6 +168,23 @@ const Content = ({
                     type="button"
                     onClick={() => {
                       setIsOpenBookingModal(true);
+                      if (profileUserData) {
+                        const {
+                          name,
+                          identity_id,
+                          phone_number,
+                          email,
+                          address,
+                        } = profileUserData.user;
+
+                        initialize({
+                          fullname: name,
+                          identityCard: identity_id,
+                          phoneNumber: phone_number,
+                          email,
+                          address,
+                        });
+                      }
                     }}
                   >
                     Booking Now
@@ -162,7 +200,7 @@ const Content = ({
                         <h4 style={{ color: "#fabf21" }}>Booking Info</h4>
                         <h5>
                           Deposit fee: $
-                          {(rent_price * PECENT_DEPOSIT_FEE) / 100}
+                          {(rent_price * PERCENT_DEPOSIT_FEE) / 100}
                         </h5>
                       </div>
                       <div className="row pt-3">
@@ -175,6 +213,7 @@ const Content = ({
                               placeholder="Enter full name"
                               type="text"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -182,11 +221,12 @@ const Content = ({
                           <div className="form-group">
                             <label>Identity Card:</label>
                             <Field
-                              name="indentityCard"
+                              name="identityCard"
                               component={InputRenderFieldComponent}
                               placeholder="Enter identity card:"
                               type="text"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -201,6 +241,7 @@ const Content = ({
                               component={InputRenderFieldComponent}
                               placeholder="Enter email"
                               required
+                              readOnly={profileUserData ? true : false}
                             />
                           </div>
                         </div>
@@ -214,10 +255,26 @@ const Content = ({
                               type="text"
                               required
                               pattern={`([0-9]{9,})`}
+                              readOnly={profileUserData ? true : false}
                             />
                             <small className="form-text text-muted">
                               Phone number must has least 9 numbers
                             </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Address: </label>
+                            <Field
+                              name="address"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter address"
+                              type="text"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
                           </div>
                         </div>
                       </div>

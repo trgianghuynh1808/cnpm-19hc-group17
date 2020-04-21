@@ -1,16 +1,17 @@
-import React, { useReducer, useEffect } from 'react';
-import Wrapper from '../../layouts';
-import PageTitle from '../../components/PageTitle';
-import Login from '../../components/LoginForm';
+import React, { useReducer, useEffect } from "react";
+import PageLayout from "../../layouts";
+import PageTitle from "../../components/PageTitle";
+import Login from "../../components/LoginForm";
+import { LOGIN_ROLE } from "../../utils/enums";
 import { login } from "../../stores/UsersState";
 import { connect } from "react-redux";
-import md5 from 'md5';
+import md5 from "md5";
 
 const connectToRedux = connect(
   null,
   distpatch => ({
-    login: ({ username, password }) => {
-      distpatch(login({ username, password }));
+    login: ({ username, password, role }) => {
+      distpatch(login({ username, password, role }));
     }
   })
 );
@@ -36,7 +37,7 @@ const LoginPage =  ({ login }) => {
   };
 
   useEffect(() => {
-    document.title = 'Đăng nhập';
+    document.title = 'Login Page';
     document.getElementById("LOGIN_FORM").onsubmit = function() {
       return false;
   };
@@ -44,15 +45,14 @@ const LoginPage =  ({ login }) => {
 
   const onSubmit = () => {
     const { username, password } = info;
-    if(!username || !password) return;
-    login({ username, password: md5(password)});
+    login({ username, password: md5(password) , role: LOGIN_ROLE });
   };
 
   return (
-    <Wrapper>
+    <PageLayout>
       <PageTitle title="Login Page"/>
         <Login onSubmit={onSubmit} onChange={onChange} />
-    </Wrapper>
+    </PageLayout>
   );
 }
 

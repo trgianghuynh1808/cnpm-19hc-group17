@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import queryString from "query-string";
 import { compose } from "redux";
+import PageLayout from "../../layouts";
 
-import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
-import Footer from "../../components/Footer";
 import Content from "./components/Content";
 import { getCarDetails, getCarDetailsAPI } from "../../stores/CarsState";
 
@@ -23,24 +21,18 @@ const connectToRedux = connect(
 
 const enhance = compose(connectToRedux);
 
-const CarDetailPage = ({ getCarDetails, carDetailsData }) => {
+const CarDetailPage = (props) => {
+  const { getCarDetails, carDetailsData, match: { params } } = props;
+  const { id } = params;
   useEffect(() => {
-    const {
-      location: { search },
-    } = window;
-    document.title = 'Chi tiết sản phẩm';
-    const queryObject = queryString.parse(search);
-    const { id = 1 } = queryObject;
     getCarDetails(id);
-  }, [getCarDetails]);
+  }, [getCarDetails, id]);
 
   return (
-    <>
-      <Header />
-      <PageTitle title="Our Gallery" />
+    <PageLayout>
+      <PageTitle title="Our Car" />
       {carDetailsData && <Content {...carDetailsData} />}
-      <Footer />
-    </>
+    </PageLayout>
   );
 };
 

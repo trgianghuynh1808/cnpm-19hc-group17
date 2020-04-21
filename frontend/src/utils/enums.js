@@ -1,8 +1,10 @@
 export const DATE_FORMAT = "YYYY-MM-DD";
-export const PECENT_DEPOSIT_FEE = 30;
+export const PERCENT_DEPOSIT_FEE = 30;
 
 export const CAR_PER_HORI_PAGE = 6;
 export const CAR_PER_VERTI_PAGE = 4;
+
+export const LOGIN_ROLE = "guest";
 
 export const SEARCH_VALUE = {
   color: ["Red", "White", "Blue", "Black"],
@@ -17,7 +19,7 @@ export const TOAST_ERROR = "TOAST_ERROR";
 export const TOAST_SUCCESS = "TOAST_SUCCESS";
 export const TOAST_DEFAULT = "TOAST_DEFAULT";
 
-//Toast Postion
+//Toast Position
 export const TOP_LEFT = "top-left";
 export const TOP_RIGHT = "top-right";
 export const TOP_CENTER = "top-center";

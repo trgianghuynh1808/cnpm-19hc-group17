@@ -8,16 +8,17 @@ import nfetch from "../libs/nfetch";
 export const LOGIN_API = "LOGIN_API";
 export const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
+const GET_PROFILE_USER_API = "GET_PROFILE_USER_API";
 
-const loginAPI = makeFetchAction(LOGIN_API, ({ username, password }) => {
+const loginAPI = makeFetchAction(LOGIN_API, ({ username, password, role }) => {
   return nfetch({
     endpoint: `/accounts/login`,
-  })({ username, password });
+  })({ username, password, role });
 });
 
-export const login = ({ username, password }) => {
+export const login = ({ username, password, role }) => {
   return respondToSuccess(
-    loginAPI.actionCreator({ username, password }),
+    loginAPI.actionCreator({ username, password, role }),
     (resp) => {
       if (resp.errors) {
         console.error("Err: ", resp.errors);
@@ -65,7 +66,7 @@ export const GetCurrentUserAPI = makeFetchAction(
   })
 );
 
-export const getCurrentUser = () => {
+export const getCurrentUserWithFailure = () => {
   return respondToFailure(GetCurrentUserAPI.actionCreator(), (resp) => {
     if (resp.errors) {
       console.error("Err: ", resp.errors);
@@ -74,6 +75,36 @@ export const getCurrentUser = () => {
 
     if (!verifyLogin(resp.email)) {
       return navigateWithClear("/login");
+    }
+
+    return;
+  });
+};
+
+export const GetProfileUserAPI = makeFetchAction(
+  GET_PROFILE_USER_API,
+  nfetch({
+    endpoint: `/accounts/getProfileUser`,
+    method: "GET",
+  })
+);
+
+export const getProfileUser = () => {
+  return respondToSuccess(GetProfileUserAPI.actionCreator(), (resp) => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
+    }
+
+    return;
+  });
+};
+
+export const getCurrentUserWithSucces = () => {
+  return respondToSuccess(GetCurrentUserAPI.actionCreator(), (resp) => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
     }
 
     return;

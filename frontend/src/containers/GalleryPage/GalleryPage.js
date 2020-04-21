@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { CAR_PER_HORI_PAGE } from "../../utils/enums";
 
-import Header from "../../components/Header";
 import PageTitle from "../../components/PageTitle";
-import Footer from "../../components/Footer";
+import PageLayout from "../../layouts";
 import Content from "./components/Content";
 
 import {
@@ -29,7 +28,7 @@ const connectToRedux = connect(
 const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   const [activePage, setActivePage] = useState(0);
   useEffect(() => {
-    document.title = 'Bộ sưu tập';
+    document.title = 'Car Gallery';
     const carPerPage = CAR_PER_HORI_PAGE - 1;
     const offset = activePage === 0 ? 0 : activePage * carPerPage + activePage;
     const limit = offset + carPerPage;
@@ -38,8 +37,7 @@ const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
   if (!carListData) return <> </>;
 
   return (
-    <>
-      <Header />
+    <PageLayout>
       <PageTitle title="Our Gallery" />
       <Content
         pageCount={Math.ceil(carListCount / CAR_PER_HORI_PAGE)}
@@ -47,8 +45,7 @@ const GalleryPage = ({ carListData, carListCount, getFilterGallery }) => {
         setActivePage={setActivePage}
         carList={carListData}
       />
-      <Footer />
-    </>
+    </PageLayout>
   );
 };
 
