@@ -15,7 +15,7 @@ import { sendMailUtil } from '../utils/mail';
 export default class ContractService {
     static async getContractUser(data, token, transaction) {
         const { email, phone_number, identity_id, name, address } = data;
-        let contractUser = { email, phone_number, identity_id, name };
+        let contractUser = { email, phone_number, identity_id, name, address };
         if (token) {
             let userInfo;
             try {
@@ -30,7 +30,8 @@ export default class ContractService {
                     email: account.user.email,
                     phone_number: account.user.phone_number,
                     identity_id: account.user.identity_id,
-                    name: account.user.name
+                    name: account.user.name,
+                    address: account.user.address
                 };
                 return contractUser;
             }
@@ -38,6 +39,7 @@ export default class ContractService {
         try {
             const password = 'abc';
             const userId = uuid();
+            const username = email.substring(0, email.indexOf('@'));
             await db.User.create({
                 id: userId,
                 email,
@@ -48,14 +50,14 @@ export default class ContractService {
             }, { transaction });
             await db.Account.create({
                 id: uuid(),
-                username: email,
+                username,
                 password: md5(password),
                 role: 'guest',
                 user_id: userId
             }, { transaction });
             await sendMailUtil({
                 to: email,
-                username: email,
+                username,
                 password
             });
             return contractUser;
