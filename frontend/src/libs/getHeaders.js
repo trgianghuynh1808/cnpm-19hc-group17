@@ -3,12 +3,17 @@ import { getToken } from "./token-libs";
 
 export const formatObj = pickBy(identity);
 
-export default (options = {}) =>
-  Object.assign(
+export default (options = {}) => {
+  let headers = Object.assign(
     {},
     {
-      "x-access-token": getToken(),
       "Content-Type": "application/json",
     },
     formatObj(options)
   );
+
+  if (getToken()) {
+    headers = { ...headers, "x-access-token": getToken() };
+  }
+  return headers;
+};
