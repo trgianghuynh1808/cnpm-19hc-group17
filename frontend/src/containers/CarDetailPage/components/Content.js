@@ -68,7 +68,7 @@ const Content = ({
 
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
-      const { indentityCard, fullname, phoneNumber, email } = values;
+      const { indentityCard, fullname, phoneNumber, email, address } = values;
 
       const objBody = {
         car_id: id,
@@ -79,6 +79,7 @@ const Content = ({
         phone_number: phoneNumber,
         email,
         note: values.note || "",
+        address,
       };
 
       createContractUser(objBody, () => {
@@ -289,6 +290,20 @@ const Content = ({
                               isValidDate={(currentDate) => {
                                 return moment(currentDate).isAfter(startDate);
                               }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Address: </label>
+                            <Field
+                              name="address"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter address"
+                              type="text"
+                              required
                             />
                           </div>
                         </div>
