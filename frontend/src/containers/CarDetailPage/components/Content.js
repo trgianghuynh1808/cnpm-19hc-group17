@@ -174,6 +174,7 @@ const Content = ({
                           identity_id,
                           phone_number,
                           email,
+                          address,
                         } = profileUserData.user;
 
                         initialize({
@@ -181,6 +182,7 @@ const Content = ({
                           indentityCard: identity_id,
                           phoneNumber: phone_number,
                           email,
+                          address,
                         });
                       }
                     }}
@@ -262,6 +264,21 @@ const Content = ({
                         </div>
                       </div>
                       <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Address: </label>
+                            <Field
+                              name="address"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter address"
+                              type="text"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
                         <div className="col-lg-6">
                           <div className="form-group">
                             <label>Start Date</label>
@@ -290,20 +307,6 @@ const Content = ({
                               isValidDate={(currentDate) => {
                                 return moment(currentDate).isAfter(startDate);
                               }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col">
-                          <div className="form-group">
-                            <label>Address: </label>
-                            <Field
-                              name="address"
-                              component={InputRenderFieldComponent}
-                              placeholder="Enter address"
-                              type="text"
-                              required
                             />
                           </div>
                         </div>
