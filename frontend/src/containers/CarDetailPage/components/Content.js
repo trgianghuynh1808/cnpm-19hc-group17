@@ -64,7 +64,7 @@ const Content = ({
 
   useEffect(() => {
     getProfileUser();
-  }, []);
+  }, [getProfileUser]);
 
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
