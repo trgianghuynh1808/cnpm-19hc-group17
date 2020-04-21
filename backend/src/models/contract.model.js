@@ -33,6 +33,9 @@ export default function (sequelize, DataTypes) {
         email: {
             type: DataTypes.STRING
         },
+        address: {
+            type: DataTypes.STRING
+        },
         status: {
             type: DataTypes.STRING
         }

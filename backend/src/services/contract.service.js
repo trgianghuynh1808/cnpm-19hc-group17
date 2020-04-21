@@ -15,7 +15,7 @@ import { sendMailUtil } from '../utils/mail';
 export default class ContractService {
     static async getContractUser(data, token, transaction) {
         const { email, phone_number, identity_id, name, address } = data;
-        let contractUser = { email, phone_number, identity_id, name };
+        let contractUser = { email, phone_number, identity_id, name, address };
         if (token) {
             let userInfo;
             try {
@@ -30,7 +30,8 @@ export default class ContractService {
                     email: account.user.email,
                     phone_number: account.user.phone_number,
                     identity_id: account.user.identity_id,
-                    name: account.user.name
+                    name: account.user.name,
+                    address: account.user.address
                 };
                 return contractUser;
             }
