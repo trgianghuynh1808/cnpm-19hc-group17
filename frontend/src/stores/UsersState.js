@@ -8,6 +8,7 @@ import nfetch from "../libs/nfetch";
 export const LOGIN_API = "LOGIN_API";
 export const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
+const GET_PROFILE_USER_API = "GET_PROFILE_USER_API";
 
 const loginAPI = makeFetchAction(LOGIN_API, ({ username, password, role }) => {
   return nfetch({
@@ -74,6 +75,25 @@ export const getCurrentUserWithFailure = () => {
 
     if (!verifyLogin(resp.email)) {
       return navigateWithClear("/login");
+    }
+
+    return;
+  });
+};
+
+export const GetProfileUserAPI = makeFetchAction(
+  GET_PROFILE_USER_API,
+  nfetch({
+    endpoint: `/accounts/getProfileUser`,
+    method: "GET",
+  })
+);
+
+export const getProfileUser = () => {
+  return respondToSuccess(GetProfileUserAPI.actionCreator(), (resp) => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
     }
 
     return;
