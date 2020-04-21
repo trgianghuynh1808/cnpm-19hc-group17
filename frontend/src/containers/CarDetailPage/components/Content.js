@@ -7,7 +7,7 @@ import { createStructuredSelector } from "reselect";
 
 import ModalComponent from "../../../components/commons/ModalComponent";
 import FormFields from "../../../components/commons/ReduxFormFields";
-import { DATE_FORMAT, PECENT_DEPOSIT_FEE } from "../../../utils/enums";
+import { DATE_FORMAT, PERCENT_DEPOSIT_FEE } from "../../../utils/enums";
 import {
   createContractUser,
   getProfileUser,
@@ -24,12 +24,12 @@ const connectToRedux = connect(
   createStructuredSelector({
     profileUserData: GetProfileUserAPI.dataSelector,
   }),
-  (distpatch) => ({
+  (dispatch) => ({
     createContractUser: (objBody, callback) => {
-      distpatch(createContractUser(objBody, callback));
+      dispatch(createContractUser(objBody, callback));
     },
     getProfileUser: () => {
-      distpatch(getProfileUser());
+      dispatch(getProfileUser());
     },
   })
 );
@@ -68,13 +68,13 @@ const Content = ({
 
   const submitBookingHandle = (values) => {
     if (values.startDate && values.endDate) {
-      const { indentityCard, fullname, phoneNumber, email, address } = values;
+      const { identityCard, fullname, phoneNumber, email, address } = values;
 
       const objBody = {
         car_id: id,
         start_rent_date: values.startDate.format(DATE_FORMAT),
         end_rent_date: values.endDate.format(DATE_FORMAT),
-        identity_id: indentityCard,
+        identity_id: identityCard,
         name: fullname,
         phone_number: phoneNumber,
         email,
@@ -179,7 +179,7 @@ const Content = ({
 
                         initialize({
                           fullname: name,
-                          indentityCard: identity_id,
+                          identityCard: identity_id,
                           phoneNumber: phone_number,
                           email,
                           address,
@@ -200,7 +200,7 @@ const Content = ({
                         <h4 style={{ color: "#fabf21" }}>Booking Info</h4>
                         <h5>
                           Deposit fee: $
-                          {(rent_price * PECENT_DEPOSIT_FEE) / 100}
+                          {(rent_price * PERCENT_DEPOSIT_FEE) / 100}
                         </h5>
                       </div>
                       <div className="row pt-3">
@@ -221,7 +221,7 @@ const Content = ({
                           <div className="form-group">
                             <label>Identity Card:</label>
                             <Field
-                              name="indentityCard"
+                              name="identityCard"
                               component={InputRenderFieldComponent}
                               placeholder="Enter identity card:"
                               type="text"
