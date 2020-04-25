@@ -28,6 +28,8 @@ const connectToRedux = connect(
 const CarListPage = ({ carListCount, carListData, searchCar }) => {
   const { history = {} } = window;
   const { state = {} } = history;
+  if(!state) window.location.replace('/');
+
   const { state: queryState = {} } = state;
   const [activePage, setActivePage] = useState(0);
   useEffect(() => {
