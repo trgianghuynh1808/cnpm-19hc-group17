@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { removeToken } from "../../../libs/token-libs";
+import logo from './logo.png';
 
 const HeaderBottom = props => {
   const { currentUser, isHOC } = props;
@@ -20,7 +21,7 @@ const HeaderBottom = props => {
           {/*== Logo Start ==*/}
           <div className="col-lg-4">
             <Link to="/" className="logo">
-              <img src="assets/img/logo.png" alt="JSOFT" />
+              <img src={logo} alt="JSOFT" />
             </Link>
           </div>
           {/*== Logo End ==*/}
