@@ -9,7 +9,7 @@ const Car = (props) => {
                 {/* Single Car Thumbnail */}
                 <div className="col-lg-5">
                 <Link to={`/car-details/${id}`} className="car-hover">
-                  <img src={`assets/img/car/${image || 'car-1'}.jpg `} alt="JSOFT" />
+                  <img src={image} alt="JSOFT" />
                 </Link>
                 </div>
                 {/* Single Car Thumbnail */}

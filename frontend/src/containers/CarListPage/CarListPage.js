@@ -36,6 +36,8 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
   const [activePage, setActivePage] = useState(0);
   const { history = {} } = window;
   const { state = {} } = history;
+  if(!state) window.location.replace('/');
+
   const { state: queryState = {} } = state;
 
   useEffect(() => {
