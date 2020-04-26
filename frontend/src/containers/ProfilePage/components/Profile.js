@@ -2,7 +2,7 @@ import React from "react";
 
 const Profile = () => {
     return (
-        <div className="col-lg-8" style={{backgroundImage: 'url("assets/wizard.jpg")'}}>
+        <div className="col-lg-8" >
         <div className="container">
   <div className="row">
     <div className="col-sm-12">
