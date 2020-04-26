@@ -105,7 +105,7 @@ const Content = ({
               <div className="car-preview-crousel">
                 <div className="single-car-preview">
                   <img
-                    src={`assets/img/car/${image || "car-1"}.jpg `}
+                    src={image}
                     alt="JSOFT"
                   />
                 </div>
