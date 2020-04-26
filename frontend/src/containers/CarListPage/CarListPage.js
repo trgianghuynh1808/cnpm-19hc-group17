@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { CAR_PER_VERTI_PAGE } from "../../utils/enums";
+import { navigateWithClear } from '../../utils/route';
 import PageTitle from "../../components/PageTitle";
 import SideBar from "./components/SideBar";
 import Car from "./components/Car";
@@ -12,6 +13,12 @@ import {
   searchCarDataSelector,
   searchCarCountSelector,
 } from "../../stores/CarsState";
+
+const { history = {} } = window;
+  const { state = {} } = history;
+  if(!state) {
+    navigateWithClear('/');
+  }
 
 const connectToRedux = connect(
   createStructuredSelector({
@@ -26,10 +33,13 @@ const connectToRedux = connect(
 );
 
 const CarListPage = ({ carListCount, carListData, searchCar }) => {
+  const [activePage, setActivePage] = useState(0);
   const { history = {} } = window;
   const { state = {} } = history;
+  if(!state) window.location.replace('/');
+
   const { state: queryState = {} } = state;
-  const [activePage, setActivePage] = useState(0);
+
   useEffect(() => {
     document.title= 'Car List';
     const carPerPage = CAR_PER_VERTI_PAGE - 1;
@@ -37,6 +47,9 @@ const CarListPage = ({ carListCount, carListData, searchCar }) => {
     const limit = offset + carPerPage;
     searchCar({ ...queryState, offset: offset, limit: limit });
   }, [activePage, searchCar, queryState]);
+
+  
+  
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, formValueSelector } from "redux-form";
 import moment from "moment";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -13,6 +13,7 @@ import {
   getProfileUser,
   GetProfileUserAPI,
 } from "../../../stores/UsersState";
+import ContractAgreementComponent from "./ContractAgreementComponent";
 
 const {
   InputRenderFieldComponent,
@@ -20,9 +21,13 @@ const {
   TextAreaRenderFieldComponent,
 } = FormFields;
 
+const selector = formValueSelector("booking-form");
+const senderNameSelector = (state) => selector(state, "fullname");
+
 const connectToRedux = connect(
   createStructuredSelector({
     profileUserData: GetProfileUserAPI.dataSelector,
+    senderNameBookingForm: senderNameSelector,
   }),
   (dispatch) => ({
     createContractUser: (objBody, callback) => {
@@ -58,9 +63,11 @@ const Content = ({
   createContractUser,
   getProfileUser,
   profileUserData,
+  senderNameBookingForm,
 }) => {
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
   const [startDate, setStartDate] = useState("");
+  const [isOpenContractModal, setIsOpenContractModal] = useState(false);
 
   useEffect(() => {
     getProfileUser();
@@ -105,7 +112,7 @@ const Content = ({
               <div className="car-preview-crousel">
                 <div className="single-car-preview">
                   <img
-                    src={`assets/img/car/${image || "car-1"}.jpg `}
+                    src={image}
                     alt="JSOFT"
                   />
                 </div>
@@ -330,6 +337,9 @@ const Content = ({
                           <span
                             className="text-primary"
                             style={{ cursor: "pointer" }}
+                            onClick={() => {
+                              setIsOpenContractModal(true);
+                            }}
                           >
                             The content of contract.
                           </span>
@@ -353,6 +363,21 @@ const Content = ({
                       </div>
                     </div>
                   </form>
+                  <ContractAgreementComponent
+                    isOpenContractModal={isOpenContractModal}
+                    setIsOpenContractModal={setIsOpenContractModal}
+                    infoContract={{
+                      senderName: senderNameBookingForm,
+                      carInfo: {
+                        brand,
+                        model,
+                        color,
+                        seat,
+                        rentPrice: rent_price,
+                        depositPrice: (rent_price * PERCENT_DEPOSIT_FEE) / 100,
+                      },
+                    }}
+                  />
                 </ModalComponent>
 
                 <div className="review-area">

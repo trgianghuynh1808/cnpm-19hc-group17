@@ -8,7 +8,7 @@ const Car = (props) => {
   <div className="single-popular-car">
     <div className="p-car-thumbnails">
       <Link to={`/car-details/${id}`} className="car-hover">
-        <img src={`assets/img/car/${image || 'car-1'}.jpg `} alt="JSOFT" />
+        <img src={image} alt="JSOFT" />
       </Link>
     </div>
     <div className="p-car-content">

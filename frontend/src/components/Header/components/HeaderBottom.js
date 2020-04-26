@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { removeToken } from "../../../libs/token-libs";
+import logo from './logo.png';
 
-const HeaderBottom = props => {
+const HeaderBottom = (props) => {
   const { currentUser, isHOC } = props;
   const logOut = () => {
     removeToken();
-    if(isHOC) return window.location.replace('/');
+    if (isHOC) return window.location.replace("/");
     return window.location.reload();
-  }
+  };
   const {
-    location: { pathname }
+    location: { pathname },
   } = window;
   const activePage = pathname.split("/")[1] || "home";
   return (
@@ -20,7 +21,7 @@ const HeaderBottom = props => {
           {/*== Logo Start ==*/}
           <div className="col-lg-4">
             <Link to="/" className="logo">
-              <img src="assets/img/logo.png" alt="JSOFT" />
+              <img src={logo} alt="JSOFT" />
             </Link>
           </div>
           {/*== Logo End ==*/}
@@ -28,18 +29,11 @@ const HeaderBottom = props => {
           <div className="col-lg-8 d-none d-xl-block">
             <nav className="mainmenu alignright">
               <ul>
-                <li
-                  className={activePage === 'home' ? 'active' : ''}
-                >
+                <li className={activePage === "home" ? "active" : ""}>
                   <Link to="/">Home</Link>
                 </li>
-                <li>
-                  <a href="about.html">About</a>
-                </li>
-                <li>
-                  <a href="services.html">services</a>
-                </li>
-                <li>
+
+                {/* <li>
                   <a href="/#">Cars</a>
                   <ul>
                     <li>
@@ -55,39 +49,42 @@ const HeaderBottom = props => {
                       <a href="car-details.html">Car Details</a>
                     </li>
                   </ul>
-                </li>
-                <li
-                  className={activePage === 'gallery' ? 'active' : ''}
-                >
+                </li> */}
+                <li className={activePage === "gallery" ? "active" : ""}>
                   <Link to="/gallery">Gallery</Link>
                 </li>
-                <li>
-                  <a href="contact.html">Contact</a>
+                <li className={activePage === "driver" ? "active" : ""}>
+                  <Link to="/driver">Driver</Link>
                 </li>
-                {
-                  currentUser ? 
-                    (
+                <li className={activePage === "services" ? "active" : ""}>
+                  <Link to="/services">Services</Link>
+                </li>
+                <li className={activePage === "contact" ? "active" : ""}>
+                  <Link to="/contact">Contact</Link>
+                </li>
+                <li className={activePage === "about" ? "active" : ""}>
+                  <Link to="/about">About</Link>
+                </li>
+
+                {currentUser ? (
+                  <li>
+                    <a href="#username ">{currentUser.username}</a>
+                    <ul>
                       <li>
-                        <a href="#username ">{currentUser.username}</a>
-                        <ul>
-                          <li>
-                            <Link to="/profile">Profile</Link>
-                          </li>
-                          <li>
-                            <a href="#logout " onClick={logOut}>
-                              Logout
-                            </a>
-                          </li> 
-                        </ul>
-                      </li>                        
-                    )
-                  :
-                    (
-                      <li className={activePage === 'login' ? 'active' : ''}>
-                      <Link to="/login">Login</Link>
+                        <Link to="/profile">Profile</Link>
                       </li>
-                    )
-                }
+                      <li>
+                        <a href="#logout " onClick={logOut}>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                ) : (
+                  <li className={activePage === "login" ? "active" : ""}>
+                    <Link to="/login">Login</Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
