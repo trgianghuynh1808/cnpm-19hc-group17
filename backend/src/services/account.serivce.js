@@ -53,4 +53,27 @@ export default class AccountService {
         delete accountData.password;
         return accountData;
     }
+
+    static async update({ accountId, data }) {
+        const transaction = await db.sequelize.transaction();
+        try {
+            if (data.role) {
+                await db.Account.update(
+                    { role: data.role },
+                    { where: { id: accountId }, transaction }
+                );
+            }
+            const account = await db.Account.findOne({ where: { id: accountId } });
+            if (!account) throw new ResourceNotFoundError('Account');
+            await db.User.update(
+                { ...data },
+                { where: { id: account.user_id }, transaction }
+            );
+            await transaction.commit();
+            return true;
+        } catch (err) {
+            await transaction.rollback();
+            throw err;
+        }
+    }
 }
