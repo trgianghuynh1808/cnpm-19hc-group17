@@ -22,7 +22,6 @@ export default class AccountController extends BaseController {
     }
 
     update(req, res) {
-        console.log('req.body-----------', req.body);
         const { accountId } = res.locals.user;
         return AccountService.update({ accountId, data: req.body });
     }

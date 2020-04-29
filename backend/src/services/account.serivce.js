@@ -1,7 +1,9 @@
+import sequelize from 'sequelize';
 import db from '../models';
 import {
     AuthenticationError,
-    ResourceNotFoundError
+    ResourceNotFoundError,
+    DataValidationError
 } from '../components/ErrorInstance/businessErrors';
 import { generate } from '../utils/token';
 
@@ -73,6 +75,9 @@ export default class AccountService {
             return true;
         } catch (err) {
             await transaction.rollback();
+            if (err instanceof sequelize.ValidationError) {
+                throw new DataValidationError(err);
+            }
             throw err;
         }
     }
