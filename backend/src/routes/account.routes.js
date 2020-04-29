@@ -22,4 +22,10 @@ router.get(
     verifyJWT,
     controller.action('getProfileUser')
 );
+
+router.put(
+    '/',
+    verifyJWT,
+    controller.action('update')
+);
 export default router;
