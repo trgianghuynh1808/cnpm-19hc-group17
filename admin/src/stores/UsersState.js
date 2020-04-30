@@ -25,7 +25,7 @@ export const login = ({ username, password, role }) => {
       }
       if (resp.token) {
         saveToken(resp.token);
-        window.location.replace('/');
+        navigateWithClear("/");
       }
       return;
     }
@@ -65,7 +65,7 @@ export const GetCurrentUserAPI = makeFetchAction(
   })
 );
 
-export const getCurrentUser = () => {
+export const getCurrentUserWithFailure = () => {
   return respondToFailure(GetCurrentUserAPI.actionCreator(), (resp) => {
     if (resp.errors) {
       console.error("Err: ", resp.errors);

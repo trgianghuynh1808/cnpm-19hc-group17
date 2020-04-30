@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { toast } from "react-toastify";
+import { Provider } from "react-redux";
+
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Provider } from "react-redux";
 import makeStore from "./stores";
+
+toast.configure();
 
 const MyApp = () => {
   return (
