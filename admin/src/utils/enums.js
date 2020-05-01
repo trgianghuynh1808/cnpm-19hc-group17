@@ -35,3 +35,18 @@ export const TOAST_DEFAULT_OPTIONS = {
   closeOnClick: true,
   hideProgressBar: false,
 };
+
+export const STATUS_BADGE_INFO = [
+  {
+    name: "reviewing",
+    badge: "warning",
+  },
+  {
+    name: "done",
+    badge: "success",
+  },
+  {
+    name: "reject",
+    badge: "danger",
+  },
+];
