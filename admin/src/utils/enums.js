@@ -36,6 +36,7 @@ export const TOAST_DEFAULT_OPTIONS = {
   hideProgressBar: false,
 };
 
+//Badge Info using render status with badge
 export const STATUS_BADGE_INFO = [
   {
     name: "reviewing",
@@ -50,3 +51,13 @@ export const STATUS_BADGE_INFO = [
     badge: "danger",
   },
 ];
+
+//Pagination
+export const DEFAULT_LIMIT = 5;
+export const DEFAULT_OFFSET = 0;
+
+//Status Contract
+export const REVIEWING_STATUS_CONTRACT = "reviewing";
+export const DONE_STATUS_CONTRACT = "done";
+export const REJECT_STATUS_CONTRACT = "reject";
+export const RENTING_STATUS_CONTRACT = "renting";

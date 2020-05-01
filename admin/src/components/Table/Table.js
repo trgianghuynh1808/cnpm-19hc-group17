@@ -1,18 +1,20 @@
 import React from "react";
+import SearchBarComponent from "../Commons/SearchBarComponent";
 
-export default ({ title, data, columns }) => {
+export default ({ title, data, columns, customHeader }) => {
   return (
     <div className="main-card mb-3 card">
       <div className="card-header">
         {title}
-        {/* <div className="btn-actions-pane-right">
-          <div role="group" className="btn-group-sm btn-group">
+        <div className="btn-actions-pane-right">
+          {customHeader}
+          {/* <div role="group" className="btn-group-sm btn-group">
               <button className="active btn btn-focus">Last Week</button>
               <button className="btn btn-focus">All Month</button>
-            </div>
-        </div> */}
+            </div> */}
+        </div>
       </div>
-      <div className="table-responsive">
+      <div>
         <table className="align-middle mb-0 table table-borderless table-striped table-hover">
           <thead>
             <tr>
@@ -23,19 +25,20 @@ export default ({ title, data, columns }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, index) => {
-              return (
-                <tr key={index}>
-                  {columns.map((column, indexCol) => {
-                    return (
-                      <td key={indexCol}>
-                        {column.component(row[`${column.accessor}`])}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+            {data &&
+              data.map((row, index) => {
+                return (
+                  <tr key={index}>
+                    {columns.map((column, indexCol) => {
+                      return (
+                        <td key={indexCol}>
+                          {column.component(row[`${column.accessor}`])}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
