@@ -1,5 +1,4 @@
 import React from "react";
-import SearchBarComponent from "../Commons/SearchBarComponent";
 
 export default ({ title, data, columns, customHeader }) => {
   return (

@@ -1,7 +1,6 @@
 import { makeFetchAction } from "redux-api-call";
 
-import { navigateWithClear } from "../utils/route";
-import { respondToSuccess, respondToFailure } from "./middlewares/api-reaction";
+import { respondToSuccess } from "./middlewares/api-reaction";
 import nfetch from "../libs/nfetch";
 import { flow, get } from "lodash/fp";
 import { REVIEWING_STATUS_CONTRACT } from "../utils/enums";

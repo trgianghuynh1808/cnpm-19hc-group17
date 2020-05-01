@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, Fragment } from "react";
+import React, { useMemo, useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
@@ -12,6 +12,23 @@ import {
   getFilterReviewingContractsDataSelector,
 } from "../stores/ContractState";
 import SearchBarComponent from "../components/Commons/SearchBarComponent";
+
+const useDebounce = (text, delay) => {
+  delay = delay || 500;
+  const [debounced, setDebounced] = useState(text);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounced(text);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [text, delay]);
+
+  return debounced;
+};
 
 const RenderTextComponent = (stt) => {
   return <div className="text-center text-muted">{stt}</div>;
@@ -144,6 +161,9 @@ const ManageContractPage = ({
     []
   );
 
+  const [searchReviewFilter, setSearchReviewFilter] = useState("");
+  const debounceSearchReviewFilter = useDebounce(searchReviewFilter);
+
   //constructor
   useEffect(() => {
     document.title = "Manage Contract";
@@ -153,6 +173,20 @@ const ManageContractPage = ({
       email: "",
     });
   }, [getFilterReviewingContracts]);
+
+  useEffect(() => {
+    if (debounceSearchReviewFilter) {
+      getFilterReviewingContracts({
+        limit: DEFAULT_LIMIT,
+        offset: DEFAULT_OFFSET,
+        email: searchReviewFilter,
+      });
+    }
+  }, [
+    debounceSearchReviewFilter,
+    getFilterReviewingContracts,
+    searchReviewFilter,
+  ]);
 
   if (!filterReviewingContractsData) return <Fragment />;
 
@@ -167,7 +201,15 @@ const ManageContractPage = ({
           title="Reviewing Contracts"
           columns={EXAMPLES_COLUMNS}
           data={filterContractDataRender}
-          customHeader={<SearchBarComponent placeholder="Enter email" />}
+          customHeader={
+            <SearchBarComponent
+              placeholder="Enter email"
+              doOnChange={(event) => {
+                const curValue = event.target.value;
+                setSearchReviewFilter(curValue);
+              }}
+            />
+          }
         />
       </div>
     </Wrapper>
