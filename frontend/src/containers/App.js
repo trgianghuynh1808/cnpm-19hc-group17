@@ -5,7 +5,7 @@ import LoginPage from "./LoginPage";
 import CarListPage from "./CarListPage";
 import GalleryPage from "./GalleryPage";
 import CarDetailPage from "./CarDetailPage";
-import ProfilePage from "./ProfilePage";
+import {ChangePassPage, ProfilePage} from "./ProfilePage";
 import AboutPage from "./AboutPage";
 import ServicesPage from "./ServicesPage";
 import ContactPage from "./ContactPage";
@@ -30,6 +30,9 @@ class App extends Component {
         <Route path="/car-details/:id" component={CarDetailPage} />
         <Route path="/profile" exact>
           <ProfilePage {...this.props} />
+        </Route>
+        <Route path="/profile/change-password" exact>
+          <ChangePassPage {...this.props} />
         </Route>
         <Route path="/about" exact>
           <AboutPage {...this.props} />

@@ -3242,3 +3242,44 @@ body,
 .dropdown-menu:hover {
 	color: white;
 }
+
+#EDIT-BTN {
+	float: right;
+    position: relative;
+    bottom: 20px;
+}
+
+#SUBMIT-BTN {
+	float: right;
+	width: 150px;
+	margin-top: 10px;
+}
+.btn-success[disabled]:hover {
+	background-color: transparent;
+	border-color: #05AE0E;
+	color: black;
+}
+
+.sidebar-content-wrap.profile-page a{
+	color: black;
+    font-weight: bold;
+    text-decoration: none;
+	text-transform: uppercase;
+}
+
+.sidebar-content-wrap.profile-page li:hover{
+	background-color: #ffd000;
+}
+
+.sidebar-content-wrap.profile-page li.active{
+	background-color: #ffd000;
+	color: black;
+    font-weight: bold;
+    text-decoration: none;
+	text-transform: uppercase;
+}
+
+.sidebar-content-wrap.profile-page .single-recent-tips {
+	margin-bottom: 20px;
+	padding: 0px 20px;
+}

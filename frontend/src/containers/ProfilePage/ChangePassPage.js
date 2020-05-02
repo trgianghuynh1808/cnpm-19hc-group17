@@ -2,10 +2,9 @@ import React from "react";
 import PageLayout from "../../layouts";
 import PageTitle from "../../components/PageTitle";
 import SideBar from './components/SideBar';
-import Profile from './components/Profile';
 import HOC from "../../components/HOC/AuthenHOC";
 
-const ProfilePage =  (props) => {
+const ChangePassPage =  (props) => {
   return (
     <PageLayout {...props}>
       <PageTitle title="Profile Page"/>
@@ -13,7 +12,7 @@ const ProfilePage =  (props) => {
             <div className="container-fluid">
               <div className="row">
                 <SideBar/>
-                <Profile/>
+                <h1>Change Password</h1>
               </div>
             </div>
         </section>
@@ -21,4 +20,4 @@ const ProfilePage =  (props) => {
   );
 }
 
-export default HOC(ProfilePage);
+export default HOC(ChangePassPage);

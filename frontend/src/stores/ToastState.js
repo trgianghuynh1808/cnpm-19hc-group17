@@ -7,7 +7,7 @@ import {
   doErrorNotify,
 } from "../libs/notifyToast";
 
-import { LOGIN_API, CREATE_CONTRACT_USER_API } from "./UsersState";
+import { LOGIN_API, CREATE_CONTRACT_USER_API, UPDATE_PROFILE_USER_API } from "./UsersState";
 
 const getMessage = get("json.message");
 
@@ -23,9 +23,11 @@ export default {
           msgNotify = getMessage(payload);
           break;
         case CREATE_CONTRACT_USER_API:
-          msgNotify =
-            "Booking Success! We will send you an email to complete the procedure.";
-          break;
+          msgNotify = "Booking Success! We will send you an email to complete the procedure.";
+            break;
+        case UPDATE_PROFILE_USER_API:
+          msgNotify = "Your profile updated success!";
+            break;
         default:
           break;
       }
@@ -36,6 +38,9 @@ export default {
         case LOGIN_API:
         case CREATE_CONTRACT_USER_API:
           msgNotify = getMessage(payload);
+          break;
+        case UPDATE_PROFILE_USER_API:
+          msgNotify = "Your profile updated failed!";
           break;
         default:
           break;

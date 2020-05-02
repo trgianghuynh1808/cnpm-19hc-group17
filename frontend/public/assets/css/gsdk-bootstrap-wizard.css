@@ -453,11 +453,11 @@ h1 .subtitle {
   color: #DDDDDD;
   opacity: 1;
 }
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+/* .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   background-color: #EEEEEE;
   color: #999999;
   cursor: not-allowed;
-}
+} */
 
 .input-lg {
   height: 56px;

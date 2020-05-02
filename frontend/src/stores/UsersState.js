@@ -9,6 +9,7 @@ export const LOGIN_API = "LOGIN_API";
 export const CREATE_CONTRACT_USER_API = "CREATE_CONTRACT_USER_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
 const GET_PROFILE_USER_API = "GET_PROFILE_USER_API";
+export const UPDATE_PROFILE_USER_API = "UPDATE_PROFILE_USER_API";
 
 const loginAPI = makeFetchAction(LOGIN_API, ({ username, password, role }) => {
   return nfetch({
@@ -95,7 +96,6 @@ export const getProfileUser = () => {
       console.error("Err: ", resp.errors);
       return;
     }
-
     return;
   });
 };
@@ -107,6 +107,27 @@ export const getCurrentUserWithSucces = () => {
       return;
     }
 
+    return;
+  });
+};
+
+export const UpdateProfileUserAPI = makeFetchAction(
+  UPDATE_PROFILE_USER_API,
+  (objBody) =>
+  nfetch({
+    endpoint: `/accounts`,
+    method: "PUT",
+  })(objBody)
+);
+
+export const updateProfileUser = (objBody, callback) => {
+  return respondToSuccess(UpdateProfileUserAPI.actionCreator(objBody), (resp) => {
+    if (resp.errors) {
+      console.error("Err: ", resp.errors);
+      return;
+    }
+    typeof callback === "function" && callback();
+    console.log(resp);
     return;
   });
 };
