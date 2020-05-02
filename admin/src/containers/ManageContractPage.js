@@ -12,6 +12,7 @@ import {
   getFilterReviewingContractsDataSelector,
 } from "../stores/ContractState";
 import SearchBarComponent from "../components/Commons/SearchBarComponent";
+import ModalDetailsCarComponent from "../components/ManageContract/ModalDetailsCar";
 
 const useDebounce = (text, delay) => {
   delay = delay || 500;
@@ -34,16 +35,21 @@ const RenderTextComponent = (stt) => {
   return <div className="text-center text-muted">{stt}</div>;
 };
 
-const RenderShowDetailsCarComponent = () => {
+const RenderShowDetailsCarComponent = (car) => {
   return (
     <div className="text-center">
-      <button
-        type="button"
-        id="PopoverCustomT-1"
-        className="btn btn-primary btn-sm"
-      >
-        Details
-      </button>
+      <ModalDetailsCarComponent
+        buttonTrigger={
+          <button
+            type="button"
+            id="PopoverCustomT-1"
+            className="btn btn-primary btn-sm"
+          >
+            Details
+          </button>
+        }
+        carInfo={car}
+      />
     </div>
   );
 };
@@ -56,14 +62,14 @@ const RenderActionsComponent = () => {
         id="PopoverCustomT-1"
         className="btn btn-success btn-sm col-lg-3 col-sm-6 mr-1"
       >
-        <i class="fas fa-check"></i>
+        <i className="fas fa-check"></i>
       </button>
       <button
         type="button"
         id="PopoverCustomT-1"
         className="btn btn-danger btn-sm col-lg-3 col-sm-6"
       >
-        <i class="fas fa-ban"></i>
+        <i className="fas fa-ban"></i>
       </button>
     </div>
   );
@@ -91,6 +97,7 @@ const mappingFilterReviewingContractsData = (filterReviewingContractsData) => {
       email,
       phone_number: phone,
       deposit,
+      car,
     } = contract;
     return {
       name,
@@ -99,6 +106,7 @@ const mappingFilterReviewingContractsData = (filterReviewingContractsData) => {
       email,
       phone,
       deposit,
+      car,
     };
   });
 };
@@ -107,7 +115,7 @@ const ManageContractPage = ({
   getFilterReviewingContracts,
   filterReviewingContractsData,
 }) => {
-  const EXAMPLES_COLUMNS = useMemo(
+  const COLUMNS = useMemo(
     () => [
       {
         Header: "Email",
@@ -147,7 +155,7 @@ const ManageContractPage = ({
       },
       {
         Header: "Car Info",
-        accessor: "details",
+        accessor: "car",
         className: "text-center",
         component: RenderShowDetailsCarComponent,
       },
@@ -162,6 +170,7 @@ const ManageContractPage = ({
   );
 
   const [searchReviewFilter, setSearchReviewFilter] = useState("");
+
   const debounceSearchReviewFilter = useDebounce(searchReviewFilter);
 
   //constructor
@@ -199,7 +208,7 @@ const ManageContractPage = ({
       <div>
         <Table
           title="Reviewing Contracts"
-          columns={EXAMPLES_COLUMNS}
+          columns={COLUMNS}
           data={filterContractDataRender}
           customHeader={
             <SearchBarComponent

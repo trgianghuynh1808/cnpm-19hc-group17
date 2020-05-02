@@ -40,7 +40,7 @@ const SearchBarComponent = ({
           </div>
         </div>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .basic-search .input-field {
           width: 100%;
           position: relative;

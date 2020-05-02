@@ -19,7 +19,11 @@ export default ({ title, data, columns, customHeader }) => {
             <tr>
               {columns.map((column, index) => {
                 const { Header, className } = column;
-                return <th className={className}>{Header}</th>;
+                return (
+                  <th className={className} key={index}>
+                    {Header}
+                  </th>
+                );
               })}
             </tr>
           </thead>
