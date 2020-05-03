@@ -15,7 +15,7 @@ router.get(
     controller.list
 );
 
-router.put(
+router.post(
     '/:id',
     controller.update
 );
