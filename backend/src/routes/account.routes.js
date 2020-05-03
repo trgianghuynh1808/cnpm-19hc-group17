@@ -23,7 +23,7 @@ router.get(
     controller.action('getProfileUser')
 );
 
-router.put(
+router.post(
     '/',
     verifyJWT,
     controller.action('update')

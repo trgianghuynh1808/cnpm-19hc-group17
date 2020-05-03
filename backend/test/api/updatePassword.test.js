@@ -29,7 +29,7 @@ describe.serial('UpdatePassword API', it => {
             tenantId: '2ba90f30-6975-11e8-8b90-9b391703c11a'
         };
         const response = await request(app)
-            .put(URI).send(accountData)
+            .post(URI).send(accountData)
             .set(staffHeader)
             .expect(403)
             .then(res => res.body);
@@ -44,7 +44,7 @@ describe.serial('UpdatePassword API', it => {
             tenantId: '2ba90f30-6975-11e8-8b90-9b391703c11a'
         };
         await request(app)
-            .put(URI).send(accountData)
+            .post(URI).send(accountData)
             .set(companyAdminHeader)
             .expect(200)
             .then(res => res.body);
@@ -58,7 +58,7 @@ describe.serial('UpdatePassword API', it => {
             tenantId: '2ba90f30-6975-11e8-8b90-9b391703c11a'
         };
         const response = await request(app)
-            .put(URI).send(accountData)
+            .post(URI).send(accountData)
             .set(companyAdminHeader)
             .expect(400)
             .then(res => res.body);
@@ -73,7 +73,7 @@ describe.serial('UpdatePassword API', it => {
             tenantId: '2ba90f30-6975-11e8-8b90-9b391703c11a'
         };
         const response = await request(app)
-            .put(URI).send(accountData)
+            .post(URI).send(accountData)
             .set(companyAdminHeader)
             .expect(400)
             .then(res => res.body);
@@ -88,7 +88,7 @@ describe.serial('UpdatePassword API', it => {
             tenantId: '2ba90f30-6975-11e8-8b90-9b391703c11a'
         };
         const response = await request(app)
-            .put(URI).send(accountData)
+            .post(URI).send(accountData)
             .set(companyAdminHeader)
             .expect(404)
             .then(res => res.body);
