@@ -6,6 +6,7 @@ import { flow, get } from "lodash/fp";
 import { REVIEWING_STATUS_CONTRACT } from "../utils/enums";
 
 const GET_FILTER_CONTRACTS_API = "GET_FILTER_CONTRACTS_API";
+export const UPDATE_STATUS_CONTRACT_API = "UPDATE_STATUS_CONTRACT_API";
 
 const GetFilterReviewingContractsAPI = makeFetchAction(
   GET_FILTER_CONTRACTS_API,
@@ -34,5 +35,34 @@ export const getFilterReviewingContractsDataSelector = flow(
   GetFilterReviewingContractsAPI.dataSelector,
   get("data")
 );
+
+export const getFilterReviewingContractsCountSelector = flow(
+  GetFilterReviewingContractsAPI.dataSelector,
+  get("count")
+);
+
+const UpdateStatusContractAPI = makeFetchAction(
+  UPDATE_STATUS_CONTRACT_API,
+  ({ idContract, status }) =>
+    nfetch({
+      endpoint: `/contracts/${idContract}`,
+    })({ status })
+);
+
+export const updateStatusContract = (idContract, status, callback) => {
+  return respondToSuccess(
+    UpdateStatusContractAPI.actionCreator({ idContract, status }),
+    (resp, header, store) => {
+      if (resp.errors) {
+        console.error("Err: ", resp.errors);
+        return;
+      }
+
+      typeof callback === "function" && callback(store.dispatch);
+
+      return;
+    }
+  );
+};
 
 export default {};

@@ -8,6 +8,7 @@ import {
 } from "../libs/notifyToast";
 
 import { LOGIN_API } from "./UsersState";
+import { UPDATE_STATUS_CONTRACT_API } from "./ContractState";
 
 const getMessage = get("json.message");
 
@@ -21,7 +22,9 @@ export default {
       switch (name) {
         case LOGIN_API: //using for API have message in resp
           msgNotify = getMessage(payload);
-          console.log("test msgNotify", msgNotify);
+          break;
+        case UPDATE_STATUS_CONTRACT_API:
+          msgNotify = "Update status contract success!";
           break;
         default:
           break;
@@ -32,6 +35,9 @@ export default {
       switch (name) {
         case LOGIN_API:
           msgNotify = getMessage(payload);
+          break;
+        case UPDATE_STATUS_CONTRACT_API:
+          msgNotify = "Update status contract fail!";
           break;
         default:
           break;

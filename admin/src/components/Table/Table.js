@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ title, data, columns, customHeader }) => {
+export default ({ title, data, columns, customHeader, paginationInfo }) => {
   return (
     <div className="main-card mb-3 card">
       <div className="card-header">
@@ -44,6 +44,26 @@ export default ({ title, data, columns, customHeader }) => {
               })}
           </tbody>
         </table>
+        {paginationInfo.count && (
+          <div className="mt-3 p-2 w-100 ">
+            <nav aria-label="Page navigation">
+              <ul className="pagination justify-content-end">
+                <li className="page-item">
+                  <span className="page-link">Previous</span>
+                </li>
+                <li className="page-item">
+                  <span className="page-link">1</span>
+                </li>
+                <li className="page-item">
+                  <span className="page-link">2</span>
+                </li>
+                <li className="page-item">
+                  <span className="page-link">Next</span>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </div>
       {/* <div className="d-block text-center card-footer">
         <button className="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
