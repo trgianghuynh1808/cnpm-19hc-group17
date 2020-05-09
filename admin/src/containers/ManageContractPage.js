@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, Fragment, useState } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
@@ -12,10 +12,16 @@ import {
   getFilterReviewingContractsDataSelector,
   updateStatusContract,
   getFilterReviewingContractsCountSelector,
+  getFilterContracts,
+  getFilterContractsDataSelector,
 } from "../stores/ContractState";
 import SearchBarComponent from "../components/Commons/SearchBarComponent";
 import ModalDetailsCarComponent from "../components/ManageContract/ModalDetailsCar";
-import { DONE_STATUS_CONTRACT, REJECT_STATUS_CONTRACT } from "../utils/enums";
+import {
+  DONE_STATUS_CONTRACT,
+  REJECT_STATUS_CONTRACT,
+  STATUS_BADGE_INFO,
+} from "../utils/enums";
 
 const useDebounce = (text, delay) => {
   delay = delay || 500;
@@ -102,10 +108,23 @@ const RenderActionsComponent = (paramsAction) => {
   );
 };
 
+const RenderStatusComponent = (status) => {
+  const curBadge = STATUS_BADGE_INFO.find(
+    (badgeInfo) => badgeInfo.name === status
+  ).badge;
+
+  return (
+    <div className="text-center">
+      <div className={`badge badge-${curBadge}`}>{status}</div>
+    </div>
+  );
+};
+
 const connectToRedux = connect(
   createStructuredSelector({
     filterReviewingContractsData: getFilterReviewingContractsDataSelector,
     filterReviewingContractsCount: getFilterReviewingContractsCountSelector,
+    filterContractsData: getFilterContractsDataSelector,
   }),
   (dispatch) => ({
     getFilterReviewingContracts: ({ limit, offset, email }) => {
@@ -113,6 +132,9 @@ const connectToRedux = connect(
     },
     updateStatusContract: (idContract, status, callback) => {
       dispatch(updateStatusContract(idContract, status, callback));
+    },
+    getFilterContracts: ({ limit, offset, email, status }) => {
+      dispatch(getFilterContracts({ limit, offset, email, status }));
     },
   })
 );
@@ -152,69 +174,146 @@ const mappingFilterReviewingContractsData = (
   });
 };
 
+const mappingFilterContractsData = (filterContractsData) => {
+  return filterContractsData.map((contract) => {
+    const {
+      name,
+      start_rent_date: startRentDate,
+      end_rent_date: endRentDate,
+      email,
+      phone_number: phone,
+      deposit,
+      car,
+      status,
+    } = contract;
+    return {
+      name,
+      startRentDate,
+      endRentDate,
+      email,
+      phone,
+      deposit,
+      car,
+      status,
+    };
+  });
+};
+
+const REVIEWING_CONTRACTS_COLUMNS = [
+  {
+    Header: "Email",
+    accessor: "email",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Phone",
+    accessor: "phone",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Deposit",
+    accessor: "deposit",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Start Rent Date",
+    accessor: "startRentDate",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "End Rent Date",
+    accessor: "endRentDate",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Car Info",
+    accessor: "car",
+    className: "text-center",
+    component: RenderShowDetailsCarComponent,
+  },
+  {
+    Header: "Actions",
+    accessor: "paramsAction",
+    className: "text-center",
+    component: RenderActionsComponent,
+  },
+];
+
+const CONTRACTS_COLUMNS = [
+  {
+    Header: "Email",
+    accessor: "email",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Name",
+    accessor: "name",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Phone",
+    accessor: "phone",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Deposit",
+    accessor: "deposit",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Start Rent Date",
+    accessor: "startRentDate",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "End Rent Date",
+    accessor: "endRentDate",
+    className: "text-center",
+    component: RenderTextComponent,
+  },
+  {
+    Header: "Car Info",
+    accessor: "car",
+    className: "text-center",
+    component: RenderShowDetailsCarComponent,
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+    className: "text-center",
+    component: RenderStatusComponent,
+  },
+];
+
 const ManageContractPage = ({
   getFilterReviewingContracts,
   filterReviewingContractsData,
   filterReviewingContractsCount,
   updateStatusContract,
+  filterContractsData,
+  getFilterContracts,
 }) => {
-  const COLUMNS = useMemo(
-    () => [
-      {
-        Header: "Email",
-        accessor: "email",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "Name",
-        accessor: "name",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "Phone",
-        accessor: "phone",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "Deposit",
-        accessor: "deposit",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "Start Rent Date",
-        accessor: "startRentDate",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "End Rent Date",
-        accessor: "endRentDate",
-        className: "text-center",
-        component: RenderTextComponent,
-      },
-      {
-        Header: "Car Info",
-        accessor: "car",
-        className: "text-center",
-        component: RenderShowDetailsCarComponent,
-      },
-      {
-        Header: "Actions",
-        accessor: "paramsAction",
-        className: "text-center",
-        component: RenderActionsComponent,
-      },
-    ],
-    []
-  );
-
   const [searchReviewFilter, setSearchReviewFilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
 
   const debounceSearchReviewFilter = useDebounce(searchReviewFilter);
+  const debounceSearchFilter = useDebounce(searchFilter);
 
   //constructor
   useEffect(() => {
@@ -224,7 +323,14 @@ const ManageContractPage = ({
       offset: DEFAULT_OFFSET,
       email: "",
     });
-  }, [getFilterReviewingContracts]);
+
+    getFilterContracts({
+      limit: DEFAULT_LIMIT,
+      offset: DEFAULT_OFFSET,
+      email: "",
+      status: "",
+    });
+  }, [getFilterReviewingContracts, getFilterContracts]);
 
   useEffect(() => {
     if (debounceSearchReviewFilter) {
@@ -232,6 +338,7 @@ const ManageContractPage = ({
         limit: DEFAULT_LIMIT,
         offset: DEFAULT_OFFSET,
         email: searchReviewFilter,
+        status: "",
       });
     }
   }, [
@@ -240,12 +347,28 @@ const ManageContractPage = ({
     searchReviewFilter,
   ]);
 
-  if (!filterReviewingContractsData) return <Fragment />;
+  useEffect(() => {
+    if (debounceSearchFilter) {
+      getFilterContracts({
+        limit: DEFAULT_LIMIT,
+        offset: DEFAULT_OFFSET,
+        email: searchFilter,
+        status: "",
+      });
+    }
+  }, [debounceSearchFilter, getFilterContracts, searchFilter]);
 
-  const filterContractDataRender = mappingFilterReviewingContractsData(
+  if (!filterReviewingContractsData || !filterContractsData)
+    return <Fragment />;
+
+  const filterReviewingContractDataRender = mappingFilterReviewingContractsData(
     filterReviewingContractsData,
     updateStatusContract,
     getFilterReviewingContracts
+  );
+
+  const filterContractDataRender = mappingFilterContractsData(
+    filterContractsData
   );
 
   return (
@@ -253,14 +376,34 @@ const ManageContractPage = ({
       <div>
         <Table
           title="Reviewing Contracts"
-          columns={COLUMNS}
-          data={filterContractDataRender}
+          columns={REVIEWING_CONTRACTS_COLUMNS}
+          data={filterReviewingContractDataRender}
           customHeader={
             <SearchBarComponent
               placeholder="Enter email"
               doOnChange={(event) => {
                 const curValue = event.target.value;
                 setSearchReviewFilter(curValue);
+              }}
+            />
+          }
+          paginationInfo={{
+            count: filterReviewingContractsCount,
+            limit: DEFAULT_LIMIT,
+          }}
+        />
+      </div>
+      <div>
+        <Table
+          title="Contracts"
+          columns={CONTRACTS_COLUMNS}
+          data={filterContractDataRender}
+          customHeader={
+            <SearchBarComponent
+              placeholder="Enter email"
+              doOnChange={(event) => {
+                const curValue = event.target.value;
+                setSearchFilter(curValue);
               }}
             />
           }

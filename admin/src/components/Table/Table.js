@@ -44,7 +44,7 @@ export default ({ title, data, columns, customHeader, paginationInfo }) => {
               })}
           </tbody>
         </table>
-        {paginationInfo.count && (
+        {paginationInfo && paginationInfo.count && (
           <div className="mt-3 p-2 w-100 ">
             <nav aria-label="Page navigation">
               <ul className="pagination justify-content-end">
