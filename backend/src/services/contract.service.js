@@ -113,7 +113,7 @@ export default class ContractService {
         const obj = _.omit(params, ['limit', 'offset']);
         let whereCondition;
         if (params.status_neq) {
-            whereCondition = { status: { $not: params.status_neq } }
+            whereCondition = { status: { $not: params.status_neq } };
         } else whereCondition = obj ? { ...obj } : undefined;
         return db.Contract.findAll({
             include: [{

@@ -65,6 +65,12 @@ export default class AccountService {
                     { where: { id: accountId }, transaction }
                 );
             }
+            if (data.password) {
+                await db.Account.update(
+                    { password: data.password },
+                    { where: { id: accountId }, transaction }
+                );
+            }
             const account = await db.Account.findOne({ where: { id: accountId } });
             if (!account) throw new ResourceNotFoundError('Account');
             await db.User.update(
