@@ -66,7 +66,7 @@ const HeaderBottom = (props) => {
                   <Link to="/about">About</Link>
                 </li>
 
-                {currentUser ? (
+                {/* {currentUser ? (
                   <li>
                     <a href="#username ">{currentUser.username}</a>
                     <ul>
@@ -84,7 +84,7 @@ const HeaderBottom = (props) => {
                   <li className={activePage === "login" ? "active" : ""}>
                     <Link to="/login">Login</Link>
                   </li>
-                )}
+                )} */}
               </ul>
             </nav>
           </div>

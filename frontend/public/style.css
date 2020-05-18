@@ -3242,3 +3242,11 @@ body,
 .dropdown-menu:hover {
 	color: white;
 }
+
+#gallery-page-content .book-a-car {
+	margin-top:20px;
+}
+
+#gallery-page-content .choose-car-type.book-item select ,#gallery-page-content .choose-car-type.book-item input{
+	border: 1px solid black;;
+};
