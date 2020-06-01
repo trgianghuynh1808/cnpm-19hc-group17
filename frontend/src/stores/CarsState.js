@@ -36,16 +36,16 @@ export const getCarsByBrandSelector = flow(
 
 const getFilterGalleryAPI = makeFetchAction(
   GET_FILTER_GALLERY_API,
-  ({ offset, limit }) =>
+  (filterObj) =>
     nfetch({
       endpoint: `/cars`,
       method: "GET"
-    })({ offset, limit })
+    })(filterObj)
 );
 
-export const getFilterGallery = ({ offset, limit }) => {
+export const getFilterGallery = (filterObj) => {
   return respondToSuccess(
-    getFilterGalleryAPI.actionCreator({ offset, limit }),
+    getFilterGalleryAPI.actionCreator(filterObj),
     resp => {
       if (resp.errors) {
         console.error("Err: ", resp.errors);

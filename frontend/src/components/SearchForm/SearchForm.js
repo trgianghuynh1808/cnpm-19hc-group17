@@ -22,7 +22,8 @@ const SearchForm = (props) => {
   const selectOnChange = (id) => {
     const element = document.getElementById(id);
     if (element.value) {
-      dispatch({ type: id, payload: element.value });
+      const payload = element.value === 'all' ? '' : element.value;  
+      dispatch({ type: id, payload });
     }
   };
   let brandList = [];
@@ -49,7 +50,7 @@ const SearchForm = (props) => {
                         name={field}
                         className="custom-select"
                       >
-                        <option value="">SELECT CAR {upperCaseField}</option>
+                        <option value="all  ">SELECT CAR {upperCaseField}</option>
                         {values.map((value) => (
                           <option
                             key={value}

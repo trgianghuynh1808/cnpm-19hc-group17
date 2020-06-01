@@ -170,7 +170,7 @@ const Content = ({
                     </div>
                   </div>
                 </div>
-                <div className="input-submit">
+                {/* <div className="input-submit">
                   <button
                     type="button"
                     onClick={() => {
@@ -196,7 +196,7 @@ const Content = ({
                   >
                     Booking Now
                   </button>
-                </div>
+                </div> */}
                 <ModalComponent
                   modalIsOpen={isOpenBookingModal}
                   setIsOpen={setIsOpenBookingModal}
