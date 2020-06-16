@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-source-maps": "^0.0.3",
     "babel-runtime": "^6.26.0",
     "dotenv-webpack": "^1.8.0",
     "lodash": "^4.17.15",
