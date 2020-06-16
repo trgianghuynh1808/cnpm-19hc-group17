@@ -1,9 +1,10 @@
+
 export default function (sequelize, DataTypes) {
     const Brand = sequelize.define('brand', {
         id: {
             type: DataTypes.STRING,
             unique: true,
-            autoIncrement: true,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         name: {

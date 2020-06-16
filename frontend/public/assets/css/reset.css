@@ -63,6 +63,13 @@ img {
     height: auto;
 }
 
+.single-car-wrap img, .single-popular-car img {
+    height: 190px;
+}
+.car-details-content img {
+    width: 100%;
+}
+
 h1,
 h2,
 h3,

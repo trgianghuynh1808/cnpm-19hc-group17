@@ -1,15 +1,101 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Field, reduxForm, formValueSelector } from "redux-form";
+import moment from "moment";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 
-const Content = props => {
-  const {
-    brand = "",
-    model = "",
-    color = "",
-    seat = "",
-    rent_price = "",
-    image,
-    license_plate = ""
-  } = props;
+import ModalComponent from "../../../components/commons/ModalComponent";
+import FormFields from "../../../components/commons/ReduxFormFields";
+import { DATE_FORMAT, PERCENT_DEPOSIT_FEE } from "../../../utils/enums";
+import {
+  createContractUser,
+  getProfileUser,
+  GetProfileUserAPI,
+} from "../../../stores/UsersState";
+import ContractAgreementComponent from "./ContractAgreementComponent";
+
+const {
+  InputRenderFieldComponent,
+  DateTimeRenderFieldComponent,
+  TextAreaRenderFieldComponent,
+} = FormFields;
+
+const selector = formValueSelector("booking-form");
+const senderNameSelector = (state) => selector(state, "fullname");
+
+const connectToRedux = connect(
+  createStructuredSelector({
+    profileUserData: GetProfileUserAPI.dataSelector,
+    senderNameBookingForm: senderNameSelector,
+  }),
+  (dispatch) => ({
+    createContractUser: (objBody, callback) => {
+      dispatch(createContractUser(objBody, callback));
+    },
+    getProfileUser: () => {
+      dispatch(getProfileUser());
+    },
+  })
+);
+
+const enhance = compose(
+  reduxForm({
+    form: "booking-form",
+  }),
+  connectToRedux
+);
+
+const Content = ({
+  brand = "",
+  model = "",
+  color = "",
+  seat = "",
+  rent_price = "",
+  image,
+  license_plate = "",
+  handleSubmit,
+  pristine,
+  submitting,
+  initialize,
+  reset,
+  id,
+  createContractUser,
+  getProfileUser,
+  profileUserData,
+  senderNameBookingForm,
+}) => {
+  const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [isOpenContractModal, setIsOpenContractModal] = useState(false);
+
+  useEffect(() => {
+    getProfileUser();
+  }, [getProfileUser]);
+
+  const submitBookingHandle = (values) => {
+    if (values.startDate && values.endDate) {
+      const { identityCard, fullname, phoneNumber, email, address } = values;
+
+      const objBody = {
+        car_id: id,
+        start_rent_date: values.startDate.format(DATE_FORMAT),
+        end_rent_date: values.endDate.format(DATE_FORMAT),
+        identity_id: identityCard,
+        name: fullname,
+        phone_number: phoneNumber,
+        email,
+        note: values.note || "",
+        address,
+      };
+
+      createContractUser(objBody, () => {
+        reset();
+        setIsOpenBookingModal(false);
+      });
+    }
+  };
+
   return (
     <section id="car-list-area" className="section-padding">
       <div className="container">
@@ -26,7 +112,7 @@ const Content = props => {
               <div className="car-preview-crousel">
                 <div className="single-car-preview">
                   <img
-                    src={`assets/img/car/${image || "car-1"}.jpg `}
+                    src={image}
                     alt="JSOFT"
                   />
                 </div>
@@ -84,6 +170,216 @@ const Content = props => {
                     </div>
                   </div>
                 </div>
+                {/* <div className="input-submit">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpenBookingModal(true);
+                      if (profileUserData) {
+                        const {
+                          name,
+                          identity_id,
+                          phone_number,
+                          email,
+                          address,
+                        } = profileUserData.user;
+
+                        initialize({
+                          fullname: name,
+                          identityCard: identity_id,
+                          phoneNumber: phone_number,
+                          email,
+                          address,
+                        });
+                      }
+                    }}
+                  >
+                    Booking Now
+                  </button>
+                </div> */}
+                <ModalComponent
+                  modalIsOpen={isOpenBookingModal}
+                  setIsOpen={setIsOpenBookingModal}
+                >
+                  <form onSubmit={handleSubmit(submitBookingHandle)}>
+                    <div className="container">
+                      <div className="row justify-content-between p-2">
+                        <h4 style={{ color: "#fabf21" }}>Booking Info</h4>
+                        <h5>
+                          Deposit fee: $
+                          {(rent_price * PERCENT_DEPOSIT_FEE) / 100}
+                        </h5>
+                      </div>
+                      <div className="row pt-3">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Full Name: </label>
+                            <Field
+                              name="fullname"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter full name"
+                              type="text"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Identity Card:</label>
+                            <Field
+                              name="identityCard"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter identity card:"
+                              type="text"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Email address</label>
+                            <Field
+                              name="email"
+                              type="email"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter email"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Phone Number:</label>
+                            <Field
+                              name="phoneNumber"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter phone number"
+                              type="text"
+                              required
+                              pattern={`([0-9]{9,})`}
+                              readOnly={profileUserData ? true : false}
+                            />
+                            <small className="form-text text-muted">
+                              Phone number must has least 9 numbers
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Address: </label>
+                            <Field
+                              name="address"
+                              component={InputRenderFieldComponent}
+                              placeholder="Enter address"
+                              type="text"
+                              required
+                              readOnly={profileUserData ? true : false}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>Start Date</label>
+                            <Field
+                              name="startDate"
+                              component={DateTimeRenderFieldComponent}
+                              isValidDate={(currentDate) => {
+                                const nowTime = moment();
+                                return moment(currentDate).isAfter(nowTime);
+                              }}
+                              onChange={(selectedDate) => {
+                                const dateFormatted = selectedDate.format(
+                                  DATE_FORMAT
+                                );
+                                setStartDate(dateFormatted);
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <label>End Date</label>
+                            <Field
+                              name="endDate"
+                              component={DateTimeRenderFieldComponent}
+                              isValidDate={(currentDate) => {
+                                return moment(currentDate).isAfter(startDate);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <div className="form-group">
+                            <label>Note</label>
+                            <Field
+                              name="note"
+                              component={TextAreaRenderFieldComponent}
+                              placeholder="Enter note"
+                              rows="3"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          By clicking submit you are agreeing to{" "}
+                          <span
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                              setIsOpenContractModal(true);
+                            }}
+                          >
+                            The content of contract.
+                          </span>
+                        </div>
+                      </div>
+                      <div className="row justify-content-center">
+                        <div className="input-submit">
+                          <button
+                            type="submit"
+                            disabled={pristine || submitting}
+                          >
+                            Submit
+                          </button>
+                          <button
+                            disabled={pristine || submitting}
+                            onClick={reset}
+                          >
+                            Clear
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <ContractAgreementComponent
+                    isOpenContractModal={isOpenContractModal}
+                    setIsOpenContractModal={setIsOpenContractModal}
+                    infoContract={{
+                      senderName: senderNameBookingForm,
+                      carInfo: {
+                        brand,
+                        model,
+                        color,
+                        seat,
+                        rentPrice: rent_price,
+                        depositPrice: (rent_price * PERCENT_DEPOSIT_FEE) / 100,
+                      },
+                    }}
+                  />
+                </ModalComponent>
+
                 <div className="review-area">
                   <h3>Be the first to review “{model.toUpperCase()}”</h3>
                   <div className="review-star">
@@ -135,4 +431,4 @@ const Content = props => {
   );
 };
 
-export default Content;
+export default enhance(Content);

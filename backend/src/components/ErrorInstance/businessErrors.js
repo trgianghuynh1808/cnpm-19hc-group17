@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import { AppError } from './appErrors';
 
 export class BusinessError extends AppError {
@@ -17,22 +18,28 @@ export class APINotFoundError extends BusinessError {
 }
 
 export class DataValidationError extends BusinessError {
-    constructor(err, sequelize) {
+    constructor(err) {
         super(err.message);
         this.name = 'DataValidationError';
         this.status = 400;
         if (err instanceof sequelize.ValidationError) {
-            this.payload = err.errors.reduce((finalErrors, itemError) => ({
-                ...finalErrors,
-                [itemError.path]: {
-                    message: itemError.message,
-                    type: itemError.validatorKey,
-                    context: {
-                        value: itemError.value,
-                        agrs: itemError.validatorArgs
-                    }
+            this.payload = err.errors.reduce((finalErrors, itemError) => {
+                let message = '';
+                if (itemError.validatorKey === 'not_unique') {
+                    message = `${itemError.path} has been exist`;
                 }
-            }), {});
+                return ({
+                    ...finalErrors,
+                    [itemError.path]: {
+                        message: message || itemError.message,
+                        type: itemError.validatorKey,
+                        context: {
+                            value: itemError.value,
+                            agrs: itemError.validatorArgs
+                        }
+                    }
+                });
+            }, {});
         }
     }
 }

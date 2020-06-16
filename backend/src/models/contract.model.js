@@ -1,7 +1,9 @@
+
 export default function (sequelize, DataTypes) {
     const Contract = sequelize.define('contract', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         car_id: {
@@ -19,7 +21,7 @@ export default function (sequelize, DataTypes) {
         note: {
             type: DataTypes.STRING
         },
-        national_id: {
+        identity_id: {
             type: DataTypes.STRING
         },
         name: {
@@ -29,6 +31,9 @@ export default function (sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         email: {
+            type: DataTypes.STRING
+        },
+        address: {
             type: DataTypes.STRING
         },
         status: {

@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
     '/',
-    controller.create
+    controller.action('create')
 );
 
 router.get(
@@ -15,7 +15,7 @@ router.get(
     controller.list
 );
 
-router.put(
+router.post(
     '/:id',
     controller.update
 );

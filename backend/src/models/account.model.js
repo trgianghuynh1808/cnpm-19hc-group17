@@ -1,9 +1,9 @@
 export default function (sequelize, DataTypes) {
     const Account = sequelize.define('account', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             unique: true,
-            autoIncrement: true,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         username: {
