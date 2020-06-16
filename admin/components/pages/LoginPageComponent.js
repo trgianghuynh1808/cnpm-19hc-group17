@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-const LoginPageComponent = () => {
+import { login } from "../../stores/UserState";
+
+const connectToRedux = connect(null, (dispatch) => ({
+  login: ({ username, password }) => {
+    dispatch(login({ username, password }));
+  },
+}));
+
+const LoginPageComponent = ({ login }) => {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const onSubmit = () => {
+    login({ username, password });
+  };
+
   return (
     <div className="limiter">
       <div className="container-login100">
@@ -17,12 +33,15 @@ const LoginPageComponent = () => {
               <input
                 className="input100"
                 type="text"
-                name="email"
-                placeholder="Email"
+                name="username"
+                placeholder="UserName"
+                autoComplete="new"
+                required
+                onChange={(event) => setUsername(event.target.value)}
               />
               <span className="focus-input100" />
               <span className="symbol-input100">
-                <i className="fa fa-envelope" aria-hidden="true" />
+                <i className="fa fa-user" aria-hidden="true" />
               </span>
             </div>
             <div
@@ -34,6 +53,11 @@ const LoginPageComponent = () => {
                 type="password"
                 name="pass"
                 placeholder="Password"
+                autoComplete="new-password"
+                required
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
               />
               <span className="focus-input100" />
               <span className="symbol-input100">
@@ -41,7 +65,17 @@ const LoginPageComponent = () => {
               </span>
             </div>
             <div className="container-login100-form-btn">
-              <button className="login100-form-btn">Login</button>
+              <button
+                type="submit"
+                className="login100-form-btn"
+                onClick={(event) => {
+                  event.preventDefault();
+                  console.log("test hehe");
+                  onSubmit();
+                }}
+              >
+                Login
+              </button>
             </div>
             <div className="text-center p-t-12">
               <span className="txt1">Forgot</span>
@@ -65,4 +99,4 @@ const LoginPageComponent = () => {
   );
 };
 
-export default LoginPageComponent;
+export default connectToRedux(LoginPageComponent);

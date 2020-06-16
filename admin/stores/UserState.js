@@ -1,22 +1,24 @@
 import { makeFetchAction } from "redux-api-call";
 import Router from "next/router";
+import md5 from "md5";
 
 import { saveToken } from "../libs/token-libs";
 import { respondToSuccess, respondToFailure } from "./middlewares/api-reaction";
 import nfetch from "../libs/nfetch";
+import { ADMIN_ROLE } from "../utils";
 
 export const LOGIN_API = "LOGIN_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";
 
-const loginAPI = makeFetchAction(LOGIN_API, ({ username, password, role }) => {
+const loginAPI = makeFetchAction(LOGIN_API, ({ username, password }) => {
   return nfetch({
     endpoint: `/accounts/login`,
-  })({ username, password, role });
+  })({ username, password: md5(password), role: ADMIN_ROLE });
 });
 
-export const login = ({ username, password, role }) => {
+export const login = ({ username, password }) => {
   return respondToSuccess(
-    loginAPI.actionCreator({ username, password, role }),
+    loginAPI.actionCreator({ username, password }),
     (resp) => {
       if (resp.errors) {
         console.error("Err: ", resp.errors);

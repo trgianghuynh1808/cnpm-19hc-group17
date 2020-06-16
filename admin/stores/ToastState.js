@@ -7,7 +7,7 @@ import {
   doErrorNotify,
 } from "../libs/notifyToast";
 
-import { LOGIN_API, CREATE_CONTRACT_USER_API } from "./UsersState";
+import { LOGIN_API, CREATE_CONTRACT_USER_API } from "./UserState";
 
 const getMessage = get("json.message");
 
