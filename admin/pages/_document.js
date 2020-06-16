@@ -46,6 +46,11 @@ class MyDocument extends Document {
             type="text/css"
             href="/static/assets/css/main.css"
           />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/assets/css/ReactToastify.css"
+          />
         </Head>
         <body>
           <Main />

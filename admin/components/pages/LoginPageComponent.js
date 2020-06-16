@@ -14,7 +14,7 @@ const LoginPageComponent = ({ login }) => {
   const [password, setPassword] = useState();
 
   const onSubmit = () => {
-    login({ username, password });
+    if (username && password) login({ username, password });
   };
 
   return (
@@ -70,7 +70,6 @@ const LoginPageComponent = ({ login }) => {
                 className="login100-form-btn"
                 onClick={(event) => {
                   event.preventDefault();
-                  console.log("test hehe");
                   onSubmit();
                 }}
               >
