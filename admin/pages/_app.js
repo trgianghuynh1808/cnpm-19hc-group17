@@ -4,7 +4,7 @@ import makeStore from "../stores";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={makeStore()}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Provider>
   );
 }
