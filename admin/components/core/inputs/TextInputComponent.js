@@ -14,12 +14,12 @@ const TextInputComponent = ({
 }) => {
   return (
     <div className="form-group text-input">
-      <label className="label" htmlFor="textInput">
+      <label className="label color-gray" htmlFor="textInput">
         {label}
       </label>
       <input
         type={type}
-        className="form-control"
+        className="form-control color-gray"
         id="textInput"
         placeholder={placeholder}
         value={value}
@@ -29,13 +29,7 @@ const TextInputComponent = ({
       />
 
       <style jsx>{`
-        .text-input .label {
-          color: #9b9999;
-        }
-
         .text-input input {
-          color: #9b9999;
-
           border: 3px solid #e5e5e5;
           border-radius: 10px;
         }

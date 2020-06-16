@@ -1,6 +1,7 @@
 import React from "react";
 
 import TextInputComponent from "../components/core/inputs/TextInputComponent";
+import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
 
 const CorePage = () => {
   return (
@@ -36,6 +37,80 @@ const CorePage = () => {
             type="password"
             placeholder="Enter Password"
           />
+        </div>
+      </div>
+      <b>* Check Box Component</b>
+      <div>
+        <div className="row">
+          <div className="col-6">
+            <CheckBoxComponent label="Check box1" value="zz" />
+            <CheckBoxComponent
+              label="Check box disabled"
+              value="zz1"
+              disabled
+            />
+          </div>
+          <div className="col-6">
+            <CheckBoxComponent
+              label="Check box1"
+              value="xx1"
+              type="radio"
+              name="testCheckBox"
+            />
+            <CheckBoxComponent
+              label="Check box2"
+              value="xx2"
+              type="radio"
+              name="testCheckBox"
+            />
+            <CheckBoxComponent
+              label="Check box disabled"
+              value="xx3"
+              name="testCheckBox"
+              type="radio"
+              disabled
+            />
+          </div>
+          <div className="col-6">
+            <CheckBoxComponent
+              label="Check box1"
+              value="zz"
+              inline
+              className="pr-3"
+            />
+            <CheckBoxComponent
+              label="Check box disabled"
+              value="zz1"
+              disabled
+              inline
+            />
+          </div>
+          <div className="col-6">
+            <CheckBoxComponent
+              label="Check box1"
+              value="xx1"
+              type="radio"
+              name="testCheckBox"
+              inline
+              className="pr-3"
+            />
+            <CheckBoxComponent
+              className="pr-3"
+              label="Check box2"
+              value="xx2"
+              type="radio"
+              name="testCheckBox"
+              inline
+            />
+            <CheckBoxComponent
+              label="Check box disabled"
+              value="xx3"
+              name="testCheckBox"
+              type="radio"
+              disabled
+              inline
+            />
+          </div>
         </div>
       </div>
     </div>
