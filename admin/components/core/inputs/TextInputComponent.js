@@ -7,7 +7,7 @@ const TextInputComponent = ({
   type = "text",
   placeholder = "",
   label,
-  value = null,
+  value = "",
   disabled,
   doOnChange,
   doOnKeyPress,
@@ -22,9 +22,10 @@ const TextInputComponent = ({
         className="form-control color-gray"
         id="textInput"
         placeholder={placeholder}
-        value={value}
+        defaultValue={value}
         disabled={disabled}
         onChange={doOnChange}
+        readOnly={typeof doOnChange === "function" ? true : false}
         onKeyPress={doOnKeyPress}
       />
 

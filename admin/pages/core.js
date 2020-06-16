@@ -1,14 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import TextInputComponent from "../components/core/inputs/TextInputComponent";
 import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
+import SelectComponent from "../components/core/inputs/SelectComponent";
 
-const CorePage = () => {
+const GroupTextInputComponent = () => {
   return (
-    <div className="container">
-      <div className="row mt-2 justify-content-center">
-        <h3>This is core component page</h3>
-      </div>
+    <Fragment>
       <b>* Text Input Component</b>
       <div className="row">
         <div className="col-3">
@@ -39,6 +37,13 @@ const CorePage = () => {
           />
         </div>
       </div>
+    </Fragment>
+  );
+};
+
+const GroupCheckBoxComponent = () => {
+  return (
+    <Fragment>
       <b>* Check Box Component</b>
       <div>
         <div className="row">
@@ -113,6 +118,41 @@ const CorePage = () => {
           </div>
         </div>
       </div>
+    </Fragment>
+  );
+};
+
+const GroupSelectComponent = () => {
+  const dataTemp = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
+  return (
+    <Fragment>
+      <b>* Select Core Components</b>
+      <div>
+        <div className="row">
+          <SelectComponent
+            placeholder="Select Core Component"
+            options={dataTemp}
+          />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+const CorePage = () => {
+  return (
+    <div className="container">
+      <div className="row mt-2 justify-content-center">
+        <h3>This is core component page</h3>
+      </div>
+      <GroupTextInputComponent />
+      <GroupCheckBoxComponent />
+      <GroupSelectComponent />
     </div>
   );
 };
