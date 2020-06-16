@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import TextInputComponent from "../components/core/inputs/TextInputComponent";
 import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
 import SelectComponent from "../components/core/inputs/SelectComponent";
+import NumberInputComponent from "../components/core/inputs/NumberInputComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -131,13 +132,26 @@ const GroupSelectComponent = () => {
 
   return (
     <Fragment>
-      <b>* Select Core Components</b>
+      <b>* Select Core Component</b>
       <div>
         <div className="row">
           <SelectComponent
             placeholder="Select Core Component"
             options={dataTemp}
           />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+const GroupNumberInputComponent = () => {
+  return (
+    <Fragment>
+      <b>* Select Number Input Component</b>
+      <div>
+        <div className="row">
+          <NumberInputComponent label="Number input" defValue="0" />
         </div>
       </div>
     </Fragment>
@@ -153,6 +167,7 @@ const CorePage = () => {
       <GroupTextInputComponent />
       <GroupCheckBoxComponent />
       <GroupSelectComponent />
+      <GroupNumberInputComponent />
     </div>
   );
 };

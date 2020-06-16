@@ -5,6 +5,9 @@ const defaultStyle = {
   container: (provided) => ({
     ...provided,
     width: "100%",
+    color: "#9b9999",
+    border: "3px solid #e5e5e5",
+    borderRadius: "10px",
   }),
 };
 
