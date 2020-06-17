@@ -5,6 +5,8 @@ import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
 import SelectComponent from "../components/core/inputs/SelectComponent";
 import NumberInputComponent from "../components/core/inputs/NumberInputComponent";
 import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
+import BackButtonComponent from "../components/core/BackButtonComponent";
+import TitleComponent from "../components/core/TitleComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -178,6 +180,26 @@ const GroupDatePickerComponent = () => {
   );
 };
 
+const GroupExtraComponent = () => {
+  return (
+    <Fragment>
+      <b>* Extra Component</b>
+      <div>
+        <div className="row">
+          <div className="col-3">
+            <span className="mr-2">Back Button:</span>
+            <BackButtonComponent />
+          </div>
+          <div className="col-3">
+            <span className="mr-2">Title:</span>
+            <TitleComponent content={"test title"} />
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
 const CorePage = () => {
   return (
     <div className="container">
@@ -189,6 +211,7 @@ const CorePage = () => {
       <GroupSelectComponent />
       <GroupNumberInputComponent />
       <GroupDatePickerComponent />
+      <GroupExtraComponent />
     </div>
   );
 };
