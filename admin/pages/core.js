@@ -8,6 +8,7 @@ import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
 import BackButtonComponent from "../components/core/BackButtonComponent";
 import TitleComponent from "../components/core/TitleComponent";
 import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
+import ButtonComponent from "../components/core/ButtonComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -206,6 +207,36 @@ const GroupExtraComponent = () => {
             <SelectFilterComponent
               placeholder="Select Filter Component"
               options={dataTemp}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <span className="mr-2">Button:</span>
+            <ButtonComponent
+              icon={
+                <img
+                  src="/static/assets/images/icons/add-icon.png"
+                  width="16"
+                  height="16"
+                />
+              }
+              content="Test Button"
+              color="green"
+              doOnClick={() => console.log("test click btn")}
+            />
+            <ButtonComponent
+              className="ml-2"
+              icon={
+                <img
+                  src="/static/assets/images/icons/reset-icon.png"
+                  width="16"
+                  height="16"
+                />
+              }
+              content="Test Button"
+              color="red"
+              doOnClick={() => console.log("test click btn")}
             />
           </div>
         </div>
