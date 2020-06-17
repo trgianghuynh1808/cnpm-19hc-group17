@@ -1,3 +1,6 @@
+// account role
+export const ADMIN_ROLE = "admin";
+
 //Toast Actions
 export const TOAST_INFO = "TOAST_INFO";
 export const TOAST_WARN = "TOAST_WARN";

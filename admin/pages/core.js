@@ -9,6 +9,7 @@ import BackButtonComponent from "../components/core/BackButtonComponent";
 import TitleComponent from "../components/core/TitleComponent";
 import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
 import ButtonComponent from "../components/core/ButtonComponent";
+import SearchBarComponent from "../components/core/SearchBarComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -202,7 +203,7 @@ const GroupExtraComponent = () => {
             <span className="mr-2">Title:</span>
             <TitleComponent content={"test title"} />
           </div>
-          <div className="col-5">
+          <div className="col-4">
             <span className="mr-2">Select Filter:</span>
             <SelectFilterComponent
               placeholder="Select Filter Component"
@@ -210,7 +211,16 @@ const GroupExtraComponent = () => {
             />
           </div>
         </div>
-        <div className="row">
+        <div className="row mt-3">
+          <div className="col-4">
+            <span className="mr-2">Search bar:</span>
+            <SearchBarComponent
+              placeholder="Search bar..."
+              doKeyPress={(value) => {
+                console.log("test", value);
+              }}
+            />
+          </div>
           <div className="col-6">
             <span className="mr-2">Button:</span>
             <ButtonComponent
@@ -253,9 +263,9 @@ const CorePage = () => {
       </div>
       <GroupTextInputComponent />
       <GroupCheckBoxComponent />
+      <GroupDatePickerComponent />
       <GroupSelectComponent />
       <GroupNumberInputComponent />
-      <GroupDatePickerComponent />
       <GroupExtraComponent />
     </div>
   );

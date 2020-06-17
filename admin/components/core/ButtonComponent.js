@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment } from "react";
 
 const pickBackGround = (color) => {
   switch (color) {
