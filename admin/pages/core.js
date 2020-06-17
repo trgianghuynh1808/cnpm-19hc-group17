@@ -10,6 +10,7 @@ import TitleComponent from "../components/core/TitleComponent";
 import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
 import ButtonComponent from "../components/core/ButtonComponent";
 import SearchBarComponent from "../components/core/SearchBarComponent";
+import TextAreaInputComponent from "../components/core/inputs/TextAreaInputComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -41,6 +42,12 @@ const GroupTextInputComponent = () => {
             label="Password Input "
             type="password"
             placeholder="Enter Password"
+          />
+        </div>
+        <div className="col-6">
+          <TextAreaInputComponent
+            label="Text Area Input "
+            placeholder="Enter Text Area"
           />
         </div>
       </div>
@@ -216,7 +223,7 @@ const GroupExtraComponent = () => {
             <span className="mr-2">Search bar:</span>
             <SearchBarComponent
               placeholder="Search bar..."
-              doKeyPress={(value) => {
+              doOnKeyPress={(value) => {
                 console.log("test", value);
               }}
             />

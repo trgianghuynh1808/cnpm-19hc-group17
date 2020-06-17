@@ -2,27 +2,24 @@ import React from "react";
 
 import { doFunctionWithEnter } from "../../../utils";
 
-//Props description:
-//type: text, email, password
-
-const TextInputComponent = ({
-  type = "text",
+const TextAreaInputComponent = ({
   placeholder = "",
   label,
   value = "",
   disabled,
   doOnChange,
   doOnKeyPress,
+  row = "3",
 }) => {
   return (
-    <div className="form-group text-input">
-      <label className="label color-gray" htmlFor="textInput">
+    <div className="form-group text-input-area">
+      <label className="label color-gray" htmlFor="textAreaInput">
         {label}
       </label>
-      <input
-        type={type}
+      <textarea
+        row={row}
         className="form-control color-gray"
-        id="textInput"
+        id="textAreaInput"
         placeholder={placeholder}
         defaultValue={value}
         disabled={disabled}
@@ -40,7 +37,7 @@ const TextInputComponent = ({
       />
 
       <style jsx>{`
-        .text-input input {
+        .text-input-area input {
           border: 3px solid #e5e5e5;
           border-radius: 10px;
         }
@@ -49,4 +46,4 @@ const TextInputComponent = ({
   );
 };
 
-export default TextInputComponent;
+export default TextAreaInputComponent;

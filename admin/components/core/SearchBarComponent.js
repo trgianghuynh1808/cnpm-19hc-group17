@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { doFunctionWithEnter } from "../../utils";
 
-const SearchBarComponent = ({ placeholder, doKeyPress }) => {
+const SearchBarComponent = ({ placeholder, doOnKeyPress }) => {
   return (
     <Fragment>
       <div className="form-group has-search">
@@ -13,7 +13,7 @@ const SearchBarComponent = ({ placeholder, doKeyPress }) => {
           placeholder={placeholder}
           onKeyPress={(event) => {
             doFunctionWithEnter(event, () => {
-              doKeyPress(event.target.value);
+              doOnKeyPress(event.target.value);
             });
           }}
         />
