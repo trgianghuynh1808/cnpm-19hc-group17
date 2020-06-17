@@ -7,6 +7,7 @@ import NumberInputComponent from "../components/core/inputs/NumberInputComponent
 import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
 import BackButtonComponent from "../components/core/BackButtonComponent";
 import TitleComponent from "../components/core/TitleComponent";
+import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -181,6 +182,12 @@ const GroupDatePickerComponent = () => {
 };
 
 const GroupExtraComponent = () => {
+  const dataTemp = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
   return (
     <Fragment>
       <b>* Extra Component</b>
@@ -193,6 +200,13 @@ const GroupExtraComponent = () => {
           <div className="col-3">
             <span className="mr-2">Title:</span>
             <TitleComponent content={"test title"} />
+          </div>
+          <div className="col-5">
+            <span className="mr-2">Select Filter:</span>
+            <SelectFilterComponent
+              placeholder="Select Filter Component"
+              options={dataTemp}
+            />
           </div>
         </div>
       </div>
