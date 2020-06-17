@@ -1,12 +1,9 @@
 import React from "react";
+import ExampleComponent from '../components/core/example';
 
 const CorePage = () => {
   return (
-    <div className="container">
-      <div className="row mt-2 justify-content-center">
-        <h3>This is core page</h3>
-      </div>
-    </div>
+    <ExampleComponent/>
   );
 };
 
