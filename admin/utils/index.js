@@ -1,2 +1,5 @@
-// account role
-export const ADMIN_ROLE = "admin";
+export const doFunctionWithEnter = (event, func) =>
+  typeof event === "object" &&
+  event.key === "Enter" &&
+  typeof func === "function" &&
+  func();

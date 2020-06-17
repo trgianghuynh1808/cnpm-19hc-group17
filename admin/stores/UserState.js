@@ -5,7 +5,7 @@ import md5 from "md5";
 import { saveToken } from "../libs/token-libs";
 import { respondToSuccess, respondToFailure } from "./middlewares/api-reaction";
 import nfetch from "../libs/nfetch";
-import { ADMIN_ROLE } from "../utils";
+import { ADMIN_ROLE } from "../utils/enums";
 
 export const LOGIN_API = "LOGIN_API";
 const GET_CURRENT_USER_API = "GET_CURRENT_USER_API";

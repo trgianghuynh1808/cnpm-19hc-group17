@@ -7,6 +7,9 @@ import NumberInputComponent from "../components/core/inputs/NumberInputComponent
 import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
 import BackButtonComponent from "../components/core/BackButtonComponent";
 import TitleComponent from "../components/core/TitleComponent";
+import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
+import ButtonComponent from "../components/core/ButtonComponent";
+import SearchBarComponent from "../components/core/SearchBarComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -181,6 +184,12 @@ const GroupDatePickerComponent = () => {
 };
 
 const GroupExtraComponent = () => {
+  const dataTemp = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
   return (
     <Fragment>
       <b>* Extra Component</b>
@@ -193,6 +202,52 @@ const GroupExtraComponent = () => {
           <div className="col-3">
             <span className="mr-2">Title:</span>
             <TitleComponent content={"test title"} />
+          </div>
+          <div className="col-4">
+            <span className="mr-2">Select Filter:</span>
+            <SelectFilterComponent
+              placeholder="Select Filter Component"
+              options={dataTemp}
+            />
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-4">
+            <span className="mr-2">Search bar:</span>
+            <SearchBarComponent
+              placeholder="Search bar..."
+              doKeyPress={(value) => {
+                console.log("test", value);
+              }}
+            />
+          </div>
+          <div className="col-6">
+            <span className="mr-2">Button:</span>
+            <ButtonComponent
+              icon={
+                <img
+                  src="/static/assets/images/icons/add-icon.png"
+                  width="16"
+                  height="16"
+                />
+              }
+              content="Test Button"
+              color="green"
+              doOnClick={() => console.log("test click btn")}
+            />
+            <ButtonComponent
+              className="ml-2"
+              icon={
+                <img
+                  src="/static/assets/images/icons/reset-icon.png"
+                  width="16"
+                  height="16"
+                />
+              }
+              content="Test Button"
+              color="red"
+              doOnClick={() => console.log("test click btn")}
+            />
           </div>
         </div>
       </div>
@@ -208,9 +263,9 @@ const CorePage = () => {
       </div>
       <GroupTextInputComponent />
       <GroupCheckBoxComponent />
+      <GroupDatePickerComponent />
       <GroupSelectComponent />
       <GroupNumberInputComponent />
-      <GroupDatePickerComponent />
       <GroupExtraComponent />
     </div>
   );
