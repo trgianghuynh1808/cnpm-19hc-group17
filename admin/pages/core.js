@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import TextInputComponent from "../components/core/inputs/TextInputComponent";
 import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
 import SelectComponent from "../components/core/inputs/SelectComponent";
 import NumberInputComponent from "../components/core/inputs/NumberInputComponent";
+import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -158,6 +159,25 @@ const GroupNumberInputComponent = () => {
   );
 };
 
+const GroupDatePickerComponent = () => {
+  const [startDate, setStartDate] = useState(null);
+
+  return (
+    <Fragment>
+      <b>* DatePicker Input Component</b>
+      <div>
+        <div className="row">
+          <DatePickerComponent
+            curDate={startDate}
+            setCurDate={setStartDate}
+            placeholder="Date Picker Component"
+          />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
 const CorePage = () => {
   return (
     <div className="container">
@@ -168,6 +188,7 @@ const CorePage = () => {
       <GroupCheckBoxComponent />
       <GroupSelectComponent />
       <GroupNumberInputComponent />
+      <GroupDatePickerComponent />
     </div>
   );
 };
