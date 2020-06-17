@@ -6,6 +6,7 @@ import SelectComponent from "../components/core/inputs/SelectComponent";
 import NumberInputComponent from "../components/core/inputs/NumberInputComponent";
 import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
 import BackButtonComponent from "../components/core/BackButtonComponent";
+import TitleComponent from "../components/core/TitleComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -185,7 +186,14 @@ const GroupExtraComponent = () => {
       <b>* Extra Component</b>
       <div>
         <div className="row">
-          <BackButtonComponent />
+          <div className="col-3">
+            <span className="mr-2">Back Button:</span>
+            <BackButtonComponent />
+          </div>
+          <div className="col-3">
+            <span className="mr-2">Title:</span>
+            <TitleComponent content={"test title"} />
+          </div>
         </div>
       </div>
     </Fragment>
