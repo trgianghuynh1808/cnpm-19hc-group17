@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import "react-datepicker/dist/react-datepicker.css";
 
 import makeStore from "../stores";
 
