@@ -50,6 +50,11 @@ class MyDocument extends Document {
             type="text/css"
             href="/static/assets/css/ReactToastify.css"
           />
+          <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans"
+            rel="stylesheet"
+            type="text/css"
+          ></link>
         </Head>
         <body>
           <Main />
