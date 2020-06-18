@@ -55,6 +55,11 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           ></link>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/assets/css/custom.css"
+          />
         </Head>
         <body>
           <Main />
