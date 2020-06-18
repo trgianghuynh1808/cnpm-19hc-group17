@@ -51,7 +51,9 @@ export const getCurrentUserWithFailure = () => {
     }
 
     if (!verifyLogin(resp.email)) {
-      return Router.push("/login");
+      return Router.replace({
+        pathname: "/login",
+      });
     }
 
     return;

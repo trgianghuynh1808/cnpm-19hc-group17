@@ -26,13 +26,14 @@ export default function withAuth(AuthComponent) {
 
     render() {
       const { currentUser } = this.props;
+
       return (
         <div>
-          {!verifyLogin(currentUser) ? (
-            <></>
-          ) : (
-            <AuthComponent {...this.props} isHOC={true} isLoggedIn={true} />
-          )}
+          <AuthComponent
+            {...this.props}
+            isHOC={true}
+            isLoggedIn={verifyLogin(currentUser)}
+          />
         </div>
       );
     }
