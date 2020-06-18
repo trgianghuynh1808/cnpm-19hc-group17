@@ -26,7 +26,7 @@ const HeaderComponent = () => {
                   width="30"
                 ></img>
               </div>
-              <div className="col-lg-5">
+              <div className="col-lg-6">
                 <img
                   src="/static/assets/images/human.png"
                   height="44"
@@ -50,7 +50,7 @@ const HeaderComponent = () => {
       <style jsx>{`
         .header-part {
           padding: 28px 20px;
-          background-color: whitesmoke;
+          background-color: white;
         }
 
         .header-part .title {

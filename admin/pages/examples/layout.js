@@ -1,9 +1,9 @@
 import React from "react";
 
-import LayoutComponent from "../../components/layouts/LayoutComponent";
+import MainLayoutComponent from "../../components/layouts/MainLayoutComponent";
 
 const LayoutPage = () => {
-  return <LayoutComponent />;
+  return <MainLayoutComponent />;
 };
 
 export default LayoutPage;
