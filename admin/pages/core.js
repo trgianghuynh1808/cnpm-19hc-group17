@@ -264,7 +264,7 @@ const GroupExtraComponent = () => {
 };
 
 const BadgeComponent = ({ content, status }) => {
-  return <span className={`badge badge-${status}`}>{content}</span>;
+  return <span className={`badge badge-${status} p-2`}>{content}</span>;
 };
 
 const ActionsComponent = () => {
@@ -358,12 +358,26 @@ const GroupTableComponent = () => {
     },
   ];
 
+  const pageInfo = {
+    isPrev: true,
+    isNext: false,
+    pages: 3,
+    curPage: 3,
+  };
+
   return (
     <Fragment>
       <b>* Table Core Component</b>
-      <div>
+      <div className="mb-3">
         <div className="row">
-          <TableComponent columnData={COLUMN_DATA} rowData={ROW_DATA} />
+          <TableComponent
+            columnData={COLUMN_DATA}
+            rowData={ROW_DATA}
+            pageInfo={pageInfo}
+            doAPI={(curPage) => {
+              console.log("test curPage", curPage);
+            }}
+          />
         </div>
       </div>
     </Fragment>

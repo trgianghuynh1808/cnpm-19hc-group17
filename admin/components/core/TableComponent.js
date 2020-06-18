@@ -24,7 +24,28 @@ const renderRowData = (row, columnData) => {
   return render;
 };
 
-const TableComponent = ({ columnData, rowData }) => {
+const renderPagination = (pages, curPage, doAPI) => {
+  let render = [];
+  for (let i = 1; i <= pages; i++) {
+    render.push(
+      <li
+        className={`page-item ${curPage == i ? "active" : ""}`}
+        key={i}
+        onClick={() => {
+          doAPI(i);
+        }}
+      >
+        <div className="page-link">{i}</div>
+      </li>
+    );
+  }
+
+  return render;
+};
+
+const TableComponent = ({ columnData, rowData, pageInfo, doAPI }) => {
+  const { isPrev, isNext, curPage, pages } = pageInfo;
+
   return (
     <Fragment>
       <table className="table table-hover table-core">
@@ -43,7 +64,33 @@ const TableComponent = ({ columnData, rowData }) => {
           ))}
         </tbody>
       </table>
-      <style jsx>{`
+      <nav className="w-100 core-pagination" aria-label="...">
+        <ul className="pagination justify-content-end">
+          <li className={`page-item ${isPrev ? " " : "disabled"}`}>
+            <div
+              className="page-link"
+              tabIndex={-1}
+              onClick={() => {
+                doAPI(curPage - 1);
+              }}
+            >
+              {"<<"}
+            </div>
+          </li>
+          {renderPagination(pages, curPage, doAPI)}
+          <li className={`page-item ${isNext ? " " : "disabled"}`}>
+            <div
+              className="page-link"
+              onClick={() => {
+                doAPI(curPage + 1);
+              }}
+            >
+              {">>"}
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <style jsx global>{`
         .table-core table,
         thead,
         tr,
@@ -55,6 +102,10 @@ const TableComponent = ({ columnData, rowData }) => {
 
         .table-core td {
           text-align: center;
+        }
+
+        .core-pagination .page-link {
+          cursor: pointer !important;
         }
       `}</style>
     </Fragment>
