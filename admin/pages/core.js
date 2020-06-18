@@ -12,6 +12,7 @@ import ButtonComponent from "../components/core/ButtonComponent";
 import SearchBarComponent from "../components/core/SearchBarComponent";
 import TextAreaInputComponent from "../components/core/inputs/TextAreaInputComponent";
 import TableComponent from "../components/core/TableComponent";
+import ModalComponent from "../components/core/ModalComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -384,6 +385,30 @@ const GroupTableComponent = () => {
   );
 };
 
+const GroupModalComponent = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  return (
+    <Fragment>
+      <b>* Modal Core Component</b>
+      <div className="mb-3">
+        <div className="row">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => setIsOpenModal(true)}
+          >
+            Open Modal
+          </button>
+          <ModalComponent modalIsOpen={isOpenModal} setIsOpen={setIsOpenModal}>
+            <div>Test Modal</div>
+          </ModalComponent>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
 const CorePage = () => {
   return (
     <div className="container">
@@ -397,6 +422,7 @@ const CorePage = () => {
       <GroupNumberInputComponent />
       <GroupExtraComponent />
       <GroupTableComponent />
+      <GroupModalComponent />
     </div>
   );
 };
