@@ -2,30 +2,7 @@ import React, { Fragment } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const MENU_ITEMS_DATA = [
-  {
-    name: "dashboard",
-    slug: "/",
-  },
-  {
-    name: "QL Xe đang cho thuê",
-    slug: "",
-  },
-  {
-    name: "QL Xe rỗi",
-    slug: "",
-  },
-  {
-    name: "Phân chia lịch làm việc",
-    slug: "",
-  },
-  {
-    name: "QL Xe đang có vấn đề",
-    slug: "",
-  },
-];
-
-const VerticalComponent = ({ menuItemsData = MENU_ITEMS_DATA }) => {
+const VerticalComponent = ({ menuItemsData }) => {
   const router = useRouter();
 
   return (

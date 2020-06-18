@@ -1,13 +1,23 @@
 import React from "react";
+import Router from "next/router";
 
-const HeaderComponent = () => {
+import { removeToken } from "../../libs/token-libs";
+
+const HeaderComponent = ({ roleName, username }) => {
+  const logOut = () => {
+    removeToken();
+    Router.replace({
+      pathname: "/login",
+    });
+  };
+
   return (
     <header>
       <div className="pl-3 pr-3 header-part">
         <div className="row justify-content-between">
           <div className="col-lg-3">
             <h3 className="text-uppercase font-weight-bold title">
-              bộ phận quản lý
+              {roleName}
             </h3>
           </div>
           <div className="col-lg-3">
@@ -32,7 +42,7 @@ const HeaderComponent = () => {
                   height="44"
                   width="44"
                 ></img>
-                <span className="color-gray ml-2">Giang Huynh</span>
+                <span className="color-gray ml-2">{username}</span>
               </div>
               <div className="col-lg-2">
                 <img
@@ -40,6 +50,7 @@ const HeaderComponent = () => {
                   height="32"
                   width="32"
                   className="cursor-pointer"
+                  onClick={logOut}
                 ></img>
               </div>
             </div>

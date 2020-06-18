@@ -18,12 +18,6 @@ const connectWithRedux = connect(
 
 export default function withAuth(AuthComponent) {
   class AuthenHOC extends React.Component {
-    static getInitialProps = async (ctx) => {
-      return AuthComponent.getInitialProps
-        ? AuthComponent.getInitialProps(ctx)
-        : {};
-    };
-
     componentDidMount() {
       if (!isServer) {
         this.props.dispatch(getCurrentUserWithFailure());

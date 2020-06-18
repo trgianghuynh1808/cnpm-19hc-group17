@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import { useRouter } from "next/router";
 
-const MainContentComponent = ({ children }) => {
+const MainContentComponent = ({ children, username, title }) => {
   const router = useRouter();
   return (
     <Fragment>
       <div className="main-content-part full-height">
-        <h4 className="font-weight-bold title ">Dashboard</h4>
-        <div className="font-weight-bold color-gray">Welcome Giang Huynh</div>
+        <h4 className="font-weight-bold title text-capitalize ">{title}</h4>
+        <div className="font-weight-bold color-gray">Welcome {username}</div>
         <div
           className={`card-part ${
             router.pathname === "/" ? "" : "card-content"

@@ -1,0 +1,30 @@
+{
+  "menuInfos": [
+    {
+      "role": "manager",
+      "name": "bộ phận quản lý",
+      "menuItems": [
+        {
+          "name": "dashboard",
+          "slug": "/"
+        },
+        {
+          "name": "QL Xe đang Cho thuê",
+          "slug": ""
+        },
+        {
+          "name": "QL Xe rỗi",
+          "slug": ""
+        },
+        {
+          "name": "Phân chia lịch làm việc",
+          "slug": ""
+        },
+        {
+          "name": "Quản lý xe đang có vấn đề",
+          "slug": ""
+        }
+      ]
+    }
+  ]
+}

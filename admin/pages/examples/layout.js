@@ -1,6 +1,7 @@
 import React from "react";
 
 import MainLayoutComponent from "../../components/layouts/MainLayoutComponent";
+import AuthenHOC from "../../components/HOC/AuthenHOC";
 
 const LayoutPage = () => {
   return (
@@ -10,4 +11,4 @@ const LayoutPage = () => {
   );
 };
 
-export default LayoutPage;
+export default AuthenHOC(LayoutPage);
