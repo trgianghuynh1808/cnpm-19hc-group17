@@ -3,33 +3,30 @@ import React from "react";
 const HeaderComponent = () => {
   return (
     <header>
-      <div
-        className="pl-3 pr-3 header-part"
-        style={{ backgroundColor: "whitesmoke" }}
-      >
+      <div className="pl-3 pr-3 header-part">
         <div className="row justify-content-between">
-          <div className="col-3">
+          <div className="col-lg-3">
             <h3 className="text-uppercase font-weight-bold title">
               bộ phận quản lý
             </h3>
           </div>
-          <div className="col-3">
-            <div className="row align-items-center">
-              <div className="col-2">
+          <div className="col-lg-3">
+            <div className="row align-items-center justify-content-end">
+              <div className="col-lg-2">
                 <img
                   src="/static/assets/images/icons/notify-icon.png"
                   height="30"
                   width="30"
                 ></img>
               </div>
-              <div className="col-2">
+              <div className="col-lg-2">
                 <img
                   src="/static/assets/images/icons/setting-icon.png"
                   height="30"
                   width="30"
                 ></img>
               </div>
-              <div className="col-5">
+              <div className="col-lg-5">
                 <img
                   src="/static/assets/images/human.png"
                   height="44"
@@ -37,7 +34,7 @@ const HeaderComponent = () => {
                 ></img>
                 <span className="color-gray ml-2">Giang Huynh</span>
               </div>
-              <div className="col-2">
+              <div className="col-lg-2">
                 <img
                   src="/static/assets/images/icons/quit-icon.png"
                   height="32"
@@ -53,6 +50,7 @@ const HeaderComponent = () => {
       <style jsx>{`
         .header-part {
           padding: 28px 20px;
+          background-color: whitesmoke;
         }
 
         .header-part .title {

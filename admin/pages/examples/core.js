@@ -19,34 +19,34 @@ const GroupTextInputComponent = () => {
     <Fragment>
       <b>* Text Input Component</b>
       <div className="row">
-        <div className="col-3">
+        <div className="col-lg-3">
           <TextInputComponent
             label="Text Input"
             placeholder="Enter text input"
           />
         </div>
-        <div className="col-3">
+        <div className="col-lg-3">
           <TextInputComponent
             label="Text Input disabled"
             value="zzz"
             disabled
           />
         </div>
-        <div className="col-3">
+        <div className="col-lg-3">
           <TextInputComponent
             label="Email Input"
             type="email"
             placeholder="Enter Email"
           />
         </div>
-        <div className="col-3">
+        <div className="col-lg-3">
           <TextInputComponent
             label="Password Input "
             type="password"
             placeholder="Enter Password"
           />
         </div>
-        <div className="col-6">
+        <div className="col-lg-6">
           <TextAreaInputComponent
             label="Text Area Input "
             placeholder="Enter Text Area"
@@ -63,7 +63,7 @@ const GroupCheckBoxComponent = () => {
       <b>* Check Box Component</b>
       <div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-lg-6">
             <CheckBoxComponent label="Check box1" value="zz" />
             <CheckBoxComponent
               label="Check box disabled"
@@ -71,7 +71,7 @@ const GroupCheckBoxComponent = () => {
               disabled
             />
           </div>
-          <div className="col-6">
+          <div className="col-lg-6">
             <CheckBoxComponent
               label="Check box1"
               value="xx1"
@@ -92,7 +92,7 @@ const GroupCheckBoxComponent = () => {
               disabled
             />
           </div>
-          <div className="col-6">
+          <div className="col-lg-6">
             <CheckBoxComponent
               label="Check box1"
               value="zz"
@@ -106,7 +106,7 @@ const GroupCheckBoxComponent = () => {
               inline
             />
           </div>
-          <div className="col-6">
+          <div className="col-lg-6">
             <CheckBoxComponent
               label="Check box1"
               value="xx1"
@@ -204,15 +204,15 @@ const GroupExtraComponent = () => {
       <b>* Extra Component</b>
       <div>
         <div className="row">
-          <div className="col-3">
+          <div className="col-lg-3">
             <span className="mr-2">Back Button:</span>
             <BackButtonComponent />
           </div>
-          <div className="col-3">
+          <div className="col-lg-3">
             <span className="mr-2">Title:</span>
             <TitleComponent content={"test title"} />
           </div>
-          <div className="col-4">
+          <div className="col-lg-4">
             <span className="mr-2">Select Filter:</span>
             <SelectFilterComponent
               placeholder="Select Filter Component"
@@ -221,7 +221,7 @@ const GroupExtraComponent = () => {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col-4">
+          <div className="col-lg-4">
             <span className="mr-2">Search bar:</span>
             <SearchBarComponent
               placeholder="Search bar..."
@@ -230,7 +230,7 @@ const GroupExtraComponent = () => {
               }}
             />
           </div>
-          <div className="col-6">
+          <div className="col-lg-6">
             <span className="mr-2">Button:</span>
             <ButtonComponent
               icon={
@@ -271,7 +271,7 @@ const BadgeComponent = ({ content, status }) => {
 const ActionsComponent = () => {
   return (
     <div className="row justify-content-center">
-      <div className="col-3">
+      <div className="col-lg-3">
         <img
           src="/static/assets/images/icons/edit-icon.png"
           height="25"
@@ -279,7 +279,7 @@ const ActionsComponent = () => {
           className="action-icon"
         ></img>
       </div>
-      <div className="col-3">
+      <div className="col-lg-3">
         <img
           src="/static/assets/images/icons/trash-icon.png"
           height="25"
