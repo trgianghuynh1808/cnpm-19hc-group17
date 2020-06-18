@@ -4,7 +4,7 @@ import HeaderComponent from "./HeaderComponent";
 import VerticalComponent from "./VerticalComponent";
 import MainContentComponent from "./MainContentComponent";
 
-const LayoutComponent = () => {
+const LayoutComponent = ({ children }) => {
   return (
     <Fragment>
       <HeaderComponent />
@@ -13,7 +13,7 @@ const LayoutComponent = () => {
           <VerticalComponent />
         </div>
         <div className="col-lg-10 pl-0 pr-0">
-          <MainContentComponent />
+          <MainContentComponent>{children}</MainContentComponent>
         </div>
       </div>
     </Fragment>

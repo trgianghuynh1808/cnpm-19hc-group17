@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const MENU_ITEMS_DATA = [
   {
@@ -8,19 +9,19 @@ const MENU_ITEMS_DATA = [
   },
   {
     name: "QL Xe đang cho thuê",
-    slug: "/",
+    slug: "",
   },
   {
     name: "QL Xe rỗi",
-    slug: "/",
+    slug: "",
   },
   {
     name: "Phân chia lịch làm việc",
-    slug: "/",
+    slug: "",
   },
   {
     name: "QL Xe đang có vấn đề",
-    slug: "/",
+    slug: "",
   },
 ];
 
@@ -53,17 +54,15 @@ const VerticalComponent = ({ menuItemsData = MENU_ITEMS_DATA }) => {
         <div className="menu-items-section">
           {menuItemsData.map((menuItem, index) => {
             return (
-              <div
-                key={index}
-                className={`container text-capitalize menu-item font-20 cursor-pointer ${
-                  router.pathname === menuItem.slug
-                } ? "menu-item-active" : ""`}
-                onClick={() => {
-                  Router.push(menuItem.slug);
-                }}
-              >
-                {menuItem.name}
-              </div>
+              <Link href={menuItem.slug} key={index}>
+                <div
+                  className={`container text-capitalize menu-item font-20 cursor-pointer ${
+                    router.pathname === menuItem.slug ? "menu-item-active" : ""
+                  }`}
+                >
+                  {menuItem.name}
+                </div>
+              </Link>
             );
           })}
         </div>
