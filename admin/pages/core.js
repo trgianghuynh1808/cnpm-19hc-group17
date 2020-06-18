@@ -11,6 +11,7 @@ import SelectFilterComponent from "../components/core/inputs/SelectFilterCompone
 import ButtonComponent from "../components/core/ButtonComponent";
 import SearchBarComponent from "../components/core/SearchBarComponent";
 import TextAreaInputComponent from "../components/core/inputs/TextAreaInputComponent";
+import TableComponent from "../components/core/TableComponent";
 
 const GroupTextInputComponent = () => {
   return (
@@ -262,6 +263,113 @@ const GroupExtraComponent = () => {
   );
 };
 
+const BadgeComponent = ({ content, status }) => {
+  return <span className={`badge badge-${status}`}>{content}</span>;
+};
+
+const ActionsComponent = () => {
+  return (
+    <div className="row justify-content-center">
+      <div className="col-3">
+        <img
+          src="/static/assets/images/icons/edit-icon.png"
+          height="25"
+          width="25"
+          className="action-icon"
+        ></img>
+      </div>
+      <div className="col-3">
+        <img
+          src="/static/assets/images/icons/trash-icon.png"
+          height="25"
+          width="25"
+          className="action-icon"
+        ></img>
+      </div>
+      <style jsx>
+        {`
+          .action-icon {
+            cursor: pointer;
+          }
+        `}
+      </style>
+    </div>
+  );
+};
+
+const GroupTableComponent = () => {
+  const COLUMN_DATA = [
+    {
+      name: "Vai trò",
+      key: "role",
+    },
+    {
+      name: "Số người",
+      key: "amount",
+    },
+    {
+      name: "Tình trạng",
+      key: "status",
+      renderComponent: (curData) => {
+        let curStatus = "";
+
+        switch (curData) {
+          case "Đủ người":
+            curStatus = "success";
+            break;
+          case "Thiếu người":
+            curStatus = "danger";
+            break;
+          default:
+            curStatus = "primary";
+            break;
+        }
+
+        return <BadgeComponent content={curData} status={curStatus} />;
+      },
+    },
+    {
+      name: "Hành động",
+      key: "actions",
+      renderComponent: (curData) => {
+        return <ActionsComponent />;
+      },
+    },
+  ];
+
+  const ROW_DATA = [
+    {
+      role: "Quản Lý",
+      amount: "1/1",
+      status: "Đủ người",
+      actions: "Sua Xoa",
+    },
+    {
+      role: "Bảo Dưỡng",
+      amount: "2/3",
+      status: "Thiếu người",
+      actions: "Sua Xoa Thêm",
+    },
+    {
+      role: "Thuê Xe",
+      amount: "3/3",
+      status: "Đủ người",
+      actions: "Sua Xoa",
+    },
+  ];
+
+  return (
+    <Fragment>
+      <b>* Table Core Component</b>
+      <div>
+        <div className="row">
+          <TableComponent columnData={COLUMN_DATA} rowData={ROW_DATA} />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
 const CorePage = () => {
   return (
     <div className="container">
@@ -274,6 +382,7 @@ const CorePage = () => {
       <GroupSelectComponent />
       <GroupNumberInputComponent />
       <GroupExtraComponent />
+      <GroupTableComponent />
     </div>
   );
 };
