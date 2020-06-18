@@ -53,17 +53,24 @@ const VerticalComponent = ({ menuItemsData = MENU_ITEMS_DATA }) => {
         </div>
         <div className="menu-items-section">
           {menuItemsData.map((menuItem, index) => {
-            return (
-              <Link href={menuItem.slug} key={index}>
+            if (router.pathname === menuItem.slug)
+              return (
                 <div
-                  className={`container text-capitalize menu-item font-20 cursor-pointer ${
-                    router.pathname === menuItem.slug ? "menu-item-active" : ""
-                  }`}
+                  className="container text-capitalize menu-item font-20 cursor-pointer menu-item-active"
+                  key={index}
                 >
                   {menuItem.name}
                 </div>
-              </Link>
-            );
+              );
+            else {
+              return (
+                <Link href={menuItem.slug} key={index}>
+                  <div className="container text-capitalize menu-item font-20 cursor-pointer ">
+                    {menuItem.name}
+                  </div>
+                </Link>
+              );
+            }
           })}
         </div>
       </div>
