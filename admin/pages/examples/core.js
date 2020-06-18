@@ -1,18 +1,18 @@
 import React, { Fragment, useState } from "react";
 
-import TextInputComponent from "../components/core/inputs/TextInputComponent";
-import CheckBoxComponent from "../components/core/inputs/CheckBoxComponent";
-import SelectComponent from "../components/core/inputs/SelectComponent";
-import NumberInputComponent from "../components/core/inputs/NumberInputComponent";
-import DatePickerComponent from "../components/core/inputs/DatePickerComponent";
-import BackButtonComponent from "../components/core/BackButtonComponent";
-import TitleComponent from "../components/core/TitleComponent";
-import SelectFilterComponent from "../components/core/inputs/SelectFilterComponent";
-import ButtonComponent from "../components/core/ButtonComponent";
-import SearchBarComponent from "../components/core/SearchBarComponent";
-import TextAreaInputComponent from "../components/core/inputs/TextAreaInputComponent";
-import TableComponent from "../components/core/TableComponent";
-import ModalComponent from "../components/core/ModalComponent";
+import TextInputComponent from "../../components/core/inputs/TextInputComponent";
+import CheckBoxComponent from "../../components/core/inputs/CheckBoxComponent";
+import SelectComponent from "../../components/core/inputs/SelectComponent";
+import NumberInputComponent from "../../components/core/inputs/NumberInputComponent";
+import DatePickerComponent from "../../components/core/inputs/DatePickerComponent";
+import BackButtonComponent from "../../components/core/BackButtonComponent";
+import TitleComponent from "../../components/core/TitleComponent";
+import SelectFilterComponent from "../../components/core/inputs/SelectFilterComponent";
+import ButtonComponent from "../../components/core/ButtonComponent";
+import SearchBarComponent from "../../components/core/SearchBarComponent";
+import TextAreaInputComponent from "../../components/core/inputs/TextAreaInputComponent";
+import TableComponent from "../../components/core/TableComponent";
+import ModalComponent from "../../components/core/ModalComponent";
 
 const GroupTextInputComponent = () => {
   return (

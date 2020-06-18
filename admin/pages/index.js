@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import Router from "next/router";
 
 import AuthenHOC from "../components/HOC/AuthenHOC";
 
@@ -20,46 +21,27 @@ const Home = () => {
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
+          <div
+            className="card cursor-pointer"
+            onClick={() => {
+              Router.push("/examples/core");
+            }}
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+            <h3>Core Component &rarr;</h3>
+            <p>Nơi chứa các core component</p>
+          </div>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
+          <div
+            className="card cursor-pointer"
+            onClick={() => {
+              Router.push("/examples/layout");
+            }}
           >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            <h3>Layout &rarr;</h3>
+            <p>Mẫu Layout</p>
+          </div>
         </div>
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
 
       <style jsx>{`
         .container {
@@ -76,25 +58,6 @@ const Home = () => {
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
           justify-content: center;
           align-items: center;
         }
@@ -182,6 +145,10 @@ const Home = () => {
 
         .logo {
           height: 1em;
+        }
+
+        .cursor-pointer {
+          cursor: pointer;
         }
 
         @media (max-width: 600px) {
