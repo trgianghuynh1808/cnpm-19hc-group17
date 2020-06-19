@@ -14,7 +14,14 @@ const pickBackGround = (color) => {
 //Props description
 // color: red, green
 
-const ButtonComponent = ({ icon, content, doOnClick, color, className }) => {
+const ButtonComponent = ({
+  icon,
+  content,
+  doOnClick,
+  color,
+  className,
+  ...other
+}) => {
   const curColor = pickBackGround(color);
 
   return (
@@ -23,6 +30,7 @@ const ButtonComponent = ({ icon, content, doOnClick, color, className }) => {
         type="button"
         className={`btn btn-primary button-style ${className || ""}`}
         onClick={doOnClick}
+        {...other}
       >
         <div className="d-flex">
           <div className="mr-2">{icon}</div>
