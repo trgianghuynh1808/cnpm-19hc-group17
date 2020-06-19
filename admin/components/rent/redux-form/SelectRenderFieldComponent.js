@@ -12,7 +12,8 @@ const defaultStyle = {
 };
 
 const SelectRenderFieldComponent = ({ input, ...other }) => {
-  const { id, customStyle, label, required } = other;
+  const { customStyle, label, required, doOnChange } = other;
+  const { value: inputValue } = input;
 
   return (
     <Fragment>
@@ -21,9 +22,15 @@ const SelectRenderFieldComponent = ({ input, ...other }) => {
         {required && <span className="text-danger"> (*)</span>}
       </label>
       <Select
-        instanceId={id || "default-id"}
+        value={inputValue}
+        onChange={(event) => {
+          input.onChange(event);
+          if (typeof doOnChange === "function") doOnChange(event.value);
+        }}
+        onBlur={() => input.onBlur(inputValue)}
         styles={Object.assign({}, defaultStyle, customStyle)}
         {...other}
+        simpleValue
       />
     </Fragment>
   );

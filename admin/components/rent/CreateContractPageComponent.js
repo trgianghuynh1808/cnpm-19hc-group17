@@ -1,10 +1,19 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import { compose } from "redux";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { get } from "lodash/fp";
 
 import TitleComponent from "../core/TitleComponent";
 import FormFields from "../rent/redux-form";
 import ButtonComponent from "../core/ButtonComponent";
+import {
+  GetBrandsAPI,
+  getBrands,
+  GetModelsByBrandAPI,
+  getModelsByBrand,
+} from "../../stores/rent/CarState";
 
 const {
   SelectRenderFieldComponent,
@@ -12,27 +21,70 @@ const {
   DatePickerRenderFieldComponent,
 } = FormFields;
 
-const enhance = compose(
-  reduxForm({
-    form: "create-contract-form",
+const convertDataToOptions = (data) => {
+  return data.map((item) => ({ label: item.name, value: item.id }));
+};
+
+const convertModelsDataToOptions = (modelsData) => {
+  const cars = get("data[0].cars", modelsData);
+  return cars.map((car) => {
+    const { id, name } = car.modelInfo;
+
+    return { label: name, value: id };
+  });
+};
+
+const connectToRedux = connect(
+  createStructuredSelector({
+    brandsData: GetBrandsAPI.dataSelector,
+    curModelsData: GetModelsByBrandAPI.dataSelector,
+  }),
+  (dispatch) => ({
+    getBrands: () => {
+      dispatch(getBrands());
+    },
+    getCurModelsByBrand: (brand) => {
+      dispatch(getModelsByBrand(brand));
+    },
   })
 );
 
-const dataTemp = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+const enhance = compose(
+  reduxForm({
+    form: "create-contract-form",
+  }),
+  connectToRedux
+);
 
 const CreateContractPageComponent = ({
   pristine,
   submitting,
   reset,
   handleSubmit,
+  brandsData,
+  getBrands,
+  getCurModelsByBrand,
+  curModelsData,
 }) => {
   const onSubmit = (values) => {
     console.log(values);
   };
+  const [curModelsOption, setCurModelsOption] = useState([]);
+
+  useEffect(() => {
+    getBrands();
+  }, []);
+
+  useEffect(() => {
+    if (curModelsData) {
+      const modelsOptions = convertModelsDataToOptions(curModelsData);
+      setCurModelsOption(modelsOptions);
+    }
+  }, [curModelsData]);
+
+  if (!brandsData) return <Fragment />;
+
+  const brandsOption = convertDataToOptions(brandsData);
 
   return (
     <Fragment>
@@ -86,7 +138,7 @@ const CreateContractPageComponent = ({
               </div>
             </div>
           </div>
-          <div className="cus tomer-info">
+          <div className="customer-info">
             <TitleComponent content={"Thông tin xe"} />
             <div className="row justify-content-between mt-3">
               <div className="col-lg-5 form-group">
@@ -95,18 +147,22 @@ const CreateContractPageComponent = ({
                   component={SelectRenderFieldComponent}
                   required
                   placeholder="Chọn hiệu xe"
-                  options={dataTemp}
+                  options={brandsOption}
                   label="Hiệu xe: "
+                  clearable={false}
+                  doOnChange={(idBrand) => {
+                    getCurModelsByBrand(idBrand);
+                  }}
                 />
               </div>
               <div className="col-lg-5 form-group">
                 <Field
-                  name="brand"
+                  name="model"
                   component={SelectRenderFieldComponent}
                   label="Dòng xe: "
                   required
                   placeholder="Chọn dòng xe"
-                  options={dataTemp}
+                  options={curModelsOption}
                 />
               </div>
             </div>
