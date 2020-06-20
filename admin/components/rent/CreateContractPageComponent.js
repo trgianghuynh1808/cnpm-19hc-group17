@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, change, untouch } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -20,6 +20,8 @@ const {
   TextInputRenderFieldComponent,
   DatePickerRenderFieldComponent,
 } = FormFields;
+
+const FORM_NAME = "create-contract-form";
 
 const convertDataToOptions = (data) => {
   return data.map((item) => ({ label: item.name, value: item.id }));
@@ -51,7 +53,7 @@ const connectToRedux = connect(
 
 const enhance = compose(
   reduxForm({
-    form: "create-contract-form",
+    form: FORM_NAME,
   }),
   connectToRedux
 );
@@ -65,10 +67,8 @@ const CreateContractPageComponent = ({
   getBrands,
   getCurModelsByBrand,
   curModelsData,
+  dispatch,
 }) => {
-  const onSubmit = (values) => {
-    console.log(values);
-  };
   const [curModelsOption, setCurModelsOption] = useState([]);
 
   useEffect(() => {
@@ -81,6 +81,20 @@ const CreateContractPageComponent = ({
       setCurModelsOption(modelsOptions);
     }
   }, [curModelsData]);
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
+  const resetFields = (formName, fieldsObj, dispatch) => {
+    Object.keys(fieldsObj).forEach((fieldKey) => {
+      //reset the field's value
+      dispatch(change(formName, fieldKey, fieldsObj[fieldKey]));
+
+      //reset the field's error
+      dispatch(untouch(formName, fieldKey));
+    });
+  };
 
   if (!brandsData) return <Fragment />;
 
@@ -152,6 +166,13 @@ const CreateContractPageComponent = ({
                   clearable={false}
                   doOnChange={(idBrand) => {
                     getCurModelsByBrand(idBrand);
+                    resetFields(
+                      FORM_NAME,
+                      {
+                        model: "",
+                      },
+                      dispatch
+                    );
                   }}
                 />
               </div>
