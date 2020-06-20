@@ -32,8 +32,27 @@ const convertModelsDataToOptions = (modelsData) => {
   const cars = get("data[0].cars", modelsData);
   return cars.map((car) => {
     const { id, name } = car.modelInfo;
+    const {
+      brand,
+      car_price: carPrice,
+      color,
+      model,
+      seat,
+      rent_price: rentPrice,
+    } = car;
 
-    return { label: name, value: id };
+    return {
+      label: name,
+      value: id,
+      info: {
+        brand,
+        carPrice,
+        color,
+        model,
+        seat,
+        rentPrice,
+      },
+    };
   });
 };
 
@@ -79,7 +98,6 @@ const CreateContractPageComponent = ({
 
   useEffect(() => {
     if (curModelsData) {
-      console.log(curModelsData);
       const modelsOptions = convertModelsDataToOptions(curModelsData);
       setCurModelsOption(modelsOptions);
     }
@@ -87,8 +105,21 @@ const CreateContractPageComponent = ({
 
   const onSubmit = (values) => {
     console.log(values);
+    const { fullName, phone, model } = values;
     setShowContractInfo({
       isShow: true,
+      customerInfo: {
+        fullName,
+        phone,
+      },
+      carInfo: {
+        depositPrice: get("info.rentPrice", model),
+        brand: get("info.brand", model),
+        model: get("info.model", model),
+        color: get("info.color", model),
+        seat: get("info.seat", model),
+        carPrice: get("info.carPrice", model),
+      },
     });
   };
 
@@ -106,8 +137,11 @@ const CreateContractPageComponent = ({
 
   return (
     <Fragment>
-      {!showContractInfo ? (
-        <ShowContractComponent />
+      {showContractInfo && showContractInfo.isShow ? (
+        <ShowContractComponent
+          customerInfo={showContractInfo.customerInfo}
+          carInfo={showContractInfo.carInfo}
+        />
       ) : (
         <div className="create-contract-wrp">
           <form onSubmit={handleSubmit(onSubmit)}>

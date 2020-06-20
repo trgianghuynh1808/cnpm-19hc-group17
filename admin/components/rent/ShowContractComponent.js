@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
 import ButtonComponent from "../core/ButtonComponent";
 
-const ShowContractComponent = () => {
+const ShowContractComponent = ({ customerInfo, carInfo }) => {
+  const { fullName, phone } = customerInfo;
+  const { depositPrice, carPrice, brand, model, color, seat } = carInfo;
+
   return (
     <Fragment>
       <div className="show-contract-wrp">
@@ -20,8 +23,8 @@ const ShowContractComponent = () => {
                 <div className="container mt-2">
                   <ol>
                     <li>
-                      Thỏa thuận này được thực hiện giữa <b>{"Giang Huynh"}</b>{" "}
-                      (sau đây gọi là "Người Thuê Nhà") và{" "}
+                      Thỏa thuận này được thực hiện giữa <b>{fullName}</b> (sau
+                      đây gọi là "Người Thuê Nhà") và{" "}
                       <b>{"Rental Car Company"} </b> (Sau đây gọi là "Chủ Sở
                       Hửu").
                     </li>
@@ -32,30 +35,30 @@ const ShowContractComponent = () => {
                         <li>
                           <div className="row">
                             <div className="col-sm-6">
-                              - <b>Hiệu xe:</b> {"TOYOTA"}
+                              - <b>Hiệu xe:</b> {brand}
                             </div>
                             <div className="col-sm-6">
-                              - <b>Dòng xe:</b> {"ZZZZZ"}
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="row">
-                            <div className="col-sm-6">
-                              - <b>Màu xe:</b> {"RED"}
-                            </div>
-                            <div className="col-sm-6">
-                              - <b>Chỗ ngồi:</b> {"8"}
+                              - <b>Dòng xe:</b> {model}
                             </div>
                           </div>
                         </li>
                         <li>
                           <div className="row">
                             <div className="col-sm-6">
-                              - <b>Tiền Thuê:</b> {"1000"}VNĐ
+                              - <b>Màu xe:</b> {color}
                             </div>
                             <div className="col-sm-6">
-                              - <b>Tiền Cọc:</b> {"2000"}VNĐ
+                              - <b>Chỗ ngồi:</b> {seat}
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="row">
+                            <div className="col-sm-6">
+                              - <b>Tiền Thuê:</b> {carPrice}VNĐ
+                            </div>
+                            <div className="col-sm-6">
+                              - <b>Tiền Cọc:</b> {depositPrice}VNĐ
                             </div>
                           </div>
                         </li>
@@ -113,11 +116,11 @@ const ShowContractComponent = () => {
               <div className="content">
                 <div className="row justify-content-center form-group">
                   <div className="font-weight-bold mr-2">Họ tên KH: </div>
-                  <div> Huỳnh Văn Tèo</div>
+                  <div> {fullName}</div>
                 </div>
                 <div className="row justify-content-center form-group">
                   <div className="font-weight-bold mr-2">Số điện thoại: </div>
-                  <div> 0123456</div>
+                  <div> {phone}</div>
                 </div>
                 <div className="row justify-content-center form-group">
                   <div className="font-weight-bold mr-2">Ngày giao dịch: </div>
@@ -125,7 +128,7 @@ const ShowContractComponent = () => {
                 </div>
                 <div className="row justify-content-center form-group">
                   <div className="font-weight-bold mr-2">Tiền đặt cọc: </div>
-                  <div> 9999 VNĐ</div>
+                  <div> {depositPrice} VNĐ</div>
                 </div>
                 <div className="row justify-content-center  form-group">
                   <div className="col-lg-4">
