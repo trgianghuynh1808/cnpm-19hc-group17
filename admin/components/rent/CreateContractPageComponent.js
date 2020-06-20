@@ -149,7 +149,7 @@ const CreateContractPageComponent = ({
         address,
       },
       carInfo: {
-        depositPrice: get("info.rentPrice", model),
+        rentPrice: get("info.rentPrice", model),
         brand: get("info.brand", model),
         model: get("info.model", model),
         color: get("info.color", model),

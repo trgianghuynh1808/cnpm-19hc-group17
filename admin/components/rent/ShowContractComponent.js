@@ -9,7 +9,7 @@ const ShowContractComponent = ({
   setShowContractInfo,
 }) => {
   const { fullName, phone, startDate, endDate, email, address } = customerInfo;
-  const { depositPrice, carPrice, brand, model, color, seat, carId } = carInfo;
+  const { rentPrice, carPrice, brand, model, color, seat, carId } = carInfo;
 
   return (
     <Fragment>
@@ -61,10 +61,10 @@ const ShowContractComponent = ({
                         <li>
                           <div className="row">
                             <div className="col-sm-6">
-                              - <b>Tiền Thuê:</b> {carPrice}VNĐ
+                              - <b>Giá trị xe:</b> {carPrice}VNĐ
                             </div>
                             <div className="col-sm-6">
-                              - <b>Tiền Cọc:</b> {depositPrice}VNĐ
+                              - <b>Tiền thuê:</b> {rentPrice}VNĐ/ngày
                             </div>
                           </div>
                         </li>
@@ -129,12 +129,12 @@ const ShowContractComponent = ({
                   <div> {phone}</div>
                 </div>
                 <div className="row justify-content-center form-group">
-                  <div className="font-weight-bold mr-2">Ngày giao dịch: </div>
-                  <div> 15/06/2020</div>
+                  <div className="font-weight-bold mr-2">Email: </div>
+                  <div> {email}</div>
                 </div>
                 <div className="row justify-content-center form-group">
-                  <div className="font-weight-bold mr-2">Tiền đặt cọc: </div>
-                  <div> {depositPrice} VNĐ</div>
+                  <div className="font-weight-bold mr-2">Tiền thuê: </div>
+                  <div> {rentPrice} VNĐ/ngày</div>
                 </div>
                 <div className="row justify-content-center  form-group">
                   <div className="col-lg-4">
