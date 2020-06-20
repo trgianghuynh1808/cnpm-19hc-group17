@@ -8,6 +8,7 @@ import {
 } from "../libs/notifyToast";
 
 import { LOGIN_API } from "./UserState";
+import { CREATE_CONTRACT_API } from "./rent/ContractState";
 
 const getMessage = get("json.message");
 
@@ -22,6 +23,9 @@ export default {
         case LOGIN_API: //using for API have message in resp
           msgNotify = getMessage(payload);
           break;
+        case CREATE_CONTRACT_API:
+          msgNotify = "Tạo hợp đồng thành công";
+          break;
         default:
           break;
       }
@@ -30,7 +34,8 @@ export default {
     } else if (type === ACTIONS.FAILURE) {
       switch (name) {
         case LOGIN_API:
-          msgNotify = getMessage(payload);
+        case CREATE_CONTRACT_API:
+          msgNotify = "Tạo hợp đồng thất bại";
           break;
         default:
           break;

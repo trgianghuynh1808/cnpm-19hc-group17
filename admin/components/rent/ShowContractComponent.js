@@ -1,9 +1,15 @@
 import React, { Fragment } from "react";
 import ButtonComponent from "../core/ButtonComponent";
 
-const ShowContractComponent = ({ customerInfo, carInfo }) => {
-  const { fullName, phone } = customerInfo;
-  const { depositPrice, carPrice, brand, model, color, seat } = carInfo;
+const ShowContractComponent = ({
+  customerInfo,
+  carInfo,
+  doAPI,
+  doReset,
+  setShowContractInfo,
+}) => {
+  const { fullName, phone, startDate, endDate, email, address } = customerInfo;
+  const { depositPrice, carPrice, brand, model, color, seat, carId } = carInfo;
 
   return (
     <Fragment>
@@ -139,6 +145,17 @@ const ShowContractComponent = ({ customerInfo, carInfo }) => {
                         <img src="/static/assets/images/icons/print-icon.png" />
                       }
                       type="button"
+                      doOnClick={() => {
+                        doAPI({
+                          startRentDate: startDate,
+                          endRentDate: endDate,
+                          name: fullName,
+                          phone,
+                          email,
+                          address,
+                          carId,
+                        });
+                      }}
                     />
                   </div>
                   <div className="col-lg-4">
@@ -149,6 +166,10 @@ const ShowContractComponent = ({ customerInfo, carInfo }) => {
                         <img src="/static/assets/images/icons/reset-icon.png" />
                       }
                       type="button"
+                      doOnClick={() => {
+                        doReset();
+                        setShowContractInfo(null);
+                      }}
                     />
                   </div>
                 </div>

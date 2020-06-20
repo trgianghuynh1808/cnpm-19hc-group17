@@ -15,6 +15,7 @@ import {
   GetModelsByBrandAPI,
   getModelsByBrand,
 } from "../../stores/rent/CarState";
+import { createContract } from "../../stores/rent/ContractState";
 
 const {
   SelectRenderFieldComponent,
@@ -39,6 +40,7 @@ const convertModelsDataToOptions = (modelsData) => {
       model,
       seat,
       rent_price: rentPrice,
+      id: carId,
     } = car;
 
     return {
@@ -51,6 +53,7 @@ const convertModelsDataToOptions = (modelsData) => {
         model,
         seat,
         rentPrice,
+        carId,
       },
     };
   });
@@ -67,6 +70,27 @@ const connectToRedux = connect(
     },
     getCurModelsByBrand: (brand) => {
       dispatch(getModelsByBrand(brand));
+    },
+    createContract: ({
+      startRentDate,
+      endRentDate,
+      name,
+      phone,
+      email,
+      address,
+      carId,
+    }) => {
+      dispatch(
+        createContract({
+          startRentDate,
+          endRentDate,
+          name,
+          phone,
+          email,
+          address,
+          carId,
+        })
+      );
     },
   })
 );
@@ -88,6 +112,7 @@ const CreateContractPageComponent = ({
   getCurModelsByBrand,
   curModelsData,
   dispatch,
+  createContract,
 }) => {
   const [curModelsOption, setCurModelsOption] = useState([]);
   const [showContractInfo, setShowContractInfo] = useState(null);
@@ -104,13 +129,24 @@ const CreateContractPageComponent = ({
   }, [curModelsData]);
 
   const onSubmit = (values) => {
-    console.log(values);
-    const { fullName, phone, model } = values;
+    const {
+      fullName,
+      phone,
+      model,
+      startDate,
+      endDate,
+      email,
+      address,
+    } = values;
     setShowContractInfo({
       isShow: true,
       customerInfo: {
         fullName,
         phone,
+        startDate,
+        endDate,
+        email,
+        address,
       },
       carInfo: {
         depositPrice: get("info.rentPrice", model),
@@ -119,6 +155,7 @@ const CreateContractPageComponent = ({
         color: get("info.color", model),
         seat: get("info.seat", model),
         carPrice: get("info.carPrice", model),
+        carId: get("info.carId", model),
       },
     });
   };
@@ -141,6 +178,9 @@ const CreateContractPageComponent = ({
         <ShowContractComponent
           customerInfo={showContractInfo.customerInfo}
           carInfo={showContractInfo.carInfo}
+          doAPI={createContract}
+          doReset={reset}
+          setShowContractInfo={setShowContractInfo}
         />
       ) : (
         <div className="create-contract-wrp">
