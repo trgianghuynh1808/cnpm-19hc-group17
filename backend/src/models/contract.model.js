@@ -42,9 +42,14 @@ export default function (sequelize, DataTypes) {
     }, { freezeTableName: true });
 
     Contract.associate = (models) => {
-        Contract.User = Contract.belongsTo(models.Car, {
+        Contract.Car = Contract.belongsTo(models.Car, {
             foreignKey: 'car_id',
             as: 'car'
+        });
+
+        Contract.Car = Contract.hasOne(models.Bill, {
+            foreignKey: 'contract_id',
+            as: 'contract'
         });
     };
     return Contract;

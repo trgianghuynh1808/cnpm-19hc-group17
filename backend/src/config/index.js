@@ -3,7 +3,7 @@ const config = {
     pgHost: process.env.PG_HOST || 'localhost',
     pgPort: process.env.PG_PORT || 5432,
     pgUser: process.env.PG_USER || 'postgres',
-    pgPassword: process.env.PG_PASSWORD || 'password',
+    pgPassword: process.env.PG_PASSWORD || 'postgres',
     pgDB: process.env.PG_DB || 'carrental',
     nodeEnv: process.env.NODE_ENV || 'development',
     sentry: process.env.SENTRY_DSN || '',
