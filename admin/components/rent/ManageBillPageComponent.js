@@ -128,7 +128,10 @@ const ManageBillPageComponent = ({ brandsData, getBrands }) => {
   return (
     <Fragment>
       {detailBillInfo && detailBillInfo.isShowDetailBill ? (
-        <ShowDetailBillComponent idBill={detailBillInfo.idBill} />
+        <ShowDetailBillComponent
+          idBill={detailBillInfo.idBill}
+          setDetailBillInfo={setDetailBillInfo}
+        />
       ) : (
         <div className="manage-bill-wrp">
           <h4 className="title font-weight-bold">DS Đơn Hàng</h4>

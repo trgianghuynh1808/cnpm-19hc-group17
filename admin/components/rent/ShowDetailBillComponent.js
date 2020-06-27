@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import ButtonComponent from "../core/ButtonComponent";
 
-const DetailsBillComponent = ({ idBill }) => {
+const DetailsBillComponent = ({ idBill, setDetailBillInfo }) => {
   return (
     <Fragment>
       <div className="detail-bill-wrp">
@@ -117,8 +117,7 @@ const DetailsBillComponent = ({ idBill }) => {
                       }
                       type="button"
                       doOnClick={() => {
-                        // doReset();
-                        // setShowContractInfo(null);
+                        setDetailBillInfo(null);
                       }}
                     />
                   </div>
