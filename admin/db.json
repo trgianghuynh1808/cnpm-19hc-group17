@@ -25,6 +25,24 @@
           "slug": ""
         }
       ]
+    },
+    {
+      "role": "rent",
+      "name": "bộ phận thuê xe",
+      "menuItems": [
+        {
+          "name": "dashboard",
+          "slug": "/"
+        },
+        {
+          "name": "QL đơn hàng",
+          "slug": "/rent/manage-bill"
+        },
+        {
+          "name": "tạo hợp đồng",
+          "slug": "/rent/create-contract"
+        }
+      ]
     }
   ]
 }
