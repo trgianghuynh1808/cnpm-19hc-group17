@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import TableComponent from "../core/TableComponent";
 import SelectFilterComponent from "../core/inputs/SelectFilterComponent";
 import SearchBarComponent from "../core/SearchBarComponent";
+import ShowDetailBillComponent from "./ShowDetailBillComponent";
 import { GetBrandsAPI, getBrands } from "../../stores/rent/CarState";
 
 const convertDataToOptions = (data) => {
@@ -21,48 +22,61 @@ const connectToRedux = connect(
     },
   })
 );
-const ActionViewBillComponent = () => {
+
+const ActionViewBillComponent = ({ idBill, setInfoBill }) => {
   return (
     <img
       className="cursor-pointer"
       src={"/static/assets/images/icons/bill-detail.png"}
+      onClick={() => {
+        setInfoBill({
+          isShowDetailBill: true,
+          idBill,
+        });
+      }}
     />
   );
 };
 
-const COLUMN_DATA = [
-  {
-    name: "Hiệu xe",
-    key: "brand",
-  },
-  {
-    name: "Dòng xe",
-    key: "model",
-  },
-  {
-    name: "Tên KH",
-    key: "customerName",
-  },
-  {
-    name: "Ngày Bắt Đầu Thuê",
-    key: "startRentDate",
-  },
-  {
-    name: "Ngày Kết Thúc Thuê",
-    key: "endRentDate",
-  },
-  {
-    name: "Thành Tiền (VNĐ)",
-    key: "total",
-  },
-  {
-    name: "Hành Động",
-    key: "actions",
-    renderComponent: (idBill) => {
-      return <ActionViewBillComponent />;
+const COLUMN_DATA = (setInfoBill) => {
+  return [
+    {
+      name: "Hiệu xe",
+      key: "brand",
     },
-  },
-];
+    {
+      name: "Dòng xe",
+      key: "model",
+    },
+    {
+      name: "Tên KH",
+      key: "customerName",
+    },
+    {
+      name: "Ngày Bắt Đầu Thuê",
+      key: "startRentDate",
+    },
+    {
+      name: "Ngày Kết Thúc Thuê",
+      key: "endRentDate",
+    },
+    {
+      name: "Thành Tiền (VNĐ)",
+      key: "total",
+    },
+    {
+      name: "Hành Động",
+      key: "actions",
+      renderComponent: (actions) => {
+        const { idBill } = actions;
+
+        return (
+          <ActionViewBillComponent idBill={idBill} setInfoBill={setInfoBill} />
+        );
+      },
+    },
+  ];
+};
 
 const ROW_DATA = [
   {
@@ -72,7 +86,7 @@ const ROW_DATA = [
     startRentDate: "18/08/2020",
     endRentDate: "20/08/2020",
     total: "150000",
-    actions: "",
+    actions: { idBill: "z" },
   },
   {
     brand: "TOYOTA",
@@ -81,7 +95,7 @@ const ROW_DATA = [
     startRentDate: "18/08/2020",
     endRentDate: "20/08/2020",
     total: "150000",
-    actions: "",
+    actions: { idBill: "z1" },
   },
   {
     brand: "TOYOTA",
@@ -90,7 +104,7 @@ const ROW_DATA = [
     startRentDate: "18/08/2020",
     endRentDate: "20/08/2020",
     total: "150000",
-    actions: "",
+    actions: { idBill: "z2" },
   },
 ];
 
@@ -102,6 +116,8 @@ const pageInfo = {
 };
 
 const ManageBillPageComponent = ({ brandsData, getBrands }) => {
+  const [detailBillInfo, setDetailBillInfo] = useState(null);
+
   useEffect(() => {
     getBrands();
   }, []);
@@ -111,37 +127,42 @@ const ManageBillPageComponent = ({ brandsData, getBrands }) => {
 
   return (
     <Fragment>
-      <div className="manage-bill-wrp">
-        <h4 className="title font-weight-bold">DS Đơn Hàng</h4>
-        <div className="main-content">
-          <div className="row justify-content-end">
-            <div className="col-lg-2">
-              <SelectFilterComponent
-                placeholder="Brand"
-                options={brandsOption}
-              />
+      {detailBillInfo && detailBillInfo.isShowDetailBill ? (
+        <ShowDetailBillComponent idBill={detailBillInfo.idBill} />
+      ) : (
+        <div className="manage-bill-wrp">
+          <h4 className="title font-weight-bold">DS Đơn Hàng</h4>
+          <div className="main-content">
+            <div className="row justify-content-end">
+              <div className="col-lg-2">
+                <SelectFilterComponent
+                  placeholder="Brand"
+                  options={brandsOption}
+                />
+              </div>
+              <div className="col-lg-2">
+                <SearchBarComponent
+                  placeholder="Nhập tên KH"
+                  doOnKeyPress={(value) => {
+                    console.log("test", value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="col-lg-2">
-              <SearchBarComponent
-                placeholder="Nhập tên KH"
-                doOnKeyPress={(value) => {
-                  console.log("test", value);
+            <div className="row mt-4">
+              <TableComponent
+                columnData={COLUMN_DATA(setDetailBillInfo)}
+                rowData={ROW_DATA}
+                pageInfo={pageInfo}
+                doAPI={(curPage) => {
+                  console.log("test curPage", curPage);
                 }}
               />
             </div>
           </div>
-          <div className="row mt-4">
-            <TableComponent
-              columnData={COLUMN_DATA}
-              rowData={ROW_DATA}
-              pageInfo={pageInfo}
-              doAPI={(curPage) => {
-                console.log("test curPage", curPage);
-              }}
-            />
-          </div>
         </div>
-      </div>
+      )}
+
       <style jsx>{`
         .manage-bill-wrp {
           padding: 36px;
