@@ -9,20 +9,12 @@
           "slug": "/"
         },
         {
-          "name": "QL Xe đang Cho thuê",
-          "slug": ""
-        },
-        {
-          "name": "QL Xe rỗi",
-          "slug": ""
+          "name": "Quản lý xe",
+          "slug": "/manager/manage-car"
         },
         {
           "name": "Phân chia lịch làm việc",
-          "slug": ""
-        },
-        {
-          "name": "Quản lý xe đang có vấn đề",
-          "slug": ""
+          "slug": "/manager/scheduled"
         }
       ]
     },
@@ -44,5 +36,12 @@
         }
       ]
     }
+  ],
+  "statusCarOptions": [
+    { "label": "Xe Bận", "value": "unavailable" },
+    { "label": "Cần Kiểm Tra", "value": "needcheck" },
+    { "label": "Xe Rỗi", "value": "available" },
+    { "label": "Đang Bảo Dưỡng", "value": "maintenancing" },
+    { "label": "Tất cả", "value": "" }
   ]
 }

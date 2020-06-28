@@ -16,7 +16,9 @@ const connectWithRedux = connect(
 );
 
 const LayoutComponent = ({ children, currentUser }) => {
-  const curRole = "rent"; //temp
+  // const curRole = "rent"; //temp
+  const curRole = "manager"; //temp
+
   const { menuInfos } = data;
   const router = useRouter();
 
