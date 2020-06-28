@@ -19,6 +19,10 @@
         {
           "name": "Thêm xe vào kho",
           "slug": "/manager/add-car"
+        },
+        {
+          "name": "Chi tiết thu chi",
+          "slug": "/manager/revenue-detail"
         }
       ]
     },
