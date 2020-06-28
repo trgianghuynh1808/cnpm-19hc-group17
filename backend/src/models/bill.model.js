@@ -26,6 +26,9 @@ export default function (sequelize, DataTypes) {
         },
         compensation_money: {
             type: DataTypes.FLOAT
+        },
+        status: {
+            type: DataTypes.STRING
         }
     }, { freezeTableName: true, timestamps: false });
 

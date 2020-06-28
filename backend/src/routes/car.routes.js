@@ -15,4 +15,9 @@ router.get(
     controller.action('retrive')
 );
 
+router.put(
+    '/:id',
+    controller.action('update')
+);
+
 export default router;
