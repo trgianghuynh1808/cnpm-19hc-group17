@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import _ from 'lodash';
 import sequelize from 'sequelize';
+import moment from 'moment';
 import md5 from 'md5';
 import uuid from 'uuid/v4';
 import jwt from 'jsonwebtoken';
@@ -86,15 +87,23 @@ export default class ContractService {
         }
         const { rent_price } = car;
         const deposit = (rent_price * 30) / 100;
+        const contractId = uuid();
         const contract = await db.Contract.create({
             ...data,
             ...contractUser,
-            id: uuid(),
+            id: contractId,
             deposit,
             status: 'reviewing'
-        });
+        }, { transaction });
+        const bill = await db.Bill.create({
+            contract_id: contractId,
+            total_price: moment(data.end_rent_date).diff(moment(data.start_rent_date)) * rent_price,
+            status: 'progress',
+            car_return_date: data.end_rent_date
+        }, { transaction })
+        const contractData = contract.toJSON();
         await transaction.commit();
-        return contract;
+        return { ...contractData, bill: bill.toJSON() };
     }
 
     static async update(data) {
