@@ -72,6 +72,9 @@ export default class BillService {
             ],
             where: { id }
         });
+        let rentPrice = moment(bill.contract.start_rent_date).diff(moment(bill.car_return_date), 'days') *
+            bill.contract.car.rent_price;
+        let total = rentPrice;
         const data = {
             nameCustomer: bill.contract.name,
             model: bill.contract.car.model,
@@ -79,19 +82,21 @@ export default class BillService {
             startRentDate: bill.contract.start_rent_date,
             endRentDate: bill.car_return_date,
             carPrice: bill.contract.car.car_price,
-            rentPrice: moment(bill.contract.start_rent_date).diff(moment(bill.car_return_date), 'days') * 
-                bill.contract.car.rent_price,
+            rentPrice,
             depositPrice: bill.contract.deposit,
             maintances: bill.maintances.map(maintance => {
+                const { price } = maintance;
+                total += price
                 return (
                     {
                         id: maintance.id,
                         name: maintance.staff.user.name,
                         description: maintance.description,
-                        price: maintance.price
+                        price
                     }
                 )
-            })
+            }),
+            total
         }
         return data;
     }
