@@ -29,6 +29,7 @@ export default class BillService {
                 return (
                     {
                         idBill: bill.id,
+                        nameCustomer: bill.contract.name,
                         startRentDate: bill.contract.start_rent_date,
                         endRentDate: bill.car_return_date,
                         totalPrice: bill.total_price,
