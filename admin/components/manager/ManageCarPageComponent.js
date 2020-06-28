@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import Router from "next/router";
 
 import SelectFilterComponent from "../core/inputs/SelectFilterComponent";
 import { GetBrandsAPI, getBrands } from "../../stores/rent/CarState";
@@ -121,7 +122,7 @@ const ManageCarPageComponent = ({ brandsData, getBrands }) => {
                 }
                 content="Thêm xe"
                 color="green"
-                doOnClick={() => console.log("test click btn")}
+                doOnClick={() => Router.push("/manager/add-car")}
               />
             </div>
 

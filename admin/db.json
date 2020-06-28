@@ -15,6 +15,10 @@
         {
           "name": "Phân chia lịch làm việc",
           "slug": "/manager/scheduled"
+        },
+        {
+          "name": "Thêm xe vào kho",
+          "slug": "/manager/add-car"
         }
       ]
     },
