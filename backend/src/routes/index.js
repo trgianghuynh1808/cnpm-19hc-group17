@@ -10,6 +10,7 @@ import { BusinessError,
 } from '../components/ErrorInstance/businessErrors';
 import ContractRoutes from './contract.routes';
 import BillRoutes from './bill.routes';
+import MaintanceRoutes from './maintaince.routes';
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.use('/cars', CarRoutes);
 router.use('/brands', BrandRoutes);
 router.use('/contracts', ContractRoutes);
 router.use('/bills', BillRoutes);
+router.use('/maintance', MaintanceRoutes);
 
 router.use((err, req, res, next) => {
     if (err instanceof DataValidationError) {

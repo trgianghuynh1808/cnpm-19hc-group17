@@ -18,6 +18,16 @@ export default class CarService {
             {
                 model: db.Model,
                 as: 'modelInfo'
+            },
+            {
+                model: db.Contract,
+                as: 'contracts',
+                include: [
+                    {
+                        model: db.Bill,
+                        as: 'bill'
+                    }
+                ]
             }],
             where: whereCondition,
             limit: params.limit,
@@ -30,6 +40,24 @@ export default class CarService {
 
     static retrive(id) {
         return db.Car.find({
+            include: [{
+                model: db.Brand,
+                as: 'brandInfo'
+            },
+            {
+                model: db.Model,
+                as: 'modelInfo'
+            },
+            {
+                model: db.Contract,
+                as: 'contracts',
+                include: [
+                    {
+                        model: db.Bill,
+                        as: 'bill'
+                    }
+                ]
+            }],
             where: { id }
         }).then((car) => {
             if (!car) {
@@ -37,5 +65,18 @@ export default class CarService {
             }
             return car;
         });
+    }
+
+    static async update(data) {
+        const { carId, status } = data;
+        try {
+            await db.Car.update(
+                { status },
+                { where: { id: carId } }
+            )
+            return 'success';
+        } catch (err) {
+            return 'fail';
+        }
     }
 }

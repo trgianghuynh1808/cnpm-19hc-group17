@@ -9,4 +9,9 @@ export default class BillControlller extends BaseController {
     retrieve(req) {
         return BillService.retrieve(req.params.id);
     }
+
+    update(req) {
+        const billId = req.params.id;
+        return BillService.update({ billId, ...req.body });
+    }
 }

@@ -100,5 +100,18 @@ export default class BillService {
         }
         return data;
     }
+
+    static async update(data) {
+        const { billId, compensation_money, status, note } = data;
+        try {
+            await db.Bill.update(
+                { compensation_money, status, note },
+                { where: { id: billId } }
+            )
+            return 'success';
+        } catch (err) {
+            return 'fail';
+        }
+    }
 }
 
