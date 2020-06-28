@@ -90,7 +90,7 @@ export default class BillService {
                 return (
                     {
                         id: maintance.id,
-                        name: maintance.staff.user.name,
+                        name: maintance.staff ? maintance.staff.user.name : '',
                         description: maintance.description,
                         price
                     }
