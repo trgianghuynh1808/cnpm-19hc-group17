@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { isEmpty } from "lodash/fp";
 
 const renderRowData = (row, columnData) => {
   let render = [];
@@ -44,7 +45,7 @@ const renderPagination = (pages, curPage, doAPI) => {
 };
 
 const TableComponent = ({ columnData, rowData, pageInfo, doAPI }) => {
-  const { isPrev, isNext, curPage, pages } = pageInfo;
+  const { isPrev, isNext, curPage, pages } = pageInfo || {};
 
   return (
     <Fragment>
@@ -64,32 +65,35 @@ const TableComponent = ({ columnData, rowData, pageInfo, doAPI }) => {
           ))}
         </tbody>
       </table>
-      <nav className="w-100 core-pagination" aria-label="...">
-        <ul className="pagination justify-content-end">
-          <li className={`page-item ${isPrev ? " " : "disabled"}`}>
-            <div
-              className="page-link"
-              tabIndex={-1}
-              onClick={() => {
-                doAPI(curPage - 1);
-              }}
-            >
-              {"<<"}
-            </div>
-          </li>
-          {renderPagination(pages, curPage, doAPI)}
-          <li className={`page-item ${isNext ? " " : "disabled"}`}>
-            <div
-              className="page-link"
-              onClick={() => {
-                doAPI(curPage + 1);
-              }}
-            >
-              {">>"}
-            </div>
-          </li>
-        </ul>
-      </nav>
+      {!isEmpty(pageInfo) && (
+        <nav className="w-100 core-pagination" aria-label="...">
+          <ul className="pagination justify-content-end">
+            <li className={`page-item ${isPrev ? " " : "disabled"}`}>
+              <div
+                className="page-link"
+                tabIndex={-1}
+                onClick={() => {
+                  doAPI(curPage - 1);
+                }}
+              >
+                {"<<"}
+              </div>
+            </li>
+            {renderPagination(pages, curPage, doAPI)}
+            <li className={`page-item ${isNext ? " " : "disabled"}`}>
+              <div
+                className="page-link"
+                onClick={() => {
+                  doAPI(curPage + 1);
+                }}
+              >
+                {">>"}
+              </div>
+            </li>
+          </ul>
+        </nav>
+      )}
+
       <style jsx global>{`
         .table-core table,
         thead,
