@@ -9,22 +9,47 @@
           "slug": "/"
         },
         {
-          "name": "QL Xe đang Cho thuê",
-          "slug": ""
-        },
-        {
-          "name": "QL Xe rỗi",
-          "slug": ""
+          "name": "Quản lý xe",
+          "slug": "/manager/manage-car"
         },
         {
           "name": "Phân chia lịch làm việc",
-          "slug": ""
+          "slug": "/manager/scheduled"
         },
         {
-          "name": "Quản lý xe đang có vấn đề",
-          "slug": ""
+          "name": "Thêm xe vào kho",
+          "slug": "/manager/add-car"
+        },
+        {
+          "name": "Chi tiết thu chi",
+          "slug": "/manager/revenue-detail"
+        }
+      ]
+    },
+    {
+      "role": "rent",
+      "name": "bộ phận thuê xe",
+      "menuItems": [
+        {
+          "name": "dashboard",
+          "slug": "/"
+        },
+        {
+          "name": "QL đơn hàng",
+          "slug": "/rent/manage-bill"
+        },
+        {
+          "name": "tạo hợp đồng",
+          "slug": "/rent/create-contract"
         }
       ]
     }
+  ],
+  "statusCarOptions": [
+    { "label": "Xe Bận", "value": "unavailable" },
+    { "label": "Cần Kiểm Tra", "value": "needcheck" },
+    { "label": "Xe Rỗi", "value": "available" },
+    { "label": "Đang Bảo Dưỡng", "value": "maintenancing" },
+    { "label": "Tất cả", "value": "" }
   ]
 }
