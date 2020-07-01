@@ -6,6 +6,7 @@ import { getProcessBill } from '../../../utils/common';
 import ModalComponent from '../../core/ModalComponent';
 import ButtonComponent from "../../core/ButtonComponent";
 import { MAINTANCE_PER_PAGE, CAR_STATUS, BILL_STATUS } from '../../../utils/enums';
+import Actions from '../Actions';
 
 const COLUMN_DATA = [
   {
@@ -19,6 +20,13 @@ const COLUMN_DATA = [
   {
     name: "Chi phí",
     key: "price",
+  },
+  {
+    name: "Hành động",
+    key: "actions",
+    renderComponent: (actionList) => {
+      return <Actions actionList={actionList}/>;
+    },
   },
 ];
 
@@ -56,12 +64,23 @@ const Details = (props) => {
     setTimeout(() => setCarID(null), 1000);
   };
 
+  const removeOnClick = (id) => {
+    const temp = [...maintanceList];
+    temp.splice(id, 1);
+    setMaintanceList(temp);
+  };
+
   const rowData = useMemo(() =>
   {
     const queryCurPage = curPage - 1;
     const offset = queryCurPage === 0 ? 0 : queryCurPage * MAINTANCE_PER_PAGE;
     const limit = offset + MAINTANCE_PER_PAGE;
-    return maintanceList.slice(offset, limit).map((maintance,index) => { return {...maintance, id: index + 1}});
+    return maintanceList.slice(offset, limit).map((maintance, index) => { 
+      return {
+        ...maintance,
+        id: index + 1 ,
+        actions: [{ iconName: 'remove', onClick: () => removeOnClick(index) }]}
+    });
   }
   ,[maintanceList, curPage]);
   return(
