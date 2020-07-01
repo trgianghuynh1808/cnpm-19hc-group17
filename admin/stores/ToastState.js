@@ -8,6 +8,7 @@ import {
 } from "../libs/notifyToast";
 
 import { LOGIN_API } from "./UserState";
+import { ADD_MAINTANCE_LIST_API } from "./maintance/billState";
 
 const getMessage = get("json.message");
 
@@ -22,6 +23,9 @@ export default {
         case LOGIN_API: //using for API have message in resp
           msgNotify = getMessage(payload);
           break;
+        case ADD_MAINTANCE_LIST_API: //using for API have message in resp
+          msgNotify = getMessage(payload);
+          break;
         default:
           break;
       }
@@ -30,6 +34,9 @@ export default {
     } else if (type === ACTIONS.FAILURE) {
       switch (name) {
         case LOGIN_API:
+          msgNotify = getMessage(payload);
+          break;
+        case ADD_MAINTANCE_LIST_API: //using for API have message in resp
           msgNotify = getMessage(payload);
           break;
         default:
