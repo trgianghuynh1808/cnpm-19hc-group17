@@ -56,6 +56,11 @@ export default function (sequelize, DataTypes) {
             foreignKey: 'model',
             as: 'modelInfo'
         });
+
+        Car.Contract = Car.hasMany(models.Contract, {
+            foreignKey: 'car_id',
+            as: 'contracts'
+        })
     };
     return Car;
 }

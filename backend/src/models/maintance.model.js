@@ -9,11 +9,9 @@ export default function (sequelize, DataTypes) {
         },
         car_id: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         staff_id: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         start_maintance_date: {
             type: DataTypes.DATE

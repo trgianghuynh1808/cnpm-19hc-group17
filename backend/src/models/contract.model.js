@@ -47,10 +47,10 @@ export default function (sequelize, DataTypes) {
             as: 'car'
         });
 
-        Contract.Car = Contract.hasOne(models.Bill, {
+        Contract.Bill = Contract.hasOne(models.Bill, {
             foreignKey: 'contract_id',
-            as: 'contract'
-        });
+            as: 'bill'
+        })
     };
     return Contract;
 }

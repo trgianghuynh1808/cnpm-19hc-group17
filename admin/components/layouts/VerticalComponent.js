@@ -54,7 +54,7 @@ const VerticalComponent = ({ menuItemsData }) => {
       <style jsx>
         {`
           .vertical-bar {
-            height: 900px;
+            height: 980px;
             background-color: #39247e;
           }
           .vertical-bar .revenue-section {
