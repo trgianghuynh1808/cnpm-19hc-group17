@@ -29,7 +29,6 @@ const FormModal = (props) => {
     }
     dispatch({ type, payload: value });
   }
-  console.log(maintance);
   return(
     <form>
       <div className="row">
