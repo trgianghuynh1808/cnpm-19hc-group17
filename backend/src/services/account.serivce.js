@@ -38,7 +38,8 @@ export default class AccountService {
         if (!account) throw new ResourceNotFoundError('Account');
         return {
             email: account.user.email,
-            username: account.username
+            username: account.username,
+            role: account.role
         };
     }
 
