@@ -81,6 +81,7 @@ const NeedCheckCars = ({ updateBillStatus, updateCarStatus, getCarDetails, carDe
     <MainLayoutComponent>
       {/*<Details updateBillStatus={updateBillStatus} updateCarStatus={updateCarStatus} {...carDetailsData}/> : */}
       <Table
+        status="need-check"
         pageInfo={pageInfo}
         carList={carListData}
         editOnClick={editOnClick}

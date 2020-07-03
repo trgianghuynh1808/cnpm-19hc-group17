@@ -62,7 +62,7 @@ const COLUMN_DATA = [
 ];
 
 const Table = (props) => {
-  const { carList = [], pageInfo, pagingOnClick, editOnClick } = props;
+  const { status, carList = [], pageInfo, pagingOnClick, editOnClick } = props;
   const formatCarList = (carList) => {
     return carList.map((car) => {
       const { id, model } = car;
@@ -70,7 +70,7 @@ const Table = (props) => {
         ...car,
         id: capitalize(id).split('-')[0],
         model: capitalize(model),
-        status: 'maintancing',
+        status,
         actions: [{ iconName: 'edit', onClick: () => editOnClick(id) }]
       }
     });

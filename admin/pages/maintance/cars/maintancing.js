@@ -80,6 +80,7 @@ const MaintancingCars = ({ updateBillStatus, updateCarStatus, addMaintanceList, 
     <MainLayoutComponent>
       {carID ? <Details updateBillStatus={updateBillStatus} updateCarStatus={updateCarStatus} addMaintanceList={addMaintanceList} setCarID={setCarID} {...carDetailsData}/> :
       <Table
+        status="maintancing"
         pageInfo={pageInfo}
         carList={carListData}
         editOnClick={editOnClick}
