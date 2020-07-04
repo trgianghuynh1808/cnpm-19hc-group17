@@ -6,7 +6,7 @@ import nfetch from "../../libs/nfetch";
 
 const GET_CARS_API = "GET_CARS_API";
 const GET_CAR_DETAILS_API = "GET_CAR_DETAILS_API";
-const UPDATE_CAR_STATUS_API = "UPDATE_CAR_STATUS_API";
+export const UPDATE_CAR_STATUS_API = "UPDATE_CAR_STATUS_API";
 
 const getCarsAPI = makeFetchAction(
   GET_CARS_API,

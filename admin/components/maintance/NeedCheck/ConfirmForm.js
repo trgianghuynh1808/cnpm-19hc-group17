@@ -20,15 +20,15 @@ function reducer(state, action) {
 }
 
 const FormModal = (props) => {
-  const { updateBillStatus, updateCarStatus, contracts = [], onSubmit, id: carID, setCarID, setIsOpenModal } = props;
+  const { updateBillStatus, updateCarStatus, contracts = [], id: carID, setCarID, setIsOpenModal } = props;
   const [carStatus, setCarStatus] = useState('done');
   const processContract = getProcessContract(contracts);
   const { bill: { id : billID } = {} } = processContract;
   const handleSubmit = async () => {
     if (carStatus === 'done') {
       await updateBillStatus(billID, BILL_STATUS.DONE, () => updateCarStatus(carID, CAR_STATUS.AVAILABLE));
-      setCarID(null);
       setIsOpenModal(false);
+      setCarID(null);
       return;
     }
     await updateCarStatus(carID, CAR_STATUS.MAINTANCING);

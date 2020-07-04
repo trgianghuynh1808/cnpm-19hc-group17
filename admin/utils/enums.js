@@ -38,5 +38,5 @@ export const CAR_STATUS = {
 
 export const BILL_STATUS = {
   DONE : 'done',
-  PROCESS: 'process',
+  PROCESS: 'progress',
 };
