@@ -14,7 +14,7 @@ export default class AccountService {
                 model: db.User,
                 as: 'user'
             }],
-            where: { username, password, role }
+            where: { username, password }
         });
         if (!account) throw new AuthenticationError('Username or Password is invalid');
         return {
