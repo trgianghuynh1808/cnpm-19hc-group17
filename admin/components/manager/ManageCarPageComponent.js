@@ -108,7 +108,7 @@ const ManageCarPageComponent = ({ brandsData, getBrands }) => {
   return (
     <Fragment>
       <div className="manage-car-wrp">
-        <h4 className="title font-weight-bold">DS Đơn Hàng</h4>
+        <h4 className="title font-weight-bold">Danh sách Xe</h4>
         <div className="main-content">
           <div className="row justify-content-between">
             <div className="col-lg-1">
