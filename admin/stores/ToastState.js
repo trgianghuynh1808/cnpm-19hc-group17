@@ -34,6 +34,8 @@ export default {
     } else if (type === ACTIONS.FAILURE) {
       switch (name) {
         case LOGIN_API:
+          msgNotify = getMessage(payload);
+          break;
         case CREATE_CONTRACT_API:
           msgNotify = "Tạo hợp đồng thất bại";
           break;
