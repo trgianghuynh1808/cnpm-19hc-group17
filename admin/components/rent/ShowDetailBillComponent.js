@@ -40,20 +40,20 @@ const DetailsBillComponent = ({ idBill, setDetailBillInfo }) => {
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+                        <th scope="row">Thuê xe</th>
+                        <td>500.000VNĐ</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                        <th scope="row">Sửa thắng</th>
+                        <td>100.000VNĐ</td>
                       </tr>
                       <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
+                        <th scope="row">Bảo dưỡng</th>
+                        <td>50.000VNĐ</td>
                       </tr>
                       <tr>
                         <th scope="row" colSpan="2" className="text-right">
-                          50000 VNĐ
+                          650.000VNĐ
                         </th>
                       </tr>
                     </tbody>
