@@ -17,7 +17,10 @@ const connectWithRedux = connect(
 
 const LayoutComponent = ({ children, currentUser }) => {
   // const curRole = "rent"; //temp
-  const curRole = "manager"; //temp
+
+  // if (!curMenuItem) curMenuItem = { name: "Example" }; //demo
+  if (!currentUser) return <Fragment />;
+  const curRole = currentUser.role; //temp
 
   const { menuInfos } = data;
   const router = useRouter();
@@ -26,8 +29,6 @@ const LayoutComponent = ({ children, currentUser }) => {
     (menuItem) => menuItem.slug === router.pathname
   );
 
-  if (!curMenuItem) curMenuItem = { name: "Example" }; //demo
-  if (!currentUser) return <Fragment />;
   return (
     <Fragment>
       <HeaderComponent
