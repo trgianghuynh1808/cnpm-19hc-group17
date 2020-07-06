@@ -22,7 +22,8 @@ export default {
 
     if (type === ACTIONS.COMPLETE) {
       switch (name) {
-        case LOGIN_API: //using for API have message in resp
+        case LOGIN_API:
+        case "ADD_CAR_API": //using for API have message in resp
           msgNotify = getMessage(payload);
           break;
         case CREATE_CONTRACT_API:

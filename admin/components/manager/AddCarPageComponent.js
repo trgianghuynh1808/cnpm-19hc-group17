@@ -7,6 +7,7 @@ import { createStructuredSelector } from "reselect";
 import TitleComponent from "../core/TitleComponent";
 import FormFields from "../rent/redux-form";
 import ButtonComponent from "../core/ButtonComponent";
+import { toast } from "react-toastify";
 
 const { TextInputRenderFieldComponent } = FormFields;
 
@@ -84,7 +85,19 @@ const AddCarPageComponent = ({ pristine, submitting, reset }) => {
                   content="Thêm xe"
                   color="green"
                   icon={<img src="/static/assets/images/icons/add-icon.png" />}
-                  type="submit"
+                  // type="submit"
+                  type="button"
+                  doOnClick={() => {
+                    toast.success("Thêm xe thành công!", {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                    });
+                  }}
                   disabled={pristine || submitting}
                 />
               </div>
