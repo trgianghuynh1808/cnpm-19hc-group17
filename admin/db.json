@@ -43,6 +43,24 @@
           "slug": "/rent/create-contract"
         }
       ]
+    },
+    {
+      "role": "maintenance",
+      "name": "bộ phận bảo dưỡng",
+      "menuItems": [
+        {
+          "name": "dashboard",
+          "slug": "/"
+        },
+        {
+          "name": "QL Xe bảo dưỡng",
+          "slug": "/maintance/cars/maintancing"
+        },
+        {
+          "name": "QL Xe cần kiểm tra",
+          "slug": "/maintance/cars/need-check"
+        }
+      ]
     }
   ],
   "statusCarOptions": [

@@ -26,7 +26,6 @@ export default function withAuth(AuthComponent) {
 
     render() {
       const { currentUser } = this.props;
-
       return (
         <div>
           <AuthComponent

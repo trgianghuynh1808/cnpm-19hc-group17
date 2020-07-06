@@ -107,7 +107,9 @@ const TableComponent = ({ columnData, rowData, pageInfo, doAPI }) => {
         .table-core td {
           text-align: center;
         }
-
+        .page-item.active .page-link, .page-link {
+          z-index: 0;
+        }
         .core-pagination .page-link {
           cursor: pointer !important;
         }

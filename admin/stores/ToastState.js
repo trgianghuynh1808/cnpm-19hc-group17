@@ -8,6 +8,8 @@ import {
 } from "../libs/notifyToast";
 
 import { LOGIN_API } from "./UserState";
+import { ADD_MAINTANCE_LIST_API } from "./maintance/billState";
+import { UPDATE_CAR_STATUS_API } from "./maintance/carState";
 import { CREATE_CONTRACT_API } from "./rent/ContractState";
 
 const getMessage = get("json.message");
@@ -26,6 +28,9 @@ export default {
         case CREATE_CONTRACT_API:
           msgNotify = "Tạo hợp đồng thành công";
           break;
+        case UPDATE_CAR_STATUS_API:
+          msgNotify = "Cập nhật trạng thái xe thành công";
+          break;
         default:
           break;
       }
@@ -38,6 +43,9 @@ export default {
           break;
         case CREATE_CONTRACT_API:
           msgNotify = "Tạo hợp đồng thất bại";
+          break;
+        case ADD_MAINTANCE_LIST_API: //using for API have message in resp
+          msgNotify = getMessage(payload);
           break;
         default:
           break;

@@ -24,3 +24,19 @@ export const TOAST_DEFAULT_OPTIONS = {
   closeOnClick: true,
   hideProgressBar: false,
 };
+
+//Maintance department enum
+
+export const CAR_PER_PAGE = 6;
+export const MAINTANCE_PER_PAGE = 3 ;
+
+export const CAR_STATUS = {
+  AVAILABLE : 'available',
+  MAINTANCING: 'maintancing',
+  NEED_CHECK: 'needcheck',
+};
+
+export const BILL_STATUS = {
+  DONE : 'done',
+  PROCESS: 'progress',
+};
